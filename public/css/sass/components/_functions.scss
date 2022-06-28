@@ -1,0 +1,14 @@
+// couleur de texte selon l'opacité
+@function set-text-color($primary-color){
+    @if (lightness($primary-color) > 50){
+        @return #000;
+    }
+    @else{
+        @return #fff;
+    }
+}
+// convertisseur pc to rem
+@function toRem($value) {
+    $remValue: ($value / 16) + rem;	
+    @return $remValue;
+}
