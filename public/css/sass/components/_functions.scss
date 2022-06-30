@@ -12,3 +12,13 @@
     $remValue: ($value / 16) + rem;	
     @return $remValue;
 }
+
+@function colorCheckbox($primary-color){
+    @if (lightness($primary-color) > 50){
+        @return $secondary-color;
+
+    }
+    @else{
+        @return $success-color;
+    }
+}
