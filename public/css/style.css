@@ -9279,6 +9279,9 @@ textarea.form-control-lg {
 .borderCarrousel {
   border-top: #ffff solid 3px; }
 
+.listMarge {
+  margin: 0 120px; }
+
 body {
   margin: 0;
   padding: 0;
@@ -9286,8 +9289,20 @@ body {
   background-color: #413725;
   color: white; }
 
+.decallageTop {
+  margin-top: 100px; }
+
+.mh100 {
+  min-height: 100vh; }
+
 .bg-door {
   background-size: cover; }
+
+.img500 {
+  height: 500px;
+  width: 500px;
+  display: flex;
+  justify-content: center; }
 
 footer {
   width: 100%;

@@ -29,7 +29,40 @@ app.get('/', function (req,res) {
 app.get('/proposer', function (req,res) {
     res.render('proposer')
 });
+// profile
+app.get('/profile', function (req,res) {
+    res.render('profile')
+});
+// éngimes
+app.get('/enigme', function (req,res) {
+    // console.log(req.query);
+    res.render('enigme',{
+        titre: req.query.q
+    })
+});
 
-
+app.get('/enigme/:id', function (req,res) {
+    res.render('enigme_details',)
+});
+// devinettes
+app.get('/devinettes', function (req,res) {
+    // console.log(req.query);
+    res.render('devinettes',{
+        titre: req.query.q
+    })
+});
+app.get('/devinettes/:id', function (req,res) {
+    res.render('enigme_details',)
+});
+// le sage
+app.get('/lesage', function (req,res) {
+    // console.log(req.query);
+    res.render('lesage',{
+        titre: req.query.q
+    })
+});
+app.get('/lesage/:id', function (req,res) {
+    res.render('enigme_details',)
+});
 // run server
 -app.listen (port, () => console.log (`Exemple d'application écoutant sur le port ${port} !`))
