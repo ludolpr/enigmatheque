@@ -9286,14 +9286,19 @@ body {
   margin: 0;
   padding: 0;
   margin-top: 57px;
-  background-color: #413725;
-  color: white; }
+  background-color: #413725; }
 
 .decallageTop {
   margin-top: 100px; }
 
 .mh100 {
   min-height: 100vh; }
+
+.mh150 {
+  min-height: 150px; }
+
+.ckColor {
+  color: black; }
 
 .bg-door {
   background-size: cover; }
