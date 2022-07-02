@@ -41,6 +41,7 @@ app.get('/enigme', function (req,res) {
     })
 });
 
+
 app.get('/enigme/:id', function (req,res) {
     res.render('enigme_details',)
 });
@@ -64,5 +65,12 @@ app.get('/lesage', function (req,res) {
 app.get('/lesage/:id', function (req,res) {
     res.render('enigme_details',)
 });
+
+// connexion modal
+app.get('/connexion', function (req,res) {
+    // console.log(req.query);
+    res.render('connexion')
+});
+
 // run server
 -app.listen (port, () => console.log (`Exemple d'application écoutant sur le port ${port} !`))

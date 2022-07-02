@@ -9286,7 +9286,8 @@ body {
   margin: 0;
   padding: 0;
   margin-top: 57px;
-  background-color: #413725; }
+  background-color: #413725;
+  color: white; }
 
 .decallageTop {
   margin-top: 100px; }
@@ -9389,5 +9390,18 @@ body, html {
     background: #00d478;
     border: 0;
     opacity: 1; } }
+#container {
+  width: 1000px;
+  margin: 20px auto; }
+
+.ck-editor__editable[role="textbox"] {
+  /* zone de texte */
+  min-height: 200px;
+  color: black; }
+
+.ck-content .image {
+  /* zone images */
+  max-width: 80%;
+  margin: 20px auto; }
 
 /*# sourceMappingURL=style.css.map */
