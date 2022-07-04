@@ -1,66 +1,4 @@
-<div class="col-md-12 mh100 decallageTop">
-
-  <div class="col-md-12 text-center mb-5">
-    <h1 class="container border-bottom border-secondary border-3">Votre profile
-      personnel</h1>
-  </div>
-
-  <div class="col-md-12 text-center mb-3 d-flex justify-content-center">
-
-    <img
-      src="/assets/images/bg.jpg"
-      class="img500 border border-5 border-success"
-      alt=""
-    />
-
-  </div>
-  <div class="col-md-12 d-flex justify-content-center">
-    
-    <input
-      type="file"
-      id="avatar"
-      class="border border-3 border-success mt-3 mb-3"
-      name="avatar"
-      accept="image/png, image/jpeg"
-    />
-    <i class="fa-regular fa-circle-check d-flex align-items-center ms-2"></i>
-  </div>
-  <div
-    class="container col-md-12 text-center d-flex justify-content-center mb-3"
-  >
-    
-    <input
-      type="text"
-      class="border border-3 border-success"
-      placeholder="nom d'utilisateur"
-    />
-    <i class="fa-regular fa-circle-check d-flex align-items-center ms-2"></i>
-  </div>
-  <div class="container col-md-12 text-center d-flex justify-content-center">
-    
-    <input
-      type="text"
-      class="border border-3 border-success"
-      placeholder="email"
-    />
-  <i class="fa-regular fa-circle-check d-flex align-items-center ms-2"></i>
-  </div>
-
-  <div class="col-md-12 text-center container mb-3">
-    <h2 class="mb-3 mt-3 text-light">Votre biographie</h2>
-    <div id="editor">
-
-    </div>
-        
-
-    
-        <div id="container">
-            <div id="editor">
-            </div>
-        </div>
-        <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/super-build/ckeditor.js"></script>
-       <script>
-           CKEDITOR.ClassicEditor.create(document.getElementById("editor"), {
+CKEDITOR.ClassicEditor.create(document.getElementById("editor"), {
 
     toolbar: {
         items: [
@@ -100,7 +38,7 @@
             { model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6' }
         ]
     },
-    placeholder: 'Votre texte ici!',
+    placeholder: 'Welcome to CKEditor 5!',
     fontFamily: {
         options: [
             'default',
@@ -188,13 +126,3 @@
         'MathType'
     ]
 });
-       </script>
-    
-
-  </div>
-
-  <div class="d-flex justify-content-center">
-    <button type="button" class="btn btn-secondary">Sauvegarder</button>
-  </div>
-
-</div>
