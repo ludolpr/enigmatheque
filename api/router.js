@@ -1,32 +1,28 @@
 const { Router } = require("express");
 const router = Router();
-
 const { getAdminPage } = require("./controllers/adminController");
-
+// page home
 router.get("/", (req, res) => {
   res.render("home");
 });
-router.get("/proposer", (req, res) => {
-  res.render("proposer");
-});
 
-// profile
-router.get("/profile", (req, res) => {
-  res.render("profile");
-});
-
-// éngimes
+// liste des éngimes + id
 router.get("/enigme", (req, res) => {
   // console.log(req.query);
   res.render("enigme", {
     titre: req.query.q,
   });
 });
-
 router.get("/enigme/:id", (req, res) => {
   res.render("enigme_details");
 });
-// devinettes
+
+// page de proposition d'énigme
+router.get("/proposer", (req, res) => {
+  res.render("proposer");
+});
+
+//liste des devinettes + id
 router.get("/devinettes", (req, res) => {
   // console.log(req.query);
   res.render("devinettes", {
@@ -36,29 +32,34 @@ router.get("/devinettes", (req, res) => {
 router.get("/devinettes/:id", (req, res) => {
   res.render("enigme_details");
 });
-// le sage
+
+// liste du sage + id
 router.get("/lesage", (req, res) => {
   // console.log(req.query);
   res.render("lesage", {
     titre: req.query.q,
   });
 });
+router.get("/lesage/:id", (req, res) => {
+  res.render("enigme_details");
+});
+
+// profile
+router.get("/profile", (req, res) => {
+  res.render("profile");
+});
+
 // inscription
 router.get("/inscription", (req, res) => {
   res.render("inscription");
 });
 
-// router.get("/admin", (req, res) => {
-//   console.log("fergdrtsgdsfgdfgdfgdfg 22222");
+// page de l'administrateur
+router.get("/admin", (req, res) => {
+  console.log("fergdrtsgdsfgdfgdfgdfg 22222");
 
-//   res.render("admin");
-// });
-
-router.get("/lesage/:id", (req, res) => {
-  res.render("enigme_details");
+  res.render("admin");
 });
-
-// Admin
 // 2nd Layout
 router.route("/admin").get(getAdminPage);
 console.log('getAdminPage', getAdminPage);
