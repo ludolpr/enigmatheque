@@ -9297,6 +9297,9 @@ body {
 .mh100 {
   min-height: 100vh; }
 
+.mh50 {
+  height: 50vh; }
+
 .bg-door {
   background-size: cover; }
 

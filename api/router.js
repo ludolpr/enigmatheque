@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const router = Router();
 const { getAdminPage } = require("./controllers/adminController");
+
 // page home
 router.get("/", (req, res) => {
   res.render("home");
@@ -54,12 +55,6 @@ router.get("/inscription", (req, res) => {
   res.render("inscription");
 });
 
-// page de l'administrateur
-router.get("/admin", (req, res) => {
-  console.log("fergdrtsgdsfgdfgdfgdfg 22222");
-
-  res.render("admin");
-});
 // 2nd Layout
 router.route("/admin").get(getAdminPage);
 console.log('getAdminPage', getAdminPage);
