@@ -3,6 +3,13 @@ body {
     padding: 0;
     margin-top: 57px;
     color:white;
+    @if (lightness($primary and $secondary and $success) > 50%){
+                color: #000;
+            }
+            @else{
+                color: #fff;
+            }
+            
 }
 
 .decallageTop{
