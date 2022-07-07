@@ -1,0 +1,31 @@
+@media screen and (max-width:1024px) {
+    nav{
+        font-size: 15px;
+    }
+    .btn{
+        font-size: 15px;    
+        height: 35px;
+    }
+    
+}
+
+@media screen and (max-width:885px) {
+    nav{
+        font-size: 10px;
+    }
+    .btn{
+        font-size: 10px;
+        width: 75px;
+        height: 25px;
+    }
+}
+@media screen and (max-width:768px) {
+    .bgDoor{
+        background-image: url('/assets/images/door-1590024_640.jpg'); 
+        height: 100vh;
+        
+    }
+}
+@media screen and (max-width:400px) {
+    
+}

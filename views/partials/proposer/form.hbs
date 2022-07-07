@@ -4,7 +4,21 @@
   <div class="container bg-secondary text-dark p-5 mb-6 mt-2">
     <div class="row">
       <label for="exampleInputEmail1" class="form-label  p-2 ps-0 ">Votre nom d'utilisateur*</label>
-      <input type="email" class="form-control border-success align-items-center" placeholder="Nom" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+      <input type="email" class="form-control border-success align-items-center mb-3" placeholder="Nom" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+      <div class="col-md-12 p-0">
+        <p>Niveau de difficulté<br />
+            <span class="wpcf7-form-control-wrap menu-742"><select
+                name="menu-742"
+                class="form-label wpcf7-form-control form-control wpcf7-select wpcf7-validates-as-required"
+                aria-required="true"
+                aria-invalid="false"
+              >
+                <option value="Contacter le webmaster">Facile</option>
+                <option value="Signaler un bug">Normal</option>
+                <option value="Autre">Difficile</option>
+              </select>
+            </span>
+      </div>
       <label for="exampleInputEmail1" class="form-label   p-2 ps-0">Enigme que vous
         proposer</label>
       <textarea name="Votre message ici" placeholder="Votre Enigme" class="border-success" id="" cols="70" rows="15"></textarea>
