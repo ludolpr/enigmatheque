@@ -1,0 +1,18 @@
+{
+    "enigmes": [
+        {
+            "id": 1,
+            "titreEnigme":"L'énigme de Stanford",
+            "para": "Cette énigme fut posée aux étudiants de l'université de Stanford lors d'une épreuve de réflexion.",
+            "boite":"C'est mieux que Dieu.C'est pire que le Diable.Les pauvres en ont.Les riches en ont besoin.Et si on en mange, on meurt.Qu'est ce que c'est ?",
+            "para2":"La version originale en anglais : 'What is greater than God, More evil than the devil, The poor have it, The rich need it, And if you eat it, you'll die.'"
+            
+        },
+        {
+            "id": 2,
+            "titre":"L'énigme de Stanford 2",
+            "para": "Cette énigme fut posée aux étudiants de l'université de Stanford lors d'une épreuve de réflexion."
+            
+        }
+    ]
+}

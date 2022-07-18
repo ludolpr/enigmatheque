@@ -1,10 +1,14 @@
 const { Router } = require("express");
 const router = Router();
 const { getAdminPage } = require("./controllers/adminController");
+const fkdb = require('./json/array.json')
 
 // page home
 router.get("/", (req, res) => {
-  res.render("home");
+  res.render("home",{
+    user:true,
+    enigmes: fkdb.enigmes
+  })
 });
 
 // liste des éngimes + id
@@ -15,7 +19,9 @@ router.get("/enigme", (req, res) => {
   });
 });
 router.get("/enigme/:id", (req, res) => {
-  res.render("enigme_details");
+  res.render("enigme_details", {
+  })
+
 });
 
 // page de proposition d'énigme
@@ -54,6 +60,7 @@ router.get("/profile", (req, res) => {
 router.get("/inscription", (req, res) => {
   res.render("inscription");
 });
+
 
 // 2nd Layout
 router.route("/admin").get(getAdminPage);

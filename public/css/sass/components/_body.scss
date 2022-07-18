@@ -22,6 +22,10 @@ margin-top: 100px;
 .mh50{
     height: 50vh;
 }
-// .mh150{
-//     min-height: 150px;
-// }
+
+.boite{
+    width: 450px;
+    height: 450px;
+    display: flex;
+    flex-wrap: wrap;
+}

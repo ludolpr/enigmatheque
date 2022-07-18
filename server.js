@@ -17,7 +17,11 @@ app.engine(
     // Ici nous définissons notre nouveau layout
     // Que nous avons créé dans ./views/layouts/adminLayout
     adminLayout: "adminLayout",
+    // helper{
+    //   upper
+    // }
   })
+  
 );
 
 app.set("view engine", ".hbs");
@@ -29,6 +33,15 @@ app.use("/assets", express.static("public"));
 // Router
 const ROUTER = require("./api/router");
 app.use(ROUTER);
+
+
+/* ERROR 404 */
+// A Mettre a la fin
+app.get('/*', function (req, res) {
+  res.render('page404',{
+  });
+})
+
 
 // run server
 app.listen(port, () =>

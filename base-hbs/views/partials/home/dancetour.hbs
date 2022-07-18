@@ -1,0 +1,51 @@
+<!-- DANCE TOUR CARD -->
+
+<section class="dance-tour-card">
+  <div class="container">
+    <div class="row">
+      <h1 class="title-dance-tour">DANCE TOUR</h1>
+    </div>
+
+    <div class="row">
+      <p class="para-dance-tour">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae
+        vestibulum vestibulum. </p>
+    </div>
+
+    <div class="row mx-auto">
+
+      {{#each (limit kakawait 3) }}
+
+      <div id="{{@index}}-{{this.name}}" class="col-md-4">
+        <div class="card border-0" style="width: 18rem;">
+          <img src="{{ this.image }}" class="card-img-top" alt="...">
+          <div class="card-body text-center">
+            <h5 class="card-title"> {{ @index }} {{ this.id }} {{ upper this.name }}</h5>
+            <p class="card-text">{{ this.description }}</p>
+          </div>
+        </div>
+      </div>
+
+      {{/each }}
+      {{!-- <div class="col-md-4">
+        <div class="card border-0" style="width: 18rem;">
+          <img src="/assets/Ressources/asia.png" class="card-img-top" alt="...">
+          <div class="card-body text-center">
+            <h5 class="card-title">ASIA</h5>
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card border-0" style="width: 18rem;">
+          <img src="/assets/Ressources/australia.png" class="card-img-top" alt="...">
+          <div class="card-body text-center">
+            <h5 class="card-title">AUSTRALIA</h5>
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </div>
+        </div>
+      </div> --}}
+    </div>
+  </div>
+</section>
+
+<!-- FIN DANCE TOUR CARD -->
