@@ -15,7 +15,7 @@ router.get("/", (req, res) => {
 router.get("/enigme", (req, res) => {
   // console.log(req.query);
   res.render("enigme", {
-    titre: req.query.q,
+    titre: req.query.q
   });
 });
 router.get("/enigme/:id", (req, res) => {

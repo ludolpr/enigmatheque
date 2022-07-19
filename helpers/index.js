@@ -10,7 +10,7 @@ exports.tabEnigme = (arrEnigme, limit) => {
 exports.limitArrayReverse = (arrEnigme, limit) => {
     if (!Array.isArray(arrEnigme.reverse())){
         return [];
-    }
+    } 
     return arrEnigme.slice(0, limit);
 }
 
@@ -18,3 +18,5 @@ exports.limitArrayReverse = (arrEnigme, limit) => {
 exports.upper = (str) => str.toUpperCase()
 
 
+// fonction nombres de caractere max 40 
+exports.cutStr = (str) => str.substr(0, 40);

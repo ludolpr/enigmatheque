@@ -8,6 +8,8 @@ const morgan = require("morgan");
 
 app.use(morgan("dev"));
 
+const { cutStr } = require('./helpers')
+
 // config handlebars
 app.engine(
   ".hbs",
@@ -17,9 +19,9 @@ app.engine(
     // Ici nous définissons notre nouveau layout
     // Que nous avons créé dans ./views/layouts/adminLayout
     adminLayout: "adminLayout",
-    // helper{
-    //   upper
-    // }
+    helpers :{
+      cutStr
+    }
   })
   
 );
@@ -45,5 +47,5 @@ app.get('/*', function (req, res) {
 
 // run server
 app.listen(port, () =>
-  console.log(`Ludolpr: Exemple d'application sur le port ${port} !`)
+  console.log(`Ludolpr: Exemple d'application sur le port ${port} ! Lancé le : ${new Date().toLocaleString()});`)
 );
