@@ -5,16 +5,14 @@ const fkdb = require('./json/array.json')
 
 // page home
 router.get("/", (req, res) => {
-  res.render("home",{
-    user:true,
-    enigmes: fkdb.enigmes
-  })
+  res.render("home")
 });
 
 // liste des éngimes + id
 router.get("/enigme", (req, res) => {
   // console.log(req.query);
   res.render("enigme", {
+    enigmes: fkdb.enigmes,
     titre: req.query.q
   });
 });
@@ -45,6 +43,7 @@ router.get("/lesage", (req, res) => {
   // console.log(req.query);
   res.render("lesage", {
     titre: req.query.q,
+    enigmes: fkdb.enigmes
   });
 });
 router.get("/lesage/:id", (req, res) => {
