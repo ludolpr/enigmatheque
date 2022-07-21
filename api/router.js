@@ -65,4 +65,8 @@ router.get("/inscription", (req, res) => {
 router.route("/admin").get(getAdminPage);
 console.log('getAdminPage', getAdminPage);
 
+
+
 module.exports = router;
+
+
