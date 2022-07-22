@@ -33,21 +33,12 @@ app.set("views", "./views");
 // route fichier static
 app.use("/assets", express.static("public"));
 
+// db link
+require('./api/dataBase');
+
 // Router
 const ROUTER = require("./api/router");
 app.use(ROUTER);
-// db
-const mysql = require('/api/dataBase');
-app.use(mysql);
-
-
-db.query("select * from enigme", function (err, result) {
-        if (err){
-         console.log("Base de données créée !");
-        }
-        console.log(res)
-       });
-
 
 
 /* ERROR 404 */

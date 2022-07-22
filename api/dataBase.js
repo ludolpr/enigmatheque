@@ -1,25 +1,17 @@
-const mysql = require ("mysql");
 
-// connexion a la base de données
-db = mysql.createConnection({
-    host: "localhost",
-    user: "ludolpr",
-    password: "lud90Eni-",
-    database : "dataenigme"
+// Import modules
+const mysql = require("mysql");
+
+// mysql instance
+db = mysql.createConnection(require('./config').config);
+
+// connexion db vers mysql
+db.connect((err) => {
+  if (err) console.error("erreur de connexion: " + err.stack);
+  console.log("connecté comme id " + db.threadId);
 });
 
-// module
-module.exports = db;
-// db.connect(function(err) {
-//     if (err) throw err;
-//     console.log("Connecté à la base de données MySQL!");
-//   });
 
-  // db.connect(function(err) {
-  //   if (err) throw err;
-  //   console.log("Connecté à la base de données MySQL!");
-  //  db.query("CREATE DATABASE mabdd", function (err, result) {
-  //       if (err) throw err;
-  //       console.log("Base de données créée !");
-  //     });
-  // });
+
+//export de la db
+exports.db = db;
