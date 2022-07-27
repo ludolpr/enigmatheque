@@ -103,6 +103,18 @@ CREATE TABLE IF NOT EXISTS `dataenigme`.`message` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `add`.`coloumn` 
+-- -----------------------------------------------------
+ALTER TABLE `articles` ADD `COLUMN ville` VARCHAR (255);
+
+ALTER TABLE `perso` ADD `nom` VARCHAR (255) ADD `prenom` VARCHAR (255);
+
+-- -----------------------------------------------------
+-- Table `perso` & jeter`coloumn` 
+-- -----------------------------------------------------
+ALTER TABLE perso AND DROP nom;
+
 
 -- -----------------------------------------------------
 -- Table `dataenigme`.`user`
