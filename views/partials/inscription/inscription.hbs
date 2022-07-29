@@ -1,5 +1,5 @@
 <div class="col-md-12 mh100">
-  <div class="row">
+  <form action="/inscription" method="post" class="row">
     <div class="container decallageTop">
       <div class="col-md-12 d-flex justify-content-center">
         <img class="border border-5 border-secondary" src="/assets/images/inscriptions.jpg" alt="" />
@@ -11,22 +11,25 @@
       <div class="col-md-12 d-flex justify-content-center">
         <div class="col-md-6 row">
           <label for="exampleInputEmail1" class="form-label m-3 ">Nom d'utilisateur :</label>
-          <input type="Nom d'utilisateur" />
+          <input type="Nom d'utilisateur" name="name" />
           <label for="exampleInputEmail1" class="form-label m-3 ">Votre e-mail :</label>
-          <input type="E-mail" />
+          <input type="E-mail" name="email"/>
           <label for="exampleInputEmail1" class="form-label m-3 ">Votre mot de passe
             :</label>
-          <input type="Mot de passe" />
+          <input type="password" name="password" />
+          <label for="exampleInputEmail1" class="form-label m-3 ">Confirmer votre mot de passe
+            :</label>
+          <input type="password" name="confPassword" />
         </div>
 
       </div>
 
       <div class="col-md-12 d-flex justify-content-center">
-        <button class="btn btn-secondary mt-3 mb-3">
+        <button type="submit" class="btn btn-secondary mt-3 mb-3">
           Envoyer
         </button>
       </div>
 
     </div>
-  </div>
+  </form>
 </div>

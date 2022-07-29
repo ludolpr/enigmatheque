@@ -44,3 +44,8 @@ db.query('DELETE FROM articles WHERE id = 1;', (err, data) => {
     if (err) console.log(err)
     console.log('script INSERT INTO', data)
 })
+
+ 
+//save db
+
+ mysqldump -u ludolpr –p dataenigme > backupDB.sql

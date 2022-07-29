@@ -7,10 +7,14 @@ const port = 1990;
 const morgan = require("morgan");
 const bodyParser = require('body-parser');
 app.use(morgan("dev"));
-const { cutStr } = require('./helpers')
+const { cutStr } = require('./helpers/');
+const { isAdmin } = require('./helpers/middleware');
+const methodOverride = require('method-override');
+
 
 // config handlebars
 app.engine(
+
   ".hbs",
   engine({
     extname: ".hbs",
@@ -24,6 +28,8 @@ app.engine(
   })
   
 );
+// Utilisation du middleware pour toute les routes suivante
+app.use(isAdmin);
 
 // Config Body-parser //
 
@@ -41,9 +47,8 @@ app.set("views", "./views");
 
 // route fichier static
 app.use("/assets", express.static("public"));
+app.use(methodOverride('_method'))
 
-// db link
-require('./api/dataBase');
 
 // Router
 const ROUTER = require("./api/router");
