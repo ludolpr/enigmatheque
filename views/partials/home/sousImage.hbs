@@ -19,26 +19,26 @@
 
         <h4 class="mt-5 pt-5 text-center text-uppercase fw-bold">Contactez-nous !</h4>
 
-        <form class="opacity-75 p-5">
+        <form action="/message" method="post" class="opacity-75 p-5">
           <div class="col-md-12">
             <div class="mb-6">
               <label for="exampleInputEmail1" class="form-label">Votre nom
                 d'utilisateur*</label>
               <input
-                type="email"
+              name="nom"
+                type="nom"
                 class="form-control"
                 placeholder="Nom"
-                id="exampleInputEmail"
                 aria-describedby="emailHelp"
               />
             </div>
             <div class="mb-6">
               <label for="exampleInputPassword" class="form-label">Votre email*</label>
               <input
-                type="nom"
+              name="email"
+                type="email"
                 class="form-control"
                 placeholder="mail@exemple.fr"
-                id="exampleInputPassword"
               />
             </div>
           </div>
@@ -47,6 +47,7 @@
             <span class="wpcf7-form-control-wrap menu-742"><select
                 name="menu-742"
                 class="form-label wpcf7-form-control form-control wpcf7-select wpcf7-validates-as-required"
+                name="sujet"
                 aria-required="true"
                 aria-invalid="false"
               >
@@ -59,9 +60,8 @@
           <div class="container">
             <div class="row">
               <textarea
-                name="Votre message ici"
+                name="message"
                 placeholder="Votre Message"
-                id=""
                 cols="70"
                 rows="5"
               ></textarea>

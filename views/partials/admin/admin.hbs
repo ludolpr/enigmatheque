@@ -41,27 +41,16 @@
               </div>
 
             </div>
-            <div class="col-md-7 mt-2" data-bs-toggle="modal" data-bs-target="#enigme-{{this.id_enigme}}">
+            <div class="col-md-10 mt-2" data-bs-toggle="modal" data-bs-target="#enigme-{{this.id_enigme}}">
               <h3>
                 {{! data-bs-toggle="modal" data-bs-target="#exampleModal" }}
-                {{this.titre}}
+                Titre: {{this.titre}}
               </h3>
-              <p class="text-left">{{this.content}}</p>
-              <p>{{this.solus}}</p>
+              <p class="text-left">Enigme: {{this.content}}</p>
+              <p>Solution: {{this.solus}}</p>
 
             </div>
-            <div class="col-md-3 d-flex justify-content-center align-items-center">
-              <button type="button" class="btn btn-labeled btn-success" data-bs-toggle="modal"
-                data-bs-target="#exampleModal1">
-                <span class="btn-label"><i class="fa fa-check"></i></span>Envoyer
-              </button>
-
-              <button type="button" class="ms-2 btn btn-labeled btn-danger" data-bs-toggle="modal"
-                data-bs-target="#exampleModal2">
-                <span class="btn-label"><i class="fa fa-remove"></i></span>Retirer
-              </button>
-
-            </div>
+            
           </div>
 
 
@@ -84,9 +73,9 @@
                           placeholder="Titre de votre énigme" id="titre" aria-describedby="titre"
                           value="{{ this.titre }}" name="titre" />
 
-                        <div class="col-md-12 p-0">
+                        <div class="col-md-12 p-0 ">
                           <p>Niveau de difficulté<br />
-                            <select name="difficulty" aria-required="true" aria-invalid="false"
+                            <select name="difficulty" class="form-control" aria-required="true" aria-invalid="false"
                               value="{{ this.difficulty }}">
                               <option value="1">Facile</option>
                               <option value="2">Normal</option>
@@ -97,14 +86,13 @@
 
                         <label for="content" class="form-label p-2 ps-0">Enigme que vous proposer</label>
                         <textarea name="content" placeholder="Votre Enigme" class="border-success" id='content'
-                          cols="70" rows="15" name="content">{{ this.content }}</textarea>
+                          cols="70" rows="15" name="content">{{ this.content }}
+                        </textarea>
 
-                        <label for="solus" class="form-label  p-2 ps-0">Réponse à votre énigme</label>
-                        <textarea name="solus" id="solus" placeholder="Votre Solution" class="mb-3 border-success"
-                          cols="70" rows="15" class="mt-2 mb-6" placeholder="Votre Solution" name="solus">
-                          {{ this.solus }}</textarea>
-
-                        <button type="submit">Envoyer</button>
+                        <label for="solus" class="form-label p-2 ps-0">Réponse à votre énigme</label>
+                        <textarea name="solus" placeholder="Votre Solution" class="border-success" id="solus"
+                          cols="70" rows="15"  name="solus">{{ this.solus }}
+                        </textarea>
 
                       </div>
                     </div>
@@ -114,10 +102,19 @@
                 </div>
                 <div class="col-md-12 d-flex justify-content-center align-content-center mb-2">
 
-                  <button class="btn btn-labeled btn-success" type="submit">Modifier</button>
-                  <button type="button">
-                    <span class="btn-label"><i class="fa fa-check"></i></span>Modifier
-                  </button>
+                  <button type="button" class="m-2 btn btn-labeled btn-success" data-bs-toggle="modal"
+                data-bs-target="#exampleModal1">
+                <span class="btn-label"><i class="fa fa-check m-1"></i></span>Envoyer
+              </button>
+              <button type="button" class="m-2 btn btn-labeled btn-success" data-bs-toggle="modal"
+                data-bs-target="#exampleModal2">
+                <span class="btn-label"><i class="fa fa-check m-1"></i></span>Modifier
+              </button>
+
+              <button type="button" class="m-2 btn btn-labeled btn-danger" data-bs-toggle="modal"
+                data-bs-target="#exampleModal3">
+                <span class="btn-label"><i class="fa fa-remove m-1"></i></span>Retirer
+              </button>
                 </div>
               </div>
 
@@ -133,53 +130,34 @@
       </div>
     </div>
     {{! Messages recus }}
+    
     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
       {{! Message recus }}
+      {{#each dbMessage}}
       <div class="col-md-12 bg-dark border-top border-success border-5 text-light m-0 row mb-3">
         <div class="col-md-2 bg-success d-flex justify-content-center align-items-center">
 
           <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
           <div class="center">
-            <h2>user</h2>
+            <h2>{{this.id_user}}</h2>
           </div>
 
         </div>
         <div class="col-md-8 mt-2">
-          <h3 class="text-left"><a href="#" class="text-decoration-none text-light">Message recu</a></h3>
-          <p class="text-left">Texte de l'enigme</p>
+          <h3 class="text-left"><a href="#" class="text-decoration-none text-light">{{this.sujet}}</a></h3>
+          <p class="text-left">{{this.message}}</p>
 
         </div>
         <div class="col-md-2 d-flex justify-content-center align-items-center">
           <button type="button" class="btn btn-labeled btn-light" data-bs-toggle="modal"
             data-bs-target="#exampleModal3">
-            <span class="btn-label"><i class="fa fa-check"></i></span>Répondre
-          </button>
-
-        </div>
-      </div>{{! Message recus }}
-      <div class="col-md-12 bg-dark border-top border-success border-5 text-light m-0 row mb-3">
-        <div class="col-md-2 bg-success d-flex justify-content-center align-items-center">
-
-          <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-          <div class="center">
-            <h2>user</h2>
-          </div>
-
-        </div>
-        <div class="col-md-8 mt-2">
-          <h3 class="text-left"><a href="#" class="text-decoration-none text-light">Message recu</a></h3>
-          <p class="text-left">Texte de l'enigme</p>
-
-        </div>
-        <div class="col-md-2 d-flex justify-content-center align-items-center">
-          <button type="button" class="btn btn-labeled btn-light">
-            <span class="btn-label"><i class="fa fa-check"></i></span>Répondre
+            <span class="btn-label"><i class="fa fa-check m-1"></i></span>Répondre
           </button>
 
         </div>
       </div>
+      {{/each}}
       {{! Message recus }}
       <div class="col-md-12 bg-dark border-top border-success border-5 text-light m-0 row mb-3">
         <div class="col-md-2 bg-success d-flex justify-content-center align-items-center">
@@ -191,42 +169,22 @@
           </div>
 
         </div>
-        <div class="col-md-8 mt-2">
+        <div class="col-md-7 mt-2">
           <h3 class="text-left"><a href="#" class="text-decoration-none text-light">Message recu</a></h3>
           <p class="text-left">Texte de l'enigme</p>
 
         </div>
-        <div class="col-md-2 d-flex justify-content-center align-items-center">
-          <button type="button" class="btn btn-labeled btn-light">
+        <div class="col-md-2 d-flex justify-content-center align-items-center m-3">
+          <button type="button" class="btn btn-labeled btn-light m-3">
             <span class="btn-label"><i class="fa fa-check"></i></span>Répondre
+          </button>
+          <button type="button" class="btn btn-labeled btn-danger">
+            <span class="btn-label"><i class="fa fa-check "></i></span>Suprimer
           </button>
 
         </div>
       </div>
-      {{! Message recus }}
-      <div class="col-md-12 bg-dark border-top border-success border-5 text-light m-0 row mb-3">
-        <div class="col-md-2 bg-success d-flex justify-content-center align-items-center">
-
-          <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-          <div class="center">
-            <h2>user</h2>
-          </div>
-
-        </div>
-        <div class="col-md-8 mt-2">
-          <h3 class="text-left"><a href="#" class="text-decoration-none text-light">Message recu</a></h3>
-          <p class="text-left">Texte de l'enigme</p>
-
-        </div>
-        <div class="col-md-2 d-flex justify-content-center align-items-center">
-          <button type="button" class="btn btn-labeled btn-light">
-            <span class="btn-label"><i class="fa fa-check"></i></span>Répondre
-          </button>
-
-        </div>
-      </div>
-    </div>
+      
 
     {{! Utilisateur }}
     <div class="tab-pane fade" id="pills-utilisateur" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
@@ -302,13 +260,30 @@
     </div>
   </div>
 </div>
-
-{{! modal de refus }}
+{{! modal de modification }}
 <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title text-dark" id="exampleModalLabel">refuser ?</h5>
+        <h5 class="modal-title text-dark" id="exampleModalLabel">Modifier ?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-dark">
+        Etes vous sur de vouloir Modifier cette enigme ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
+        <button type="button" class="btn btn-primary">Modifier</button>
+      </div>
+    </div>
+  </div>
+</div>
+{{! modal de refus }}
+<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-dark" id="exampleModalLabel">Refuser ?</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body text-dark">
@@ -316,7 +291,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
-        <button type="button" class="btn btn-primary">Envoyer</button>
+        <button type="button" class="btn btn-primary">Refuser</button>
       </div>
     </div>
   </div>
@@ -346,25 +321,3 @@
 Code pour mettre un modal
 data-bs-toggle="modal" data-bs-target="#exampleModal"
 }}
-
-
-
-
-
-
-
-
-<div>
-  <form action="edit">
-    <input type="text">
-    <textarea name="" id="" cols="30" rows="10"></textarea>
-
-    <button type="submit"></button>
-  </form>
-
-  <form action="delete">
-    <button type="submit"></button>
-  </form>
-
-
-</div>

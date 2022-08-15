@@ -61,6 +61,7 @@ router
   .get("/enigme/:id", (req, res) => {
     res.render("enigme_details", {});
   })
+  // EDIT
   .put("/enigme/:id", async (req, res) => {
     console.log("edit::enigme", req.body);
     const { id } = req.params;
@@ -85,6 +86,8 @@ router
 
     res.redirect("/admin");
   })
+
+  // DELETE
   .delete("/enigme/:id", async (req, res) => {
     console.log("delete::enigme", req.params);
     const { id } = req.params;
@@ -94,67 +97,43 @@ router
     res.redirect("/admin");
   });
 
+// message à l'admin
+router
+  .get("/", (req, res) => {
+    res.render("/");
+  })
+  .post("/message", async (req, res) => {
+    console.log("message envoyé", req.body);
+    const { name, email, sujet, message } = req.body;
 
+    await db.query(
+      `INSERT INTO message (name, email, sujet, message ) VALUES ("${name}", "${email}", "${sujet}", "${message}");`
+    );
 
-// READ
-// page de proposition d'énigme
-// .get("/admin", async (req, res) => {
-//   // ajout d'un article
-//   const dbEnigmes = await db.query(`SELECT * FROM enigme `);
-//   /*
-// // Redirection vers la page Admin
-//   if ( isAdmin() === true ) {
-//     // page admin
-//     res.redirect("/admin")
-// } else {
-//     // page proposer
-//     res.redirect("/proposer")
-//     console.log("hey",isAdmin);
-// }
-// */
-
-// console.log('admin page', dbEnigmes)
-//   res.render("admin", {
-//     dbEnigmes
-//   });
-// });
-
-// PUT enigme ID - EDIT
-// .put('/admin', async (req, res) => {
-//   const { id } = req.params;
-//   const { titre, difficulty, content, solus } = req.body;
-
-//   // Edition de l'article par rapport a son id
-//   await db.query(`UPDATE enigme SET titre="${titre}", difficulty="${difficulty}, content="${content}, solus="${solus}" WHERE id=${id};`)
-
-//   // Redirection vers la page admin
-//   res.redirect('/admin');
+    res.redirect("/");
+  })
+  .delete("/message/:id", async (req, res) => {
+    console.log("delete::message", req.params);
+    const { id } = req.params;
+  
+    if (id) await db.query(`DELETE FROM message WHERE id = "${id}";`);
+  
+    res.redirect("/admin");
+  });
+// .get("/message/:id", (req, res) => {
+//   res.render("/message", {});
 // })
 
-// // DELETE ARTICLE ID - DELETE
-// .delete('/article/:id', async (req,res) => {
-//   const { id } = req.params;
+// EDIT
+// DELETE
+// DELETE
 
-//   // Supression de l'article par rapport a son id
-//   await db.query(`DELETE FROM admin WHERE id=${id}`)
 
-//   // Redirection vers la page admin
-//   res.redirect('/admin');
-// })
+// CREATE
+// EDIT
+// DELETE
 
-// // Admin page
-// .get('/admin', async (req, res) => {
 
-//   // Récupération de tout les articles
-//   const db = await db.query(`SELECT * FROM enigme`)
-
-//   // Rendu de la page admin avec les data de la requête précédente
-//   res.render('admin', {
-//     layout: "admin",
-//     db
-//   });
-
-// });
 
 //liste des devinettes + id
 router.get("/devinettes", (req, res) => {
@@ -181,6 +160,8 @@ router.get("/proposer", (req, res) => {
 router.get("/profile", (req, res) => {
   res.render("profile");
 });
+
+
 
 // inscription
 router
