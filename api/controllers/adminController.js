@@ -5,11 +5,12 @@ exports.getAdminPage = async (req, res) => {
   console.log("getAdminPage");
   const dbEnigmes = await db.query(`SELECT * FROM enigme`);
   const dbMembres = await db.query(`SELECT * FROM membres`);
+  const dbMessage = await db.query(`SELECT * FROM message`);
   
   res.render("admin", {
     // Quand nous utilisons un layout qui n'est pas celui par default nous devons le spécifié
     layout: "adminLayout",
-    dbEnigmes, dbMembres
+    dbEnigmes, dbMembres, dbMessage
   });
 };
 

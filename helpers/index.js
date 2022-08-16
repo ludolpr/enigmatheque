@@ -19,8 +19,8 @@ exports.upper = (str) => str.toUpperCase()
 
 
 // fonction nombres de caractere max 40 
-exports.cutStr = (str) => str.substr(0, 40);
+exports.cutStr = (str) => str.substr(0, 40)
 
 // function saut de ligne
 
-exports.lign = (lign) => lign.replaceAll ("~","\n");
+exports.lign = (lign) => lign.replaceAll ("~","\n")

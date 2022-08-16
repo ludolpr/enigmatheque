@@ -1,0 +1,62 @@
+<!-- sous l'image -->
+<div class="py-3 container-fluid bg-primary h-100">
+  <div class="row container-fluid d-flex">
+
+    <div class="col-md-6 d-flex justify-content-center">
+      <p class="d-flex align-items-center text-center m-0 text-light">Pour contacter le
+        webmaster du site, veuillez utiliser le formulaire.<br />
+        Il vous répond dans les plus brefs délais.<br />
+        Le délais est d'environ 72 heures hors periode de vacances.<br />Donc si
+        vous ne recevez pas de message c'est que le webMaster est en congée.<br />
+        Il vous répondra des que possible.
+
+      </p>
+
+    </div>
+    <div class="col-md-6 container">
+      <div class="col-md-12 bg-success">
+
+        <h4 class="mt-5 pt-5 text-center text-uppercase fw-bold">Contactez-nous !</h4>
+
+        <form action="/message" method="post" class="opacity-75 p-5">
+          <div class="col-md-12">
+            <div class="mb-6">
+              <label for="exampleInputEmail1" class="form-label">Nom d'utilisateur</label>
+              <input name="id_user" type="nom" class="form-control" placeholder="Votre nom d'utilisateur"
+                aria-describedby="emailHelp" />
+            </div>
+            <div class="mb-6">
+              <label for="exampleInputPassword" class="form-label">Votre email*</label>
+              <input name="email" type="email" class="form-control" placeholder="Votre email" />
+            </div>
+          </div>
+
+          <p>Sujet<br />
+            <span class="wpcf7-form-control-wrap menu-742"><select name="menu-742"
+                class="form-label wpcf7-form-control form-control wpcf7-select wpcf7-validates-as-required" name="sujet"
+                aria-required="true" aria-invalid="false">
+                <option value="Contacter le webmaster">Contacter le webmaster</option>
+                <option value="Signaler un bug">Signaler un bug</option>
+                <option value="Autre">Autre</option>
+              </select>
+            </span>
+          </p>
+          <div class="container">
+            <div class="row">
+            <label for="exampleInputEmail1" class="form-label p-0">Tapez votre message ci-dessous</label>
+              <textarea name="message" placeholder="Votre message" cols="70" rows="5"></textarea>
+
+            </div>
+            <div class="container">
+              <div class="row d-flex justify-content-center">
+                <button type="submit" class="mt-2 w-auto btn btn-primary">Envoyer</button>
+              </div>
+            </div>
+          </div>
+        </form>
+
+      </div>
+    </div>
+
+  </div>
+</div>

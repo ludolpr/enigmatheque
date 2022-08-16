@@ -9287,7 +9287,7 @@ textarea.form-control-lg {
   border-radius: 45deg; }
 
 header {
-  background-image: url("./assets/images/door-1590024_1920.jpg");
+  background-image: url("/public/images/door-1590024_1920.jpg");
   height: 100vh;
   background-size: cover; }
 

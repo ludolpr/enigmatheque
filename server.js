@@ -11,6 +11,9 @@ const { cutStr } = require('./helpers/');
 const { isAdmin } = require('./helpers/middleware');
 const methodOverride = require('method-override');
 
+const expressSession = require("express-session");
+const MySQLStore = require("express-mysql-session")(expressSession);
+
 
 // config handlebars
 app.engine(
@@ -30,6 +33,20 @@ app.engine(
 );
 // Utilisation du middleware pour toute les routes suivante
 app.use(isAdmin);
+
+
+// sessions des membres
+// const sessionStore = new MySQLStore("./api/config/db.js");
+app 
+.use(
+  expressSession({
+    secret: "securite",
+    name: "poti-gato",
+    saveUninitialized: true,
+    resave: false,
+    // store: sessionStore
+  })
+);
 
 // Config Body-parser //
 
