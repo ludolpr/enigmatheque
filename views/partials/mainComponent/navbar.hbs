@@ -1,38 +1,24 @@
 <!-- Fixed navbar -->
-<nav
-  class="border-bottom navbar navbar-expand-md navbar-dark navbar fixed-top bg-dark"
->
+<nav class="border-bottom navbar navbar-expand-md navbar-dark navbar fixed-top bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">EnigmaTheque</a>
 
     <script>
       const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
       const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new
-      bootstrap.Popover(popoverTriggerEl))
+        bootstrap.Popover(popoverTriggerEl))
     </script>
-    
 
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarCollapse"
-      aria-controls="navbarCollapse"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+      aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav me-auto mb-2 mb-md-0">
         <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle text-light"
-            data-bs-toggle="dropdown"
-            href="#"
-            role="button"
-            aria-expanded="false"
-          >Enigmes & solutions
+          <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#" role="button"
+            aria-expanded="false">Enigmes & solutions
           </a>
           {{! liste enigmes }}
           <ul class="dropdown-menu">
@@ -46,19 +32,16 @@
             </li>
             <li><a class="dropdown-item" href="/enigme?q=difficile">Difficile</a></li>
           </ul>
-          {{!  deux pages suivantes  }}
+          {{! deux pages suivantes }}
         </li>
         <li class="nav-item">
           <a class="nav-link text-light" href="/proposer">Proposer</a>
         </li>
         <li class="nav-item">
-          <a
-            class="nav-link text-light"
-            href="/devinettes?q=Devinettes"
-          >Devinettes</a>
+          <a class="nav-link text-light" href="/devinettes?q=Devinettes">Devinettes</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light" href="/lesage?q=du Sage">Le sage</a> 
+          <a class="nav-link text-light" href="/lesage?q=du Sage">Le sage</a>
           {{!-- "le querry au dessus c'est possible ?" --}}
         </li>
         <li class="nav-item">
@@ -69,80 +52,44 @@
         </li>
       </ul>
       {{! connexion }}
-      <button
-        type="button"
-        class="text-dark btn btn-secondary me-2"
-        data-bs-toggle="modal"
-        data-bs-target="#exampleModal"
-      >Connexion</button>
+      <button type="button" class="text-dark btn btn-secondary me-2" data-bs-toggle="modal"
+        data-bs-target="#exampleModal">Connexion</button>
       <a href="/inscription">
-        <button
-          type="button"
-          class="text-dark btn btn-secondary"
-        >Inscription</button>
+        <button type="button" class="text-dark btn btn-secondary">Inscription</button>
       </a>
     </div>
   </div>
 </nav>
 {{! modal }}
-<div
-  class="modal fade"
-  id="exampleModal"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog modal-dialog-centered">
     <div class="modal-content bg-success">
       <div class="modal-header">
         <h1 class="modal-title" id="exampleModalLabel">Connexion</h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        <form action="/login" method="post">
+      <form action="/login" method="post">
+        <div class="modal-body">
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">E-mail</label>
-            <input
-              type="email"
-              name="email"
-              class="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-            />
+            <input type="email" name="email" class="form-control" id="exampleInputEmail1"
+              aria-describedby="emailHelp" />
             <div id="emailHelp" class="form-text text-light">Nous ne partagerons
               jamais votre adresse électronique avec qui que ce soit.</div>
           </div>
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
-            <input
-            name="password"
-              type="password"
-              class="form-control"
-              id="exampleInputPassword1"
-            />
+            <input name="password" type="password" class="form-control" id="exampleInputPassword1" />
           </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-secondary"
-          data-bs-dismiss="modal"
-        >Mot de passe oublié
-        </button>
-        <button
-          type="button"
-          class="btn btn-secondary"
-          data-bs-dismiss="modal"
-        >Fermer
-        </button>
-        <button type="submit" class="btn btn-primary">Envoyer</button>
-      </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Mot de passe oublié
+          </button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer
+          </button>
+          <button type="submit" class="btn btn-primary">Envoyer</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

@@ -27,4 +27,6 @@ db.connect((err) => {
 //   console.log('enigme', data)
 // });
 
-module.exports = db;
+module.exports = {
+ db, config 
+};

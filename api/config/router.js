@@ -1,22 +1,21 @@
 const { Router } = require("express");
 const router = Router();
-const { getAdminPage } = require("./controllers/adminController");
+const { getAdminPage } = require("../controllers/adminController");
 // const fkdb = require("./json/array.json");
-const db = require("./config/db");
-// session user 
-const { setSession } = require("../api/utils/setSession");
-// const utils = require("./utils/setSession")
-// helpers
+const db = require("./db");
+// session user
+const { setSession } = require("../utils/setSession");
+
+// Helpers
 // const { cutStr, lign } = require("../helpers");
-// const { setServers } = require("dns");
-const bcrypt = require('bcrypt');
-const  bcrypt_salt = 10;
-// page home
+const bcrypt = require("bcrypt");
+const bcrypt_salt = 10;
+// Page home
 router.get("/", (req, res) => {
   res.render("home");
 });
 
-// liste des éngimes + id
+// Liste des éngimes + id
 router
   .get("/enigme", async (req, res) => {
     let dif;
@@ -51,8 +50,6 @@ router
     });
   })
 
-
-
   // CRUD PROPOSER ENIGME
   // CREATE
   .post("/enigme", async (req, res) => {
@@ -64,7 +61,6 @@ router
     );
     res.redirect("/proposer");
   });
-
 
 router
   .get("/enigme/:id", (req, res) => {
@@ -105,7 +101,7 @@ router
     res.redirect("/admin");
   });
 
-// message à l'admin
+// Message à l'admin
 
 router.post("/message", async (req, res) => {
   console.log("message envoyé", req.body);
@@ -126,19 +122,8 @@ router.delete("/message/:id", async (req, res) => {
 
   res.redirect("/admin");
 });
-// .get("/message/:id", (req, res) => {
-//   res.render("/message", {});
-// })
 
-// EDIT
-// DELETE
-// DELETE
-
-// CREATE
-// EDIT
-// DELETE
-
-//liste des devinettes + id
+// Liste des devinettes + id
 router.get("/devinettes", (req, res) => {
   // console.log(req.query);
   res.render("enigme", {
@@ -146,7 +131,7 @@ router.get("/devinettes", (req, res) => {
   });
 });
 
-// liste du sage + id
+// Liste du sage + id
 router.get("/lesage", (req, res) => {
   // console.log(req.query);
   res.render("enigme", {
@@ -154,54 +139,64 @@ router.get("/lesage", (req, res) => {
   });
 });
 
-// proposer
+// Proposer
 router.get("/proposer", (req, res) => {
   res.render("proposer");
 });
 
-// profile
+// Profile
 router.get("/profile", (req, res) => {
   res.render("profile");
 });
 
-// inscription
+// Connexion
+router.post("/login", (req, res) => {
+  console.log("Login", req.body);
+  const { email, password } = req.body;
+  db.query(`SELECT password FROM membres WHERE email="${email}"`, function (err, data) {
+      if (err) throw err;
+
+      if (!data[0]) res.render("/", { flash: "Ce compte n'existe pas" });
+      else
+        bcrypt.hash(password, data[0].password, (err, result) => {
+          if (result) {
+            setSession(req, res, email);
+            // } else res.render("connexion", { flash: "L'email ou le mot de passe n'est pas correct !" });
+          } else res.redirect("/");
+        });
+    }
+  );
+});
+
+// Inscription
 router
   .get("/inscription", (req, res) => {
+    console.log("inscription", req.body);
     res.render("inscription");
   })
   .post("/inscription", async (req, res) => {
     console.log("inscription", req.body);
     const { name, email, password } = req.body;
+    if (!name || !email || !password) return res.redirect("/");
+    else {
+      await db.query(
+        `INSERT INTO membres SET name="${name}", email="${email}", password="${await bcrypt.hash(
+          password,
+          bcrypt_salt
+        )}", isAdmin=0`
+      );
 
-    await db.query(
-      `INSERT INTO membres (name, email, password) VALUES ("${name}", "${email}", "${password}");`
-    );
-
-    res.redirect("/");
+      res.redirect("/");
+    }
   });
 
-// connexion
-  router
-  .post("/login"), (req, res) => {
-    const { email, password } = req.body
-    db.query(`SELECT password FROM membres WHERE email="${email}"`, function(err, data){
-     if(err) throw err;
-     
-     if(!data[0]) return res.render("/", { flash: "Ce compte n'existe pas"})
-     bcrypt.compare(password, data[0].password, function (err, result){
-      if (result === true) { setSession(req, res, email) } else return res.render("connexion" , { flash: "L\'email ou le mot de passe n\'est pas correct !"})
-     });
-    })
-  }
-
-  router
-  .post('/logout', (req, res)=>{
-    req.session.destroy(() => {
-      res.clearCookie('poti-gato');
-      console.log("Clear Cookie session :", req.sessionID);
-      res.redirect('/');
-    })
-  })  
+router.post("/logout", (req, res) => {
+  req.session.destroy(() => {
+    res.clearCookie("poti-gato");
+    console.log("Clear Cookie session :", req.sessionID);
+    res.redirect("/");
+  });
+});
 // 2nd Layout
 router.route("/admin").get(getAdminPage);
 console.log("getAdminPage", getAdminPage);

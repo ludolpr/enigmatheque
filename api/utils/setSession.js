@@ -10,5 +10,5 @@ exports.setSession = async function (req, res, email) {
     isAdmin: user.isAdmin,
   };
 
-  res.redirect("/")
+  res.redirect("/drt")
 };

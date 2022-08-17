@@ -8,12 +8,10 @@ const morgan = require("morgan");
 const bodyParser = require('body-parser');
 app.use(morgan("dev"));
 const { cutStr } = require('./helpers/');
-const { isAdmin } = require('./helpers/middleware');
+// const { isAdmin } = require('./api/middlewares/admin'); 
 const methodOverride = require('method-override');
-
 const expressSession = require("express-session");
 const MySQLStore = require("express-mysql-session")(expressSession);
-
 
 // config handlebars
 app.engine(
@@ -31,12 +29,16 @@ app.engine(
   })
   
 );
-// Utilisation du middleware pour toute les routes suivante
-app.use(isAdmin);
+
+
+
+// // Utilisation du middleware pour toute les routes suivante
+// app.use(isAdmin);
 
 
 // sessions des membres
-// const sessionStore = new MySQLStore("./api/config/db.js");
+var sessionStore = new MySQLStore(require('./api/config/db').config);
+
 app 
 .use(
   expressSession({
@@ -44,7 +46,7 @@ app
     name: "poti-gato",
     saveUninitialized: true,
     resave: false,
-    // store: sessionStore
+    store: sessionStore
   })
 );
 
@@ -68,7 +70,7 @@ app.use(methodOverride('_method'))
 
 
 // Router
-const ROUTER = require("./api/router");
+const ROUTER = require("./api/config/router");
 app.use(ROUTER);
 
 
@@ -78,7 +80,6 @@ app.get('/*', function (req, res) {
   res.render('page404',{
   });
 })
-
 
 // run server
 app.listen(port, () =>
