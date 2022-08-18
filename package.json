@@ -27,6 +27,7 @@
     "express-hbs": "^2.4.0",
     "express-mysql-session": "^2.1.8",
     "express-session": "^1.17.3",
+    "flash": "^1.1.0",
     "handlebars": "^4.7.7",
     "method-override": "^3.0.0",
     "morgan": "^1.10.0",

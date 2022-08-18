@@ -53,7 +53,8 @@
       </ul>
       {{! connexion }}
       <button type="button" class="text-dark btn btn-secondary me-2" data-bs-toggle="modal"
-        data-bs-target="#exampleModal">Connexion</button>
+        data-bs-target="#staticBackdrop">Connexion</button>
+
       <a href="/inscription">
         <button type="button" class="text-dark btn btn-secondary">Inscription</button>
       </a>
@@ -61,15 +62,22 @@
   </div>
 </nav>
 {{! modal }}
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog modal-dialog-centered">
     <div class="modal-content bg-success">
       <div class="modal-header">
-        <h1 class="modal-title" id="exampleModalLabel">Connexion</h1>
+        <h1 class="modal-title" id="staticBackdropLabel">Connexion</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <form action="/login" method="post">
         <div class="modal-body">
+           {{#if flash}}
+            <h3 style="color:white;">{{this.flash}}</h3>
+            {{/if}}
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">E-mail</label>
             <input type="email" name="email" class="form-control" id="exampleInputEmail1"

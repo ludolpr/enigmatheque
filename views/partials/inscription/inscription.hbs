@@ -1,5 +1,5 @@
 <div class="col-md-12 mh100">
-  <form action="/inscription" method="post" class="row">
+  <form action="/inscription" method="post">
     <div class="container decallageTop">
       <div class="col-md-12 d-flex justify-content-center">
         <img class="border border-5 border-secondary" src="/assets/images/inscriptions.jpg" alt="" />
@@ -10,10 +10,16 @@
 
       <div class="col-md-12 d-flex justify-content-center">
         <div class="col-md-6 row">
+
+          {{#if flash}}
+            <h3 style="color:white;">{{this.flash}}</h3>
+            {{/if}}
+
+
           <label for="exampleInputEmail1" class="form-label m-3 ">Nom d'utilisateur :</label>
-          <input type="Nom d'utilisateur" name="name" />
+          <input type="text" name="name" />
           <label for="exampleInputEmail1" class="form-label m-3 ">Votre e-mail :</label>
-          <input type="E-mail" name="email"/>
+          <input type="email" name="email"/>
           <label for="exampleInputEmail1" class="form-label m-3 ">Votre mot de passe
             :</label>
           <input type="password" name="password" />

@@ -8,10 +8,17 @@ const morgan = require("morgan");
 const bodyParser = require('body-parser');
 app.use(morgan("dev"));
 const { cutStr } = require('./helpers/');
-// const { isAdmin } = require('./api/middlewares/admin'); 
 const methodOverride = require('method-override');
 const expressSession = require("express-session");
 const MySQLStore = require("express-mysql-session")(expressSession);
+
+
+// Import des middlewares
+const { isAdmin } = require("./api/middlewares/admin");
+
+// // Utilisation du middleware pour toute les routes suivante
+// app.use(isAdmin);
+
 
 // config handlebars
 app.engine(
@@ -35,9 +42,8 @@ app.engine(
 // // Utilisation du middleware pour toute les routes suivante
 // app.use(isAdmin);
 
-
 // sessions des membres
-var sessionStore = new MySQLStore(require('./api/config/db').config);
+var sessionStore = new MySQLStore(require('./api/config/config_db'));
 
 app 
 .use(

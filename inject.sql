@@ -1,1 +1,2 @@
-INSERT INTO membres (name, email, password) VALUES ("bruno", "bruno@kakawait.fr", "1234");
+INSERT INTO membres (name, password, email, isVerified, isAdmin, isBan,avatar) VALUES ("Admin", "ludo90Eni-", "ludolpr@gmail.com",1 ,1 ,0, "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.ms_ni44c-_TBsdHzF" );
+INSERT INTO membres SET ? name="${Admin}", password="${hash}", email="${ludolpr@gmail.com}", isVerified=1 , isAdmin=1, isBan=0, avatar="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.ms_ni44c-_TBsdHzF" 
