@@ -7,7 +7,7 @@ const port = 1990;
 const morgan = require("morgan");
 const bodyParser = require('body-parser');
 app.use(morgan("dev"));
-const { cutStr } = require('./helpers/');
+const { cutStr } = require('./helpers/index');
 const methodOverride = require('method-override');
 const expressSession = require("express-session");
 const MySQLStore = require("express-mysql-session")(expressSession);
@@ -35,7 +35,7 @@ app.engine(
     }
   })
   
-);
+)
 
 
 
@@ -56,7 +56,12 @@ app
   })
 );
 
-// Config Body-parser //
+// Session Connexion for HBS
+app.use('*', (req, res, next) => {
+  res.locals.user = req.session.user;
+  next();
+})
+
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));

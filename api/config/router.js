@@ -133,7 +133,8 @@ router.get("/devinettes", (req, res) => {
     titre: req.query.q,
   });
 });
-
+// -----------------------------------------------------------------
+// -----------------------------------------------------------------
 // Liste du sage + id
 router.get("/lesage", (req, res) => {
   // console.log(req.query);
@@ -141,17 +142,20 @@ router.get("/lesage", (req, res) => {
     titre: req.query.q,
   });
 });
-
+// -----------------------------------------------------------------
+// -----------------------------------------------------------------
 // Proposer
 router.get("/proposer", (req, res) => {
   res.render("proposer");
 });
-
+// -----------------------------------------------------------------
+// -----------------------------------------------------------------
 // Profile
 router.get("/profile", (req, res) => {
   res.render("profile");
 });
-
+// -----------------------------------------------------------------
+// -----------------------------------------------------------------
 // Connexion
 router.post('/login', (req, res) => {
   console.log("connecter au site", req.body);
@@ -160,7 +164,7 @@ router.post('/login', (req, res) => {
     if(err) throw err;
 
     let user = data[0]
-    if (!user) return res.redirect('/', { flash: "Ce compte n'existe pas"})
+    if (!user) return res.render('home', { flash: "Ce compte n'existe pas"})
     bcrypt.compare(password, user.password, function (err, result) {
       if (result === true) { 
         req.session.user = {
@@ -171,12 +175,13 @@ router.post('/login', (req, res) => {
           isAdmin: user.isAdmin
         };
         res.redirect('/')
-       } else return res.redirect('/')
+       } else return res.render('home',)
     });
   })
 
 });
-
+// -----------------------------------------------------------------
+// -----------------------------------------------------------------
 // Inscription
 router
   .get("/inscription", (req, res) => {
@@ -208,8 +213,32 @@ router.post("/logout", (req, res) => {
     res.redirect("/");
   });
 });
+// -----------------------------------------------------------------
+// -----------------------------------------------------------------
 // 2nd Layout
 router.route("/admin").get(getAdminPage);
 console.log("getAdminPage", getAdminPage);
 
+
+
+
+// -----------------------------------------------------------------
+// -----------------------------------------------------------------
+// nodemailer
+router
+.post("/mail", (req, res) => {
+  const { content, sujet, email} = req.body;
+
+  mailSend(`Email de l'administrateur <${process.env.MAIL_USER}>`, `Vous <${email}>`, sujet, content, async function (err, info) {
+   if(err) {
+    res.redirect("/")
+   } else {
+    res.redirect("/")
+   }
+  });
+});
+
+// -----------------------------------------------------------------
+// -----------------------------------------------------------------
+// exports module 
 module.exports = router;

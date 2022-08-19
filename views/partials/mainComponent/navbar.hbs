@@ -14,7 +14,8 @@
       aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
+    {{#if user}}
+    <div class="collapse navbar-collapse d-flex" id="navbarCollapse">
       <ul class="navbar-nav me-auto mb-2 mb-md-0">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#" role="button"
@@ -47,18 +48,36 @@
         <li class="nav-item">
           <a class="nav-link text-light" href="/profile">Profile</a>
         </li>
-        <li class="nav-item">
+        {{#if user.isAdmin}}
+            <li class="nav-item">
           <a class="nav-link text-light" href="/admin">Admin</a>
         </li>
+        {{/if}}
       </ul>
-      {{! connexion }}
+      {{! Deconnexion }}
+      <form action="/logout" method="post">
+      <a class="text-light text-decoration-none m-5" href="/profile">Vous êtes connecter en tant que: {{user.name}}</a>
+        <button type="submit" class="text-light btn btn-danger me-2" data-bs-target="#staticBackdrop">Deconnexion
+        </button>
+      </form>
+
+
+    </div>
+    {{else}}
+    <div class="d-flex justify-content-end justify-content-center ">
       <button type="button" class="text-dark btn btn-secondary me-2" data-bs-toggle="modal"
         data-bs-target="#staticBackdrop">Connexion</button>
 
       <a href="/inscription">
+
+
+
         <button type="button" class="text-dark btn btn-secondary">Inscription</button>
+
       </a>
+
     </div>
+    {{/if}}
   </div>
 </nav>
 {{! modal }}
@@ -75,9 +94,9 @@
       </div>
       <form action="/login" method="post">
         <div class="modal-body">
-           {{#if flash}}
-            <h3 style="color:white;">{{this.flash}}</h3>
-            {{/if}}
+          {{#if flash}}
+          <h3 style="color:white;">{{this.flash}}</h3>
+          {{/if}}
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">E-mail</label>
             <input type="email" name="email" class="form-control" id="exampleInputEmail1"
