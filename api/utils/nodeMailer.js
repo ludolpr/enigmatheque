@@ -1,11 +1,9 @@
 exports.mailSend = function (emailFrom, emailSend, sujet, content, callback) {
     const nodemailer = require("nodemailer");
-    const { MAIL_SERVICE, MAIL_HOST, MAIL_PORT, MAIL_USER, MAIL_PASSWORD, MAIL_TLS } = process.env;
+    const { MAIL_SERVICE, MAIL_USER, MAIL_PASSWORD, MAIL_TLS } = process.env;
 
     var transporter = nodemailer.createTransport({
         service: MAIL_SERVICE,
-        host: MAIL_HOST,
-        port: MAIL_PORT,
         secure: true,
         auth: {
             user: MAIL_USER,

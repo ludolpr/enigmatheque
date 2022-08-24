@@ -3,8 +3,10 @@ const router = Router();
 const { getAdminPage } = require("../controllers/adminController");
 // const fkdb = require("./json/array.json");
 const db = require("./db");
+const 
 // session user
-const { setSession } = require("../utils/setSession");
+{ setSession } = require("../utils/setSession"),
+{ mailSend } = require("../utils/nodeMailer");
 // import de flash
 const flash = require ("flash")
 
@@ -43,8 +45,9 @@ router
     }
     console.log("difficulty lvl", dif);
     const dbEnigmes = await db.query(
-      `SELECT * FROM enigme WHERE difficulty=${dif} AND isVerified=1`
-    );
+      // `SELECT * FROM enigme WHERE difficulty=${dif}`
+      `SELECT * FROM enigme WHERE difficulty=${dif} AND is_Verified=1` 
+    ); 
     console.log(dbEnigmes);
     // const proposEnigme = await db.query (`SELECT * FROM enigme `)
     res.render("enigme", {
@@ -53,8 +56,8 @@ router
     });
   })
 
-  // CRUD PROPOSER ENIGME
-  // CREATE
+  // CRUD PROPOSER ÉNIGME
+  // CREATE IN FORM
   .post("/enigme", async (req, res) => {
     console.log("create::enigme", req.body);
     const { titre, difficulty, content, solus } = req.body;
@@ -62,14 +65,14 @@ router
     await db.query(
       `INSERT INTO enigme (titre , difficulty, content, solus, id_user) VALUES ("${titre}", "${difficulty}", "${content}", "${solus}", "1");`
     );
-    res.redirect("/proposer");
+    res.render("proposer",{ flash: "Votre enigme à été envoyé"});
   });
 
 router
   .get("/enigme/:id", (req, res) => {
     res.render("enigme_details", {});
   })
-  // EDIT
+  // EDIT ENIGME
   .put("/enigme/:id", async (req, res) => {
     console.log("edit::enigme", req.body);
     const { id } = req.params;
@@ -91,10 +94,11 @@ router
       await db.query(
         `UPDATE enigme SET solus = "${solus}" WHERE id_enigme = ${id};`
       );
-
     res.redirect("/admin");
   })
-  // DELETE
+
+
+  // DELETE ÉNIGME
   .delete("/enigme/:id", async (req, res) => {
     console.log("delete::enigme", req.params);
     const { id } = req.params;
@@ -104,9 +108,10 @@ router
     res.redirect("/admin");
   });
 
-// Message à l'admin
+// Message à l'admin ( CRUD )
 
-router.post("/message", async (req, res) => {
+router
+.post("/message", async (req, res) => {
   console.log("message envoyé", req.body);
   const { name, email, sujet, message } = req.body;
 
@@ -115,9 +120,37 @@ router.post("/message", async (req, res) => {
   );
 
   res.redirect("/");
-});
+})
 
-router.delete("/message/:id", async (req, res) => {
+.get("/message/:id", (req, res) => {
+  res.render("enigme_details", {});
+})
+// EDITE MESSAGES
+.put("/message/:id", async (req, res) => {
+  console.log("edit::enigme", req.body);
+  const { id } = req.params;
+  const { message, name, sujet, email } = req.body;
+
+  if (titre)
+    await db.query(
+      `UPDATE enigme SET titre = "${message}" WHERE id_enigme = ${id};`
+    );
+  if (difficulty)
+    await db.query(
+      `UPDATE enigme SET difficulty = "${name}" WHERE id_enigme = ${id};`
+    );
+  if (content)
+    await db.query(
+      `UPDATE enigme SET content = "${sujet}" WHERE id_enigme = ${id};`
+    );
+  if (solus)
+    await db.query(
+      `UPDATE enigme SET solus = "${email}" WHERE id_enigme = ${id};`
+    );
+  res.redirect("/admin");
+})
+// DELETE MESSAGE
+.delete("/message/:id", async (req, res) => {
   console.log("delete::message", req.params);
   const { id } = req.params;
 
@@ -126,6 +159,9 @@ router.delete("/message/:id", async (req, res) => {
   res.redirect("/admin");
 });
 
+
+// -----------------------------------------------------------------
+// ----------------------------------------------------------------- 
 // Liste des devinettes + id
 router.get("/devinettes", (req, res) => {
   // console.log(req.query);
@@ -174,8 +210,8 @@ router.post('/login', (req, res) => {
           account_create: user.create_time,
           isAdmin: user.isAdmin
         };
-        res.redirect('/')
-       } else return res.render('home',)
+        res.redirect('/') 
+       } else return res.render('home',{ flash: "Erreur de saisis vériefier vos information"})
     });
   })
 
@@ -209,7 +245,7 @@ router
 router.post("/logout", (req, res) => {
   req.session.destroy(() => {
     res.clearCookie("poti-gato");
-    console.log("Clear Cookie session :", req.sessionID);
+    console.log("Clear Cookie session :", req);
     res.redirect("/");
   });
 });
@@ -229,7 +265,7 @@ router
 .post("/mail", (req, res) => {
   const { content, sujet, email} = req.body;
 
-  mailSend(`Email de l'administrateur <${process.env.MAIL_USER}>`, `Vous <${email}>`, sujet, content, async function (err, info) {
+  mailSend(`Email de l'administrateur <${process.env.EMAIL}>`, `Vous <${email}>`, sujet, content, async function (err, info) {
    if(err) {
     res.redirect("/")
    } else {

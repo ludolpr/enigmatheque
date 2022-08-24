@@ -50,7 +50,5 @@ db.query('DELETE FROM articles WHERE id = 1;', (err, data) => {
 
  mysqldump -u ludolpr –p dataenigme > backupDB.sql
 
-
-
  render  = renvoie la view ("home) + un objet au besoin.
  redirect = redirige sur une URL donc sur une route puis un controller

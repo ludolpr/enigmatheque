@@ -24,3 +24,7 @@ exports.cutStr = (str) => str.substr(0, 40)
 // function saut de ligne
 
 exports.lign = (lign) => lign.replaceAll ("~","\n")
+
+exports.inc = (value, option) => {
+    return parseInt(value)
+}

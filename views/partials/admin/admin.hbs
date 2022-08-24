@@ -31,123 +31,135 @@
       {{!-- debut du conteneur admin --}}
       <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"
         tabindex="0">
+        {{!--------------------------------------------------------------------------}}
+        {{!--------------------------------------------------------------------------}}
+        {{!-- Enigme proposer par les utilisateurs --}}
+        {{!--------------------------------------------------------------------------}}
+        {{!--------------------------------------------------------------------------}}
+        {{#each dbEnigmes}}
 
-      </div>
-      {{!--------------------------------------------------------------------------}}
-      {{!--------------------------------------------------------------------------}}
-      {{!-- Enigme proposer par les utilisateurs --}}
-      {{!--------------------------------------------------------------------------}}
-      {{!--------------------------------------------------------------------------}}
-      {{#each dbEnigmes}}
-      <div class="col-md-12 text-dark m-0 row mb-5">
-        {{!--------------------------------------------------------------------------}}
-        {{!--------------------------------------------------------------------------}}
-        {{!--------------------------------------------------------------------------}}
-        {{!--------------------------------------------------------------------------}}
-        {{! Enigme proposer}}
-        <div class="col-md-12 bg-secondary text-dark m-0 row mb-3">
-          <div class="col-md-2 d-flex justify-content-center align-items-center">
+        <div class="col-md-12 text-dark m-0 row">
+          {{!--------------------------------------------------------------------------}}
+          {{!--------------------------------------------------------------------------}}
+          {{!--------------------------------------------------------------------------}}
+          {{!--------------------------------------------------------------------------}}
+          {{! Enigme proposer}}
+          <div class="col-md-12 bg-dark text-light m-0 p-0 row mb-1">
+            <div class="col-md-2 d-flex bg-success m-0 justify-content-center align-items-center">
 
-            <link rel="stylesheet"
-              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-            <div class="text-center">
-              <h2>{{this.id_user}}</h2>
+              <link rel="stylesheet"
+                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+              <div class="text-center ">
+                <h2> {{this.id_user}}</h2>
+              </div>
+
+            </div>
+            <div class="col-md-10 mt-2" data-bs-toggle="modal" data-bs-target="#enigme-{{this.id_enigme}}">
+              <h3>
+                {{! data-bs-toggle="modal" data-bs-target="#exampleModal" }}
+                Titre: {{this.titre}}
+              </h3>
+              <p class="text-left">Enigme: {{this.content}}</p>
+              <p>Solution: {{this.solus}}</p>
+
             </div>
 
           </div>
-          <div class="col-md-10 mt-2" data-bs-toggle="modal" data-bs-target="#enigme-{{this.id_enigme}}">
-            <h3>
-              {{! data-bs-toggle="modal" data-bs-target="#exampleModal" }}
-              Titre: {{this.titre}}
-            </h3>
-            <p class="text-left">Enigme: {{this.content}}</p>
-            <p>Solution: {{this.solus}}</p>
 
-          </div>
+          {{!--------------------------------------------------------------------------}}
+          {{!--------------------------------------------------------------------------}}
+          {{!--------------------------------------------------------------------------}}
+          {{!--------------------------------------------------------------------------}}
+          {{! modal d'énigme }}
+          <div class="modal fade" data-bs-backdrop="static" id="enigme-{{this.id_enigme}}" tabindex="-1"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title text-dark" id="exampleModalLabel">Enigme reçu</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-dark">
+                  <form action="/enigme/{{ this.id_enigme }}?_method=PUT" method="post">
+                    <div class="container bg-secondary text-dark p-5 mb-6 mt-2">
+                      <div class="row">
 
-        </div>
+                        <label for="titre" class="form-label  p-2 ps-0">Votre titre</label>
+                        <input type="text" class="form-control border-success align-items-center mb-3"
+                          placeholder="Titre de votre énigme" id="titre" aria-describedby="titre"
+                          value="{{ this.titre }}" name="titre" />
 
-        {{!--------------------------------------------------------------------------}}
-        {{!--------------------------------------------------------------------------}}
-        {{!--------------------------------------------------------------------------}}
-        {{!--------------------------------------------------------------------------}}
-        {{! modal d'énigme }}
-        <div class="modal fade" id="enigme-{{this.id_enigme}}" tabindex="-1" aria-labelledby="exampleModalLabel"
-          aria-hidden="true">
-          <div class="modal-dialog modal-lg modal-dialog-scrollable">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title text-dark" id="exampleModalLabel">Enigme reçu</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body text-dark">
-                <form action="/enigme/{{ this.id_enigme }}?_method=PUT" method="post">
-                  <div class="container bg-secondary text-dark p-5 mb-6 mt-2">
-                    <div class="row">
+                        <div class="col-md-12 p-0 ">
+                          <p>Niveau de difficulté<br />
+                            <select name="difficulty" class="form-control" aria-required="true" aria-invalid="false"
+                              value="{{ this.difficulty }}">
+                              <option value="1">Facile</option>
+                              <option value="2">Normal</option>
+                              <option value="3">Difficile</option>
+                            </select>
+                            </span>
+                        </div>
 
-                      <label for="titre" class="form-label  p-2 ps-0">Votre titre</label>
-                      <input type="text" class="form-control border-success align-items-center mb-3"
-                        placeholder="Titre de votre énigme" id="titre" aria-describedby="titre" value="{{ this.titre }}"
-                        name="titre" />
+                        <label for="content" class="form-label p-2 ps-0">Enigme que vous proposer</label>
+                        <textarea name="content" placeholder="Votre Enigme" class="border-success" id='content'
+                          cols="70" rows="15" name="content">{{ this.content }}
+                        </textarea>
 
-                      <div class="col-md-12 p-0 ">
-                        <p>Niveau de difficulté<br />
-                          <select name="difficulty" class="form-control" aria-required="true" aria-invalid="false"
-                            value="{{ this.difficulty }}">
-                            <option value="1">Facile</option>
-                            <option value="2">Normal</option>
-                            <option value="3">Difficile</option>
-                          </select>
-                          </span>
+                        <label for="solus" class="form-label p-2 ps-0">Réponse à votre énigme</label>
+                        <textarea name="solus" placeholder="Votre Solution" class="border-success" id="solus" cols="70"
+                          rows="15" name="solus">{{ this.solus }}
+                        </textarea>
+
                       </div>
-
-                      <label for="content" class="form-label p-2 ps-0">Enigme que vous proposer</label>
-                      <textarea name="content" placeholder="Votre Enigme" class="border-success" id='content' cols="70"
-                        rows="15" name="content">{{ this.content }}
-                        </textarea>
-
-                      <label for="solus" class="form-label p-2 ps-0">Réponse à votre énigme</label>
-                      <textarea name="solus" placeholder="Votre Solution" class="border-success" id="solus" cols="70"
-                        rows="15" name="solus">{{ this.solus }}
-                        </textarea>
-
                     </div>
-                  </div>
-                </form>
+                  </form>
 
 
+                </div>
+                <div class="col-md-12 d-flex justify-content-center align-content-center mb-2">
+                  {{!--------------------------------------------------------------------------}}
+                  {{!--------------------------------------------------------------------------}}
+                  {{!-- data-bs-dismiss="modal" --}}
+                  {{!-- envoyer l'énigme --}}
+                  <form action="/enigme/{{ this.id_enigme }}" method="post">
+                    <button type="submit" class="m-2 btn btn-labeled btn-success">
+                      <span class="btn-label"><i class="fa fa-check m-1"></i></span>Valider
+                    </button>
+                  </form>
+                  {{!--------------------------------------------------------------------------}}
+                  {{!--------------------------------------------------------------------------}}
+                  {{!-- modifier l'énigme --}}
+                  <form action="/enigme/{{ this.id_enigme }}?_method=PUT" method="post">
+                    <button type="submit" class="m-2 btn btn-labeled btn-success">
+                      <span class="btn-label"><i class="fa fa-check m-1"></i></span>Modifier
+                    </button>
+                  </form>
+                  {{!--------------------------------------------------------------------------}}
+                  {{!--------------------------------------------------------------------------}}
+                  {{!-- Supprimer l'énigme --}}
+                  <form action="/enigme/{{ this.id_enigme }}?_method=DELETE" method="post">
+                    <button type="submit" class="m-2 btn btn-labeled btn-danger">
+                      <span class="btn-label"><i class="fa fa-remove m-1"></i></span>Retirer
+                    </button>
+                  </form>
+
+
+                </div>
               </div>
-              <div class="col-md-12 d-flex justify-content-center align-content-center mb-2">
 
-                {{!-- data-bs-dismiss="modal" --}}
-
-                <button type="button" class="m-2 btn btn-labeled btn-success" data-bs-toggle="modal"
-                  data-bs-dismiss="modal" data-bs-target="#exampleModal1">
-                  <span class="btn-label"><i class="fa fa-check m-1"></i></span>Envoyer
-                </button>
-                <button type="button" class="m-2 btn btn-labeled btn-success" data-bs-toggle="modal"
-                  data-bs-dismiss="modal" data-bs-target="#exampleModal2">
-                  <span class="btn-label"><i class="fa fa-check m-1"></i></span>Modifier
-                </button>
-
-                <button type="button" class="m-2 btn btn-labeled btn-danger" data-bs-toggle="modal"
-                  data-bs-dismiss="modal" data-bs-target="#exampleModal3">
-                  <span class="btn-label"><i class="fa fa-remove m-1"></i></span>Retirer
-                </button>
-              </div>
             </div>
-
           </div>
+
         </div>
 
-      </div>
+        {{/each}}
+        {{!--------------------------------------------------------------------------}}
+        {{!--------------------------------------------------------------------------}}
+        {{!-- Fin des énigmes proposées --}}
+        {{!--------------------------------------------------------------------------}}
+        {{!--------------------------------------------------------------------------}}
 
-      {{/each}}
-      {{!--------------------------------------------------------------------------}}
-      {{!--------------------------------------------------------------------------}}
-      {{!-- Fin des énigmes proposées --}}
-      {{!--------------------------------------------------------------------------}}
-      {{!--------------------------------------------------------------------------}}
+      </div>
 
 
       <div class="tab-pane fade" id="pills-message" role="tabpanel" aria-labelledby="pills-message-tab" tabindex="0">
@@ -172,12 +184,18 @@
             <p class="text-left">{{this.message}}</p>
 
           </div>
-          <div class="col-md-2 d-flex justify-content-center align-items-center">
+          <div class="col-md-1 d-flex justify-content-center align-items-center">
+            <button type="button" class="btn btn-labeled btn-light" data-bs-toggle="modal"
+              data-bs-target="#exampleModal4">
+              <span class="btn-label"><i class="fa fa-check m-1"></i></span>Modifier
+            </button>
+          </div>
+
+          <div class="col-md-1 d-flex justify-content-center align-items-center">
             <button type="button" class="btn btn-labeled btn-light" data-bs-toggle="modal"
               data-bs-target="#exampleModal4">
               <span class="btn-label"><i class="fa fa-check m-1"></i></span>Répondre
             </button>
-
           </div>
         </div>
         {{/each}}
@@ -190,37 +208,6 @@
       </div>
 
 
-
-
-
-
-
-      {{! Message recus }}
-      {{!-- <div class="col-md-12 bg-dark border-top border-success border-5 text-light m-0 row mb-3">
-        <div class="col-md-2 bg-success d-flex justify-content-center align-items-center">
-
-          <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-          <div class="center">
-            <h2>user</h2>
-          </div>
-
-        </div>
-        <div class="col-md-7 mt-2">
-          <h3 class="text-left"><a href="#" class="text-decoration-none text-light">Message recu</a></h3>
-          <p class="text-left">Texte de l'enigme</p>
-
-        </div>
-        <div class="col-md-2 d-flex justify-content-center align-items-center m-3">
-          <button type="button" class="btn btn-labeled btn-light m-3">
-            <span class="btn-label"><i class="fa fa-check"></i></span>Répondre
-          </button>
-          <button type="button" class="btn btn-labeled btn-danger">
-            <span class="btn-label"><i class="fa fa-check "></i></span>Suprimer
-          </button>
-
-        </div>
-      </div> --}}
 
 
 
@@ -252,28 +239,33 @@
           </div>
           <div class="col-md-5 d-flex justify-content-center align-items-center border-light border-bottom border-2">
 
-            <button type="button" data-bs-toggle="popover" data-bs-placement="top"
-              data-bs-content="Utilisateur non vérifier" class="btn btn-labeled btn-light m-3">
-              <span class="btn-label"><i class="fa-solid fa-user-check text-warning"></i></span>
+            <button type="button" class="h-50 d-flex align-items-center btn btn-labeled btn-light m-3">
+              <div class="form-check form-switch">
+                <span class="btn-label"><i data-bs-toggle="popover" data-bs-placement="top"
+                    data-bs-content="Administrateur" class="fs-4 fa-solid fa-image-portrait text-dark"></i></span>
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault1">
+              </div>
             </button>
-            
-              
-              <button type="button" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Utilisateur banni"
-              
-              class="btn btn-labeled btn-light m-3">
-            <div class="form-check form-switch">
-              <span class="btn-label"><i class="fa-solid fa-user-slash text-danger"></i></span>
-              <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-            </div>
+
+            <button type="button" class="h-50 d-flex align-items-center btn btn-labeled btn-light m-3">
+              <div class="form-check form-switch">
+                <span class="btn-label"><i data-bs-toggle="popover" data-bs-placement="top"
+                    data-bs-content="Utilisateur banni" class="fs-4 fa-solid fa-user-slash text-danger"></i></span>
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+              </div>
             </button>
-            <button type="button" data-bs-toggle="popover" data-bs-placement="top"
-              data-bs-content="Utilisateur vérifier" class="btn btn-labeled btn-light m-3 text-dark">
-              <span class="btn-label"><i class="fa-solid fa-certificate text-info"></i></span>
+
+
+            <button type="button" class="h-50  btn btn-labeled btn-light m-3">
+              <a class="text-decoration-none" href="/profile/id">
+                <div class="row">
+
+                  <p class="d-flex align-items-center">Voir le profile<span class="btn-label"><i
+                        class="fs-4 fa-solid fa-eye text-success m-3"></i></span></p>
+                </div>
+              </a>
             </button>
-            <button type="button" data-bs-toggle="popover" data-bs-placement="top"
-              data-bs-content="Changer le status de l'utilisateur" class="btn btn-labeled btn-light m-3">
-              <span class="btn-label"><i class="fa-solid fa-eye text-success"></i></span>
-            </button>
+
 
           </div>
           <script src="/assets/js/popoverEverywhere.js"></script>
@@ -287,102 +279,148 @@
 
 
 
+
     </div>
+
     {{! End Pills }}
     {{! bas de page }}
 
+  </div>
+</div>
 
+{{!--------------------------------------------------------------------------}}
+{{!--------------------------------------------------------------------------}}
+{{! modal de validation d'énigme}}
+<div class="modal fade" data-bs-backdrop="static" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-dark" id="exampleModalLabel">Envoyer ?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-dark">
+        Etes vous sur de vouloir envoyer cette énigme ?
 
-    {{!--------------------------------------------------------------------------}}
-    {{!--------------------------------------------------------------------------}}
-    {{! modal de validation }}
-    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-scrollable">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title text-dark" id="exampleModalLabel">Envoyer ?</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body text-dark">
-            Etes vous sur de vouloir envoyer cette énigme ?
-
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
-            <button type="button" class="btn btn-primary">Envoyer</button>
-          </div>
-        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
+        <button type="button" class="btn btn-primary">Envoyer</button>
       </div>
     </div>
-    {{!--------------------------------------------------------------------------}}
-    {{!--------------------------------------------------------------------------}}
-    {{!--------------------------------------------------------------------------}}
-    {{!--------------------------------------------------------------------------}}
-    {{! modal de modification }}
-    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-scrollable">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title text-dark" id="exampleModalLabel">Modifier ?</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body text-dark">
-            Etes vous sur de vouloir modifier cette enigme ?
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
-            <button type="button" class="btn btn-primary">Modifier</button>
-          </div>
-        </div>
+  </div>
+</div>
+{{!--------------------------------------------------------------------------}}
+{{!--------------------------------------------------------------------------}}
+{{!--------------------------------------------------------------------------}}
+{{!--------------------------------------------------------------------------}}
+{{! modal de modification d'énigme}}
+<div class="modal fade" data-bs-backdrop="static" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-dark" id="exampleModalLabel">Modifier ?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-dark">
+        Etes vous sur de vouloir modifier cette enigme ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
+        <button type="button" class="btn btn-primary">Modifier</button>
       </div>
     </div>
-    {{!--------------------------------------------------------------------------}}
-    {{!--------------------------------------------------------------------------}}
-    {{!--------------------------------------------------------------------------}}
-    {{!--------------------------------------------------------------------------}}
-    {{! modal de refus }}
-    <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-scrollable">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title text-dark" id="exampleModalLabel">Refuser ?</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body text-dark">
-            Etes vous sur de vouloir refuser cette enigme ?
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
-            <button type="button" class="btn btn-primary">Refuser</button>
-          </div>
-        </div>
+  </div>
+</div>
+{{!--------------------------------------------------------------------------}}
+{{!--------------------------------------------------------------------------}}
+{{!--------------------------------------------------------------------------}}
+{{!--------------------------------------------------------------------------}}
+{{! modal de refus }}
+<div class="modal fade" data-bs-backdrop="static" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-dark" id="exampleModalLabel">Refuser ?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-dark">
+        Etes vous sur de vouloir refuser cette enigme ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
+        <button type="button" class="btn btn-primary">Refuser</button>
       </div>
     </div>
-    {{!--------------------------------------------------------------------------}}
-    {{!--------------------------------------------------------------------------}}
-    {{!--------------------------------------------------------------------------}}
-    {{!--------------------------------------------------------------------------}}
-    {{! modal de réponse au message }}
-    <div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-scrollable">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title text-dark" id="exampleModalLabel">Message reçu</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body text-dark">
-            Etes vous sur de vouloir répondre au méssage ?
-          </div>
-          <textarea class="bg-success m-2 text-light" name="" id="" cols="30" rows="10"></textarea>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
-            <button type="button" class="btn btn-primary">Envoyer</button>
-          </div>
-        </div>
+  </div>
+</div>
+{{!--------------------------------------------------------------------------}}
+{{!--------------------------------------------------------------------------}}
+{{!--------------------------------------------------------------------------}}
+{{!--------------------------------------------------------------------------}}
+{{! modal de réponse au message }}
+<div class="modal fade" data-bs-backdrop="static" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-dark" id="exampleModalLabel">Message reçu</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-dark">
+        Etes vous sur de vouloir répondre au méssage ?
+      </div>
+      <textarea class="bg-success m-2 text-light" name="" id="" cols="30" rows="10"></textarea>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
+        <button type="button" class="btn btn-primary">Envoyer</button>
       </div>
     </div>
+  </div>
+</div>
 
-    {{!
-    Code pour mettre un modal
-    data-bs-toggle="modal" data-bs-target="#exampleModal"
-    }}
+<div class="modal fade" data-bs-backdrop="static" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-dark" id="exampleModalLabel">Message reçu</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-dark">
+        Etes vous sur de vouloir modifier se message ?
+      </div>
+      <textarea class="bg-success m-2 text-light" name="" id="" cols="30" rows="10"></textarea>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
+        <button type="button" class="btn btn-primary">Envoyer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" data-bs-backdrop="static" id="exampleModal6" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-dark" id="exampleModalLabel">Message reçu</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-dark">
+        Etes vous sur de vouloir retirer se message ?
+      </div>
+      <textarea class="bg-success m-2 text-light" name="" id="" cols="30" rows="10"></textarea>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
+        <button type="button" class="btn btn-primary">Envoyer</button>
+      </div>
+    </div>
+  </div>
+</div>
+{{!
+Code pour mettre un modal
+data-bs-toggle="modal" data-bs-target="#exampleModal"
+}}

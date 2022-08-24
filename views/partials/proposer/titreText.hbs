@@ -1,6 +1,9 @@
 <div class="container-fluid decallageTop">
     <div class="container ">
         <h1>Proposer une énigme</h1>
+        {{#if flash}}
+        <h3 style="color:white;">{{this.flash}}</h3>
+        {{/if}}
         <p class="fs-6">
             Vous pouvez nous proposer votre énigme avec la solution en remplissant le formulaire ci-dessous.
         </p>
