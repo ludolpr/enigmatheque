@@ -20,6 +20,11 @@ router.get("/", (req, res) => {
   res.render("home");
 });
 
+// ----------------------------------------------------------------------- //
+// -----------------------------SEPARATE---------------------------------- //
+// ----------------------------------------------------------------------- //
+
+
 // Liste des éngimes + id
 router
   .get("/enigme", async (req, res) => {
@@ -56,50 +61,42 @@ router
     });
   })
 
+
+// ----------------------------------------------------------------------- //
+// -----------------------------SEPARATE---------------------------------- //
+// ----------------------------------------------------------------------- //
+
+  
   // CRUD PROPOSER ÉNIGME
+  router
   // CREATE IN FORM
-  .post("/enigme", async (req, res) => {
+  .post("/insertEnigme", async (req, res) => {
     console.log("create::enigme", req.body);
     const { titre, difficulty, content, solus } = req.body;
-
-    await db.query(
-      `INSERT INTO enigme (titre , difficulty, content, solus, id_user) VALUES ("${titre}", "${difficulty}", "${content}", "${solus}", "1");`
-    );
+    // Ajout d'une énigme
+    await db.query(`INSERT INTO enigme (titre , difficulty, content, solus, id_user) VALUES ("${titre}", "${difficulty}", "${content}", "${solus}", "1");`
+    )
     res.render("proposer",{ flash: "Votre enigme à été envoyé"});
-  });
-
-router
+  })
+  // AFFICHER ENIGME
   .get("/enigme/:id", (req, res) => {
     res.render("enigme_details", {});
   })
   // EDIT ENIGME
-  .put("/enigme/:id", async (req, res) => {
+  .put("/updateEnigme/:id", async (req, res) => {
     console.log("edit::enigme", req.body);
     const { id } = req.params;
     const { titre, difficulty, content, solus } = req.body;
 
-    if (titre)
+    // if (titre)
       await db.query(
-        `UPDATE enigme SET titre = "${titre}" WHERE id_enigme = ${id};`
-      );
-    if (difficulty)
-      await db.query(
-        `UPDATE enigme SET difficulty = "${difficulty}" WHERE id_enigme = ${id};`
-      );
-    if (content)
-      await db.query(
-        `UPDATE enigme SET content = "${content}" WHERE id_enigme = ${id};`
-      );
-    if (solus)
-      await db.query(
-        `UPDATE enigme SET solus = "${solus}" WHERE id_enigme = ${id};`
-      );
-    res.redirect("/admin");
+        `UPDATE enigme SET titre="${titre}", difficulty="1", content="${content}", solus="${solus}" WHERE id_enigme="${id}";`
+        )
+      // Redirection vers la page admin
+        res.redirect("/admin");
   })
-
-
   // DELETE ÉNIGME
-  .delete("/enigme/:id", async (req, res) => {
+  .delete("/deleteEnigme/:id", async (req, res) => {
     console.log("delete::enigme", req.params);
     const { id } = req.params;
 
@@ -108,16 +105,24 @@ router
     res.redirect("/admin");
   });
 
-// Message à l'admin ( CRUD )
 
+// ----------------------------------------------------------------------- //
+// -----------------------------SEPARATE---------------------------------- //
+// ----------------------------------------------------------------------- //
+
+
+
+// CRUD MESSAGE A L'ADMIN
 router
+// CREATE IN FORM
 .post("/message", async (req, res) => {
   console.log("message envoyé", req.body);
   const { name, email, sujet, message } = req.body;
+  await db.query(`INSERT INTO message (name, email, sujet, message ) VALUES ("${name}","${email}", "${sujet}", "${message}");`)
 
-  await db.query(
-    `INSERT INTO message (name, email, sujet, message ) VALUES ("${name}","${email}", "${sujet}", "${message}");`
-  );
+  // await db.query(
+  //   `INSERT INTO message (name, email, sujet, message ) VALUES ("${name}","${email}", "${sujet}", "${message}" WHERE id=${id};`)
+    
 
   res.redirect("/");
 })
@@ -160,8 +165,12 @@ router
 });
 
 
-// -----------------------------------------------------------------
-// ----------------------------------------------------------------- 
+
+// ----------------------------------------------------------------------- //
+// -----------------------------SEPARATE---------------------------------- //
+// ----------------------------------------------------------------------- //
+
+
 // Liste des devinettes + id
 router.get("/devinettes", (req, res) => {
   // console.log(req.query);
@@ -264,9 +273,9 @@ console.log("getAdminPage", getAdminPage);
 router
 .post("/mail", (req, res) => {
   const { content, sujet, email} = req.body;
-
-  mailSend(`Email de l'administrateur <${process.env.EMAIL}>`, `Vous <${email}>`, sujet, content, async function (err, info) {
-   if(err) {
+  console.log("mail envoyé",req.body);
+  mailSend(`Email de l'administrateur <${process.env.MAIL_USER}>`, `Vous <${email}>`, sujet, content, async function (err, info) {
+    if(err) {
     res.redirect("/")
    } else {
     res.redirect("/")

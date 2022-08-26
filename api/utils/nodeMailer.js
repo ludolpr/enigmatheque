@@ -1,17 +1,14 @@
 exports.mailSend = function (emailFrom, emailSend, sujet, content, callback) {
     const nodemailer = require("nodemailer");
-    const { MAIL_SERVICE, MAIL_USER, MAIL_PASSWORD, MAIL_TLS } = process.env;
+    const { MAIL_SERVICE, MAIL_USER, MAIL_PASSWORD } = process.env;
 
     var transporter = nodemailer.createTransport({
         service: MAIL_SERVICE,
-        secure: true,
         auth: {
             user: MAIL_USER,
             pass: MAIL_PASSWORD
         },
-        tls: {
-            ciphers: MAIL_TLS
-        }
+        
     });
 
     var mailOptions = {
