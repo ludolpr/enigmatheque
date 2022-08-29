@@ -280,6 +280,54 @@ router.post("/mail", (req, res) => {
   //   }
   // );
 });
+router.post("/mailReply", ( req, res) => {
+   const { reply_content } = req.body,
+  { id } = req.params;
+  const msg =  db.query(`SELECT * FROM message WHERE id=${id}`)
+  
+   var msgHtml = `Votre message original : ${msg.message}<br><br>L'administrateur à répondu : ${reply_content}`
+  mailReply(`${process.env.MAIL_USER} <${process.env.MAIL_USER}>`, `${msg.email} <${msg.email}>`, `Réponse de votre demande : ${msg.sujet}`, msgHtml, function (err, info) {
+    if (err) {
+      req,res,'Une erreur est survenue !'
+    }
+    else {
+      db.query(`DELETE FROM message WHERE id=${id}`)
+      res.redirect('/')
+    }
+  });
+})
+async function mailReply() {
+  const mailOptions = {
+    from: 'from@email.fr',
+    to: 'to@email.fr',
+    subject: 'Test email pour le tutoriel',
+    text: "Voici le texte de l'email de test", //Le contenu de la version texte
+    html:
+      "<h1>HTML</h1><p>Voici le texte dans un paragraph pour l'email de test</p>", // Le contenu de la version HTML
+  }
+  await transporter.mailReply(mailOptions)
+}
+//On lance l'email
+mailReply()
+
+
+// exports.replyToUser = async (req, res) => {
+//   const { reply_content } = req.body,
+//   { id } = req.params;
+//   const [msg] = await db.query(`SELECT * FROM message WHERE id=${id}`)
+  
+//    var msgHtml = `Votre message original : ${msg.message}<br><br>L'administrateur à répondu : ${reply_content}`
+//   mailSend(`${process.env.MAIL_USER} <${process.env.MAIL_USER}>`, `${msg.email} <${msg.email}>`, `Réponse de votre demande : ${msg.sujet}`, msgHtml, async function (err, info) {
+//     if (err) {
+//       req,res,'Une erreur est survenue !'
+//     }
+//     else {
+//       await db.query(`DELETE FROM messages WHERE id=${id}`)
+//       res.redirect('/')
+//     }
+//   });
+// }
+
 
 // -----------------------------------------------------------------
 // -----------------------------------------------------------------

@@ -162,17 +162,17 @@
   {{!--------------------------------------------------------------------------}}
   {{!-- Message recus --}}
   {{#each dbMessage}}
-  <div class="col-md-12 bg-dark border-top border-success border-5 text-light m-0 row mb-1 p-0">
+  <div class="col-md-12 bg-dark m-0 text-light  mb-1 row  p-0">
     <div class="col-md-2 bg-success d-flex justify-content-center align-items-center">
 
       <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
       <div class="center">
-        <h2>{{this.name}}</h2>
+        <h2>{{this.name}} </h2>
       </div>
 
     </div>
-    <div class="col-md-8 mt-2">
+    <div class="col-md-8">
       <h3 class="text-left"><a href="#" class="text-decoration-none text-light">{{this.sujet}}</a></h3>
       <p class="text-left">{{this.message}}</p>
 
@@ -187,7 +187,7 @@
     </div>
     <form action="/mail" method="post" class="col-md-1 d-flex justify-content-center align-items-center">
       <div class="col-md-1 d-flex justify-content-center align-items-center">
-        <button type="button" class="btn btn-labeled btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+        <button type="button" class="btn btn-labeled btn-light" data-bs-toggle="modal" data-bs-target="#messageModal{{@index}}">
           <span class="btn-label"><i class="fa fa-check m-1"></i></span>Répondre
         </button>
       </div>
@@ -289,48 +289,9 @@
 {{!--------------------------------------------------------------------------}}
 {{!--------------------------------------------------------------------------}}
 {{! modal de réponse au message }}
-<div class="modal fade" data-bs-backdrop="static" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable">
-    <div class="modal-content bg-success">
+{{#each dbMessage}}
 
-      <form action="/mail" method="post" class="opacity-75 p-5">
-        <div class="col-md-12">
-          <div class="mb-6">
-            <label for="exampleInputEmail1" class="form-label">Nom d'utilisateur</label>
-            <input name="id_user" type="nom" class="form-control" placeholder="Votre nom d'utilisateur"
-              aria-describedby="emailHelp" />
-          </div>
-          <div class="mb-6">
-            <label for="exampleInputPassword" class="form-label">email*</label>
-            <input name="email" type="email" class="form-control" placeholder="Votre email" />
-          </div>
-        </div>
-
-        <p>Sujet<br />
-        <div class="mb-6">
-          <label for="exampleInputPassword" class="form-label">Message</label>
-          <input name="sujet" type="email" class="form-control" placeholder="Mon Message" />
-        </div>
-        </p>
-        <div class="container">
-          <div class="row">
-            <label for="exampleInputEmail1" class="form-label p-0">Tapez votre message ci-dessous</label>
-            <textarea name="content" placeholder="Votre message" cols="70" rows="5"></textarea>
-
-          </div>
-          <div class="container">
-
-          </div>
-        </div>
-      </form>
-
-    </div>
-  </div>
-
-</div>
-
-<div class="modal fade bg-success" id="exampleModal1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<div class="modal fade bg-success" id="messageModal{{@index}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
   aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content bg-dark">
@@ -339,41 +300,42 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       
-      <form action="/mail" method="post" class="opacity-75 p-5">
-        <div class="col-md-12">
-          <div class="mb-6">
-            <label for="exampleInputEmail1" class="form-label">{{this.name}}</label>
-            {{!-- <input name="id_user" type="nom" class="form-control" placeholder=""
-              aria-describedby="emailHelp" /> --}}
-          </div>
-          <div class="mb-6">
-            <label for="exampleInputPassword" class="form-label">{{this.email}}</label>
-            {{!-- <input name="email" type="email" class="form-control" placeholder="Votre email" /> --}}
-          </div>
-
-          {{!-- <p>Sujet<br /> --}}
-          <div class="row">
-            <label for="exampleInputEmail1" class="form-label p-0">Tapez votre message ci-dessous</label>
-            <textarea name="content" placeholder="Votre message" cols="70" rows="5"></textarea>
-
-          </div>
-          </p>
-        </div>
-
-
-        <div class="container">
-
-          <div class="container">
-            <div class="row d-flex justify-content-center">
-              <button type="submit" class="mt-2 w-auto btn btn-primary">Envoyer</button>
+      <form action="/mailReply" method="post" class="opacity-75 p-5">
+          <div class="col-md-12">
+            <div class="mb-6">
+              <label for="exampleInputEmail1" class="form-label">Mon nom d'utilisateur</label>
+              <input name="id_user" type="nom" value="{{this.name}}" class="form-control"
+                aria-describedby="emailHelp" />
+            </div>
+            <div class="mb-6">
+              <label for="exampleInputPassword"  class="form-label mt-2">Mon email:</label>
+              <input name="email" type="email" value="{{this.email}}" class="form-control"/>
             </div>
           </div>
-        </div>
-      </form>
+
+          <p>Sujet<br />
+            <span class="wpcf7-form-control-wrap menu-742">
+              <input name="sujet" type="text" class="form-control" placeholder="{{this.sujet}}" />
+            </span>
+          </p>
+          <div class="container">
+            <div class="row">
+              <label for="exampleInputEmail1" class="form-label p-0">Tapez votre message ci-dessous</label>
+              <textarea name="content" placeholder="{{this.content}}" cols="70" rows="5"></textarea>
+
+            </div>
+            <div class="container">
+              <div class="row d-flex justify-content-center">
+                <button type="submit" class="mt-2 w-auto btn btn-primary">Envoyer</button>
+              </div>
+            </div>
+          </div>
+        </form>
       
     </div>
   </div>
 </div>
+{{/each}}
 
 {{!--------------------------------------------------------------------------}}
 {{!--------------------------------------------------------------------------}}
