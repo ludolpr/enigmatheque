@@ -25,7 +25,7 @@
     {{!--------------------------------------------------------------------------}}
     {{! Insertion du contenu dans les pills }}
     {{! Enigme proposer par un user }}
-    <div class="tab-content p-0" id="pills-tabContent">
+    <div class="tab-content  p-0" id="pills-tabContent">
       {{!--------------------------------------------------------------------------}}
       {{!--------------------------------------------------------------------------}}
       {{!-- debut du conteneur admin --}}
@@ -50,7 +50,7 @@
               <link rel="stylesheet"
                 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
               <div class="text-center ">
-                <h2> {{this.id_user}}</h2>
+                <h2> {{ upper this.name }} : {{this.id_user}} </h2>
               </div>
 
             </div>
@@ -59,7 +59,7 @@
                 {{! data-bs-toggle="modal" data-bs-target="#exampleModal" }}
                 Titre: {{this.titre}}
               </h3>
-              <p class="text-left">Enigme: {{this.content}}</p>
+              <p class="text-left">Enigme: {{lign this.content}}</p>
               <p>Solution: {{this.solus}}</p>
 
             </div>
@@ -141,8 +141,8 @@
           </div>
         </div>
       </div>
-      {{/each}}
     </div>
+    {{/each}}
 
   </div>
 
@@ -155,14 +155,14 @@
 </div>
 
 
-<div class="tab-pane fade" id="pills-message" role="tabpanel" aria-labelledby="pills-message-tab" tabindex="0">
+<div class="tab-pane fade p-0" id="pills-message" role="tabpanel" aria-labelledby="pills-message-tab" tabindex="0">
   {{!--------------------------------------------------------------------------}}
   {{!--------------------------------------------------------------------------}}
   {{!--------------------------------------------------------------------------}}
   {{!--------------------------------------------------------------------------}}
   {{!-- Message recus --}}
   {{#each dbMessage}}
-  <div class="col-md-12 bg-dark border-top border-success border-5 text-light m-0 row mb-3">
+  <div class="col-md-12 bg-dark border-top border-success border-5 text-light m-0 row mb-1 p-0">
     <div class="col-md-2 bg-success d-flex justify-content-center align-items-center">
 
       <link rel="stylesheet"
@@ -178,19 +178,21 @@
 
     </div>
     <div class="col-md-1 d-flex justify-content-center align-items-center">
-      <form action="/deleteMessage/{{this.id}}" method="post">
-        <button type="button" class="btn btn-labeled btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal4">
-        <span class="btn-label"><i class="fa fa-check m-1"></i></span>Suprimer
-      </button>
+      <form action="/deleteMessage/{{this.id}}?_method=DELETE" method="post">
+        <button type="submit" class="btn btn-labeled btn-danger">
+          <span class="btn-label"><i class="fa fa-check m-1"></i></span>Suprimer
+        </button>
       </form>
-      
-    </div>
 
-    <div class="col-md-1 d-flex justify-content-center align-items-center">
-      <button type="button" class="btn btn-labeled btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal4">
-        <span class="btn-label"><i class="fa fa-check m-1"></i></span>Répondre
-      </button>
     </div>
+    <form action="/mail" method="post" class="col-md-1 d-flex justify-content-center align-items-center">
+      <div class="col-md-1 d-flex justify-content-center align-items-center">
+        <button type="button" class="btn btn-labeled btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+          <span class="btn-label"><i class="fa fa-check m-1"></i></span>Répondre
+        </button>
+      </div>
+    </form>
+
   </div>
   {{/each}}
   {{!--------------------------------------------------------------------------}}
@@ -207,14 +209,14 @@
 
 <div class="tab-pane fade" id="pills-utilisateur" role="tabpanel" aria-labelledby="pills-utilisateur-tab" tabindex="0">
 
-
+  {{#each dbMembres}}
   <div class="col-md-12 bg-dark border-top border-success border-5 text-light m-0 row mb-3">
     {{!--------------------------------------------------------------------------}}
     {{!--------------------------------------------------------------------------}}
     {{!-- Membres du site --}}
     {{!--------------------------------------------------------------------------}}
     {{!--------------------------------------------------------------------------}}
-    {{#each dbMembres}}
+
     <div
       class="col-md-2 bg-success d-flex justify-content-center align-items-center border-light border-bottom border-2">
 
@@ -262,18 +264,19 @@
 
     </div>
     <script src="/assets/js/popoverEverywhere.js"></script>
-    {{/each}}
     {{!--------------------------------------------------------------------------}}
     {{!-- Fin des membres du site --}}
     {{!--------------------------------------------------------------------------}}
 
+    {{/each}}
   </div>
-</div>
-
-
-
 
 </div>
+
+
+
+
+
 
 {{! End Pills }}
 {{! bas de page }}
@@ -283,137 +286,96 @@
 
 {{!--------------------------------------------------------------------------}}
 {{!--------------------------------------------------------------------------}}
-{{! modal de validation d'énigme}}
-<div class="modal fade" data-bs-backdrop="static" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title text-dark" id="exampleModalLabel">Envoyer ?</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body text-dark">
-        Etes vous sur de vouloir envoyer cette énigme ?
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
-        <button type="button" class="btn btn-primary">Envoyer</button>
-      </div>
-    </div>
-  </div>
-</div>
-{{!--------------------------------------------------------------------------}}
-{{!--------------------------------------------------------------------------}}
-{{!--------------------------------------------------------------------------}}
-{{!--------------------------------------------------------------------------}}
-{{! modal de modification d'énigme}}
-<div class="modal fade" data-bs-backdrop="static" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title text-dark" id="exampleModalLabel">Modifier ?</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body text-dark">
-        Etes vous sur de vouloir modifier cette enigme ?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
-        <button type="button" class="btn btn-primary">Modifier</button>
-      </div>
-    </div>
-  </div>
-</div>
-{{!--------------------------------------------------------------------------}}
-{{!--------------------------------------------------------------------------}}
-{{!--------------------------------------------------------------------------}}
-{{!--------------------------------------------------------------------------}}
-{{! modal de refus }}
-<div class="modal fade" data-bs-backdrop="static" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title text-dark" id="exampleModalLabel">Refuser ?</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body text-dark">
-        Etes vous sur de vouloir refuser cette enigme ?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
-        <button type="button" class="btn btn-primary">Refuser</button>
-      </div>
-    </div>
-  </div>
-</div>
-{{!--------------------------------------------------------------------------}}
-{{!--------------------------------------------------------------------------}}
 {{!--------------------------------------------------------------------------}}
 {{!--------------------------------------------------------------------------}}
 {{! modal de réponse au message }}
-<div class="modal fade" data-bs-backdrop="static" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel"
+<div class="modal fade" data-bs-backdrop="static" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable">
-    <div class="modal-content">
+    <div class="modal-content bg-success">
+
+      <form action="/mail" method="post" class="opacity-75 p-5">
+        <div class="col-md-12">
+          <div class="mb-6">
+            <label for="exampleInputEmail1" class="form-label">Nom d'utilisateur</label>
+            <input name="id_user" type="nom" class="form-control" placeholder="Votre nom d'utilisateur"
+              aria-describedby="emailHelp" />
+          </div>
+          <div class="mb-6">
+            <label for="exampleInputPassword" class="form-label">email*</label>
+            <input name="email" type="email" class="form-control" placeholder="Votre email" />
+          </div>
+        </div>
+
+        <p>Sujet<br />
+        <div class="mb-6">
+          <label for="exampleInputPassword" class="form-label">Message</label>
+          <input name="sujet" type="email" class="form-control" placeholder="Mon Message" />
+        </div>
+        </p>
+        <div class="container">
+          <div class="row">
+            <label for="exampleInputEmail1" class="form-label p-0">Tapez votre message ci-dessous</label>
+            <textarea name="content" placeholder="Votre message" cols="70" rows="5"></textarea>
+
+          </div>
+          <div class="container">
+
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="modal fade bg-success" id="exampleModal1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content bg-dark">
       <div class="modal-header">
-        <h5 class="modal-title text-dark" id="exampleModalLabel">Message reçu</h5>
+        <h5 class="modal-title" id="staticBackdropLabel">Réponse au utilisateurs</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body text-dark">
-        Etes vous sur de vouloir répondre au méssage ?
-      </div>
-      <textarea class="bg-success m-2 text-light" name="" id="" cols="30" rows="10"></textarea>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
-        <button type="button" class="btn btn-primary">Envoyer</button>
-      </div>
+      
+      <form action="/mail" method="post" class="opacity-75 p-5">
+        <div class="col-md-12">
+          <div class="mb-6">
+            <label for="exampleInputEmail1" class="form-label">{{this.name}}</label>
+            {{!-- <input name="id_user" type="nom" class="form-control" placeholder=""
+              aria-describedby="emailHelp" /> --}}
+          </div>
+          <div class="mb-6">
+            <label for="exampleInputPassword" class="form-label">{{this.email}}</label>
+            {{!-- <input name="email" type="email" class="form-control" placeholder="Votre email" /> --}}
+          </div>
+
+          {{!-- <p>Sujet<br /> --}}
+          <div class="row">
+            <label for="exampleInputEmail1" class="form-label p-0">Tapez votre message ci-dessous</label>
+            <textarea name="content" placeholder="Votre message" cols="70" rows="5"></textarea>
+
+          </div>
+          </p>
+        </div>
+
+
+        <div class="container">
+
+          <div class="container">
+            <div class="row d-flex justify-content-center">
+              <button type="submit" class="mt-2 w-auto btn btn-primary">Envoyer</button>
+            </div>
+          </div>
+        </div>
+      </form>
+      
     </div>
   </div>
 </div>
 
-<div class="modal fade" data-bs-backdrop="static" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title text-dark" id="exampleModalLabel">Message reçu</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body text-dark">
-        Etes vous sur de vouloir modifier se message ?
-      </div>
-      <textarea class="bg-success m-2 text-light" name="" id="" cols="30" rows="10"></textarea>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
-        <button type="button" class="btn btn-primary">Envoyer</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" data-bs-backdrop="static" id="exampleModal6" tabindex="-1" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title text-dark" id="exampleModalLabel">Message reçu</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body text-dark">
-        Etes vous sur de vouloir retirer se message ?
-      </div>
-      <textarea class="bg-success m-2 text-light" name="" id="" cols="30" rows="10"></textarea>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
-        <button type="button" class="btn btn-primary">Envoyer</button>
-      </div>
-    </div>
-  </div>
-</div>
-{{!
-Code pour mettre un modal
-data-bs-toggle="modal" data-bs-target="#exampleModal"
-}}
+{{!--------------------------------------------------------------------------}}
+{{!--------------------------------------------------------------------------}}
+{{!--------------------------------------------------------------------------}}
+{{!--------------------------------------------------------------------------}}

@@ -7,7 +7,6 @@ const port = 1990;
 const morgan = require("morgan");
 const bodyParser = require('body-parser');
 app.use(morgan("dev"));
-const { cutStr } = require('./helpers/index');
 const methodOverride = require('method-override');
 const expressSession = require("express-session");
 const MySQLStore = require("express-mysql-session")(expressSession);
@@ -21,6 +20,7 @@ const { isAdmin } = require("./api/middlewares/admin");
 
 
 // config handlebars
+const { cutStr, upper, lign } = require('./helpers/index');
 app.engine(
 
   ".hbs",
@@ -31,7 +31,7 @@ app.engine(
     // Que nous avons créé dans ./views/layouts/adminLayout
     adminLayout: "adminLayout",
     helpers :{
-      cutStr
+      cutStr, upper, lign
     }
   })
   
@@ -81,7 +81,7 @@ app.use(methodOverride('_method'))
 
 
 // Router
-const ROUTER = require("./api/config/router");
+const ROUTER = require("./api/router");
 app.use(ROUTER);
 
 
