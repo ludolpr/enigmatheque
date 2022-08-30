@@ -8,9 +8,9 @@ const // session user
   { mailSend } = require("./config/nodeMailer");
 // import de flash
 const flash = require("flash");
-require('dotenv').config()
+require("dotenv").config();
 const { MAIL_USER } = process.env;
-const transporter = require("./config/nodeMailer")
+const transporter = require("./config/nodeMailer");
 // Helpers
 // const { cutStr, lign } = require("../helpers");
 const bcrypt = require("bcrypt");
@@ -21,7 +21,7 @@ router.get("/", (req, res) => {
 });
 
 // ----------------------------------------------------------------------- //
-// -----------------------------SEPARATE---------------------------------- //
+// -------------------LISTE DES ENIGMES + ID------------------------------ //
 // ----------------------------------------------------------------------- //
 
 // Liste des éngimes + id
@@ -60,10 +60,10 @@ router.get("/enigme", async (req, res) => {
 });
 
 // ----------------------------------------------------------------------- //
-// -----------------------------SEPARATE---------------------------------- //
+// -----------------------CRUD PROPOSER ÉNIGME---------------------------- //
 // ----------------------------------------------------------------------- //
 
-// CRUD PROPOSER ÉNIGME
+//
 router
   // CREATE IN FORM
   .post("/insertEnigme", async (req, res) => {
@@ -103,10 +103,9 @@ router
   });
 
 // ----------------------------------------------------------------------- //
-// -----------------------------SEPARATE---------------------------------- //
+// ---------------------CRUD MESSAGE A L'ADMIN---------------------------- //
 // ----------------------------------------------------------------------- //
 
-// CRUD MESSAGE A L'ADMIN
 router
   // CREATE IN FORM
   .post("/message", async (req, res) => {
@@ -125,7 +124,7 @@ router
   .get("/message/:id", (req, res) => {
     res.render("enigme_details", {});
   })
-  
+
   // DELETE MESSAGE
   .delete("/deleteMessage/:id", async (req, res) => {
     console.log("delete::message", req.params);
@@ -147,8 +146,9 @@ router.get("/devinettes", (req, res) => {
     titre: req.query.q,
   });
 });
-// -----------------------------------------------------------------
-// -----------------------------------------------------------------
+// ----------------------------------------------------------------------- //
+// ------------------------LISTE DU SAGE + ID----------------------------- //
+// ----------------------------------------------------------------------- //
 // Liste du sage + id
 router.get("/lesage", (req, res) => {
   // console.log(req.query);
@@ -156,21 +156,79 @@ router.get("/lesage", (req, res) => {
     titre: req.query.q,
   });
 });
-// -----------------------------------------------------------------
-// -----------------------------------------------------------------
-// Proposer
+// ----------------------------------------------------------------------- //
+// -----------------------------PROPOSER------------------------------- //
+// ----------------------------------------------------------------------- //
+
 router.get("/proposer", (req, res) => {
   res.render("proposer");
 });
-// -----------------------------------------------------------------
-// -----------------------------------------------------------------
-// Profile
-router.get("/profile", (req, res) => {
-  res.render("profile");
-});
-// -----------------------------------------------------------------
-// -----------------------------------------------------------------
-// Connexion
+// ----------------------------------------------------------------------- //
+// -----------------------------PROFIL------------------------------------ //
+// ----------------------------------------------------------------------- //
+router
+  .get("/profil", (req, res) => {
+    res.render("profil");
+  })
+  .put("/profilEdit", async (req, res) => {
+    console.log("edit::profil", req.body);
+    const { id } = req.params;
+    const { avatar, name, email, password,confPassword, bio } = req.body;
+    if (avatar) {
+      await db.query(
+        `UPDATE membres SET name="${avatar}" WHERE id=${id}`
+      );
+    }
+    if (name) {
+      await db.query(
+        `UPDATE membres SET name="${name}" WHERE id=${id}`
+      );
+    }
+    if (email) {
+      await db.query(
+        `UPDATE membres SET email="${email}" WHERE id=${id}`
+      );
+    }
+    if (password === confPassword) {
+      bcrypt.hash(
+        password,
+        confPassword,
+        bcrypt_salt,
+        async function (err, hash) {
+          await db.query(
+            `UPDATE membres SET password="${hash}" WHERE id=${id}`
+          );
+        }
+      );
+    }
+    if (bio) {
+      await db.query(
+        `UPDATE membres SET name="${bio}" WHERE id=${id}`
+      );
+    }
+
+    let userget = await db.query(
+      `SELECT * FROM membres WHERE id="${req.session.user.id}" `
+    );
+    let user = userget[0];
+
+    req.session.user = {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      account_create: user.create_time,
+      isAdmin: user.isAdmin,
+      avatar: user.avatar,
+      bio: user.bio
+    };
+
+    res.redirect("/profil");
+  });
+
+// ----------------------------------------------------------------------- //
+// -----------------------------CONNEXION--------------------------------- //
+// ----------------------------------------------------------------------- //
+
 router.post("/login", (req, res) => {
   console.log("connecter au site", req.body);
   const { email, password } = req.body;
@@ -189,6 +247,8 @@ router.post("/login", (req, res) => {
             name: user.name,
             account_create: user.create_time,
             isAdmin: user.isAdmin,
+            avatar: user.avatar,
+            bio: user.bio,
           };
           res.redirect("/");
         } else return res.render("home", { flash: "Erreur de saisis vériefier vos information" });
@@ -196,9 +256,9 @@ router.post("/login", (req, res) => {
     }
   );
 });
-// -----------------------------------------------------------------
-// -----------------------------------------------------------------
-// Inscription
+// ----------------------------------------------------------------------- //
+// -----------------------------INSCRIPTION------------------------------- //
+// ----------------------------------------------------------------------- //
 router
   .get("/inscription", (req, res) => {
     console.log("inscription", req.body);
@@ -236,15 +296,17 @@ router.post("/logout", (req, res) => {
     res.redirect("/");
   });
 });
-// -----------------------------------------------------------------
-// -----------------------------------------------------------------
-// 2nd Layout
+// ----------------------------------------------------------------------- //
+// -----------------------------2ND LAYOUT-------------------------------- //
+// ----------------------------------------------------------------------- //
+
 router.route("/admin").get(getAdminPage);
 console.log("getAdminPage", getAdminPage);
 
-// -----------------------------------------------------------------
-// -----------------------------------------------------------------
-// nodemailer
+// ----------------------------------------------------------------------- //
+// -----------------------------NODEMAILER-------------------------------- //
+// ----------------------------------------------------------------------- //
+
 router.post("/mail", (req, res) => {
   const { content, sujet, email } = req.body;
   console.log("mail envoyé", req.body);
@@ -257,7 +319,7 @@ router.post("/mail", (req, res) => {
       html: `
           <h1> Le mail du destinataire: ${email}</h1>
           <h3> son message : ${content}</h3>
-      `
+      `,
     },
     function (err, info) {
       if (err) {
@@ -280,8 +342,9 @@ router.post("/mail", (req, res) => {
   //   }
   // );
 });
-// -----------------------------------------------------------------
-// -----------------------------------------------------------------
+// ----------------------------------------------------------------------- //
+// ------------------------NODEMAILER REPLY------------------------------- //
+// ----------------------------------------------------------------------- //
 router.post("/mailReply", (req, res) => {
   const { content, sujet, email } = req.body;
   console.log("mail envoyé", req.body);
@@ -290,11 +353,10 @@ router.post("/mailReply", (req, res) => {
     {
       from: MAIL_USER,
       to: email,
-      subject: sujet,
+      subject: `Enigmatheque + ${sujet}`,
       html: `
-          <h1> Le mail du destinataire: ${email}</h1>
-          <h3> son message : ${content}</h3>
-      `
+          <h2> Réponse de l'administrateur : ${content}</h2>
+      `,
     },
     function (err, info) {
       if (err) {
@@ -319,11 +381,7 @@ router.post("/mailReply", (req, res) => {
   // );
 });
 
-
-
-
-
-// -----------------------------------------------------------------
-// -----------------------------------------------------------------
-// exports module
+// ----------------------------------------------------------------------- //
+// -----------------------------EXPORTS MODULE---------------------------- //
+// ----------------------------------------------------------------------- //
 module.exports = router;

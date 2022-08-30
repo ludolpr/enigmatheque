@@ -28,12 +28,12 @@
           <div class="col-md-12">
             <div class="mb-6">
               <label for="exampleInputEmail1" class="form-label">Nom d'utilisateur</label>
-              <input name="name" type="nom" class="form-control" placeholder="Votre nom d'utilisateur"
+              <input name="name" type="nom" value="{{user.name}}" class="form-control" placeholder="Votre nom d'utilisateur"
                 aria-describedby="emailHelp" />
             </div>
             <div class="mb-6">
               <label for="exampleInputPassword" class="form-label">Votre email*</label>
-              <input name="email" type="email" value="{{this.email}}" class="form-control" placeholder="Votre email" />
+              <input name="email" type="email" value="{{user.email}}" class="form-control" placeholder="Votre email" />
             </div>
           </div>
 

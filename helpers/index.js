@@ -15,7 +15,7 @@ exports.limitArrayReverse = (arrEnigme, limit) => {
 }
 
 // mettre en majuscule
-exports.upper = (str) => str.toUpperCase()
+exports.upper = (str) => str.toUpperCase();
 
 
 // fonction nombres de caractere max 40 

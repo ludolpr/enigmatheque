@@ -9286,6 +9286,13 @@ textarea.form-control-lg {
 .borderRadius45 {
   border-radius: 45deg; }
 
+.bioBG {
+  background-color: #08080854;
+  border: white 3px;
+  min-height: 300px;
+  min-width: 450px;
+  padding: 5px; }
+
 header {
   background-image: url("/assets/images/door-1590024_1920.jpg");
   height: 100vh;

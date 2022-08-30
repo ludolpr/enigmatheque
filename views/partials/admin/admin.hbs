@@ -31,12 +31,12 @@
       {{!-- debut du conteneur admin --}}
       <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"
         tabindex="0">
+        {{#each dbEnigmes}}
         {{!--------------------------------------------------------------------------}}
         {{!--------------------------------------------------------------------------}}
         {{!-- Enigme proposer par les utilisateurs --}}
         {{!--------------------------------------------------------------------------}}
         {{!--------------------------------------------------------------------------}}
-        {{#each dbEnigmes}}
 
         <div class="col-md-12 text-dark m-0 row">
           {{!--------------------------------------------------------------------------}}
@@ -152,134 +152,136 @@
   {{!--------------------------------------------------------------------------}}
   {{!--------------------------------------------------------------------------}}
 
-</div>
 
 
-<div class="tab-pane fade p-0" id="pills-message" role="tabpanel" aria-labelledby="pills-message-tab" tabindex="0">
-  {{!--------------------------------------------------------------------------}}
-  {{!--------------------------------------------------------------------------}}
-  {{!--------------------------------------------------------------------------}}
-  {{!--------------------------------------------------------------------------}}
-  {{!-- Message recus --}}
-  {{#each dbMessage}}
-  <div class="col-md-12 bg-dark m-0 text-light  mb-1 row  p-0">
-    <div class="col-md-2 bg-success d-flex justify-content-center align-items-center">
 
-      <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-      <div class="center">
-        <h2>{{this.name}} </h2>
+  <div class="tab-pane fade p-0" id="pills-message" role="tabpanel" aria-labelledby="pills-message-tab" tabindex="0">
+    {{!--------------------------------------------------------------------------}}
+    {{!--------------------------------------------------------------------------}}
+    {{!--------------------------------------------------------------------------}}
+    {{!--------------------------------------------------------------------------}}
+    {{!-- Message recus --}}
+    {{#each dbMessage}}
+    <div class="col-md-12 bg-dark m-0 text-light  mb-1 row  p-0">
+      <div class="col-md-2 bg-success d-flex justify-content-center align-items-center">
+
+        <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+        <div class="center">
+          <h2>{{this.name}} </h2>
+        </div>
+
       </div>
+      <div class="col-md-8">
+        <h3 class="text-left"><a href="#" class="text-decoration-none text-light">{{this.sujet}}</a></h3>
+        <p class="text-left">{{this.message}}</p>
 
-    </div>
-    <div class="col-md-8">
-      <h3 class="text-left"><a href="#" class="text-decoration-none text-light">{{this.sujet}}</a></h3>
-      <p class="text-left">{{this.message}}</p>
+      </div>
+      <div class="col-md-1 d-flex justify-content-center align-items-center">
+        <form action="/deleteMessage/{{this.id}}?_method=DELETE" method="post">
+          <button type="submit" class="btn btn-labeled btn-danger">
+            <span class="btn-label"><i class="fa fa-check m-1"></i></span>Suprimer
+          </button>
+        </form>
 
-    </div>
-    <div class="col-md-1 d-flex justify-content-center align-items-center">
-      <form action="/deleteMessage/{{this.id}}?_method=DELETE" method="post">
-        <button type="submit" class="btn btn-labeled btn-danger">
-          <span class="btn-label"><i class="fa fa-check m-1"></i></span>Suprimer
-        </button>
+      </div>
+      <form action="/mail" method="post" class="col-md-1 d-flex justify-content-center align-items-center">
+        <div class="col-md-1 d-flex justify-content-center align-items-center">
+          <button type="button" class="btn btn-labeled btn-light" data-bs-toggle="modal"
+            data-bs-target="#messageModal{{@index}}">
+            <span class="btn-label"><i class="fa fa-check m-1"></i></span>Répondre
+          </button>
+        </div>
       </form>
 
     </div>
-    <form action="/mail" method="post" class="col-md-1 d-flex justify-content-center align-items-center">
-      <div class="col-md-1 d-flex justify-content-center align-items-center">
-        <button type="button" class="btn btn-labeled btn-light" data-bs-toggle="modal" data-bs-target="#messageModal{{@index}}">
-          <span class="btn-label"><i class="fa fa-check m-1"></i></span>Répondre
-        </button>
-      </div>
-    </form>
+    {{!--------------------------------------------------------------------------}}
+    {{!--------------------------------------------------------------------------}}
+    {{!-- Fin Message recus --}}
+    {{!--------------------------------------------------------------------------}}
+    {{!--------------------------------------------------------------------------}}
 
-  </div>
   {{/each}}
-  {{!--------------------------------------------------------------------------}}
-  {{!--------------------------------------------------------------------------}}
-  {{!-- Fin Message recus --}}
-  {{!--------------------------------------------------------------------------}}
-  {{!--------------------------------------------------------------------------}}
-
-</div>
-
-
-
-
-
-<div class="tab-pane fade" id="pills-utilisateur" role="tabpanel" aria-labelledby="pills-utilisateur-tab" tabindex="0">
-
-  {{#each dbMembres}}
-  <div class="col-md-12 bg-dark border-top border-success border-5 text-light m-0 row mb-3">
-    {{!--------------------------------------------------------------------------}}
-    {{!--------------------------------------------------------------------------}}
-    {{!-- Membres du site --}}
-    {{!--------------------------------------------------------------------------}}
-    {{!--------------------------------------------------------------------------}}
-
-    <div
-      class="col-md-2 bg-success d-flex justify-content-center align-items-center border-light border-bottom border-2">
-
-      <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-      <div class="center">
-        <h2> {{ this.name }} </h2>
-      </div>
-
-    </div>
-    <div class="col-md-5  d-flex justify-content-center align-items-center border-light border-bottom border-2">
-      <h3 class="text-center"><a href="#" class="text-decoration-none text-light center ">{{this.email}}</a>
-      </h3>
-
-    </div>
-    <div class="col-md-5 d-flex justify-content-center align-items-center border-light border-bottom border-2">
-
-      <button type="button" class="h-50 d-flex align-items-center btn btn-labeled btn-light m-3">
-        <div class="form-check form-switch">
-          <span class="btn-label"><i data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Administrateur"
-              class="fs-4 fa-solid fa-image-portrait text-dark"></i></span>
-          <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault1">
-        </div>
-      </button>
-
-      <button type="button" class="h-50 d-flex align-items-center btn btn-labeled btn-light m-3">
-        <div class="form-check form-switch">
-          <span class="btn-label"><i data-bs-toggle="popover" data-bs-placement="top"
-              data-bs-content="Utilisateur banni" class="fs-4 fa-solid fa-user-slash text-danger"></i></span>
-          <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-        </div>
-      </button>
-
-
-      <button type="button" class="h-50  btn btn-labeled btn-light m-3">
-        <a class="text-decoration-none" href="/profile/id">
-          <div class="row">
-
-            <p class="d-flex align-items-center">Voir le profile<span class="btn-label"><i
-                  class="fs-4 fa-solid fa-eye text-success m-3"></i></span></p>
-          </div>
-        </a>
-      </button>
-
-
-    </div>
-    <script src="/assets/js/popoverEverywhere.js"></script>
-    {{!--------------------------------------------------------------------------}}
-    {{!-- Fin des membres du site --}}
-    {{!--------------------------------------------------------------------------}}
-
-    {{/each}}
   </div>
 
-</div>
+
+
+
+
+  <div class="tab-pane fade" id="pills-utilisateur" role="tabpanel" aria-labelledby="pills-utilisateur-tab"
+    tabindex="0">
+    {{#each dbMembres}}
+
+    <div class="col-md-12 bg-dark border-top border-success border-5 text-light m-0 row mb-1">
+      {{!--------------------------------------------------------------------------}}
+      {{!--------------------------------------------------------------------------}}
+      {{!-- Membres du site --}}
+      {{!--------------------------------------------------------------------------}}
+      {{!--------------------------------------------------------------------------}}
+
+      <div
+        class="col-md-2 bg-success d-flex justify-content-center align-items-center border-light border-bottom border-2">
+
+        <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+        <div class="center">
+          <h2> {{ this.name }} </h2>
+        </div>
+
+      </div>
+      <div class="col-md-5  d-flex justify-content-center align-items-center border-light border-bottom border-2">
+        <h3 class="text-center"><a href="#" class="text-decoration-none text-light center ">{{this.email}}</a>
+        </h3>
+
+      </div>
+      <div class="col-md-5 d-flex justify-content-center align-items-center border-light border-bottom border-2">
+
+        <button type="button" class="h-50 d-flex align-items-center btn btn-labeled btn-light m-3">
+          <div class="form-check form-switch">
+            <span class="btn-label"><i data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Administrateur"
+                class="fs-4 fa-solid fa-image-portrait text-dark"></i></span>
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault1">
+          </div>
+        </button>
+
+        <button type="button" class="h-50 d-flex align-items-center btn btn-labeled btn-light m-3">
+          <div class="form-check form-switch">
+            <span class="btn-label"><i data-bs-toggle="popover" data-bs-placement="top"
+                data-bs-content="Utilisateur banni" class="fs-4 fa-solid fa-user-slash text-danger"></i></span>
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+          </div>
+        </button>
+
+
+        <button type="button" class="h-50  btn btn-labeled btn-light m-3">
+          <a class="text-decoration-none" href="/profil/{{user.id}}">
+            <div class="row">
+
+              <p class="d-flex align-items-center">Voir le profil<span class="btn-label"><i
+                    class="fs-4 fa-solid fa-eye text-success m-3"></i></span></p>
+            </div>
+          </a>
+        </button>
+
+
+      </div>
+      <script src="/assets/js/popoverEverywhere.js"></script>
+      {{!--------------------------------------------------------------------------}}
+      {{!-- Fin des membres du site --}}
+      {{!--------------------------------------------------------------------------}}
+
+    </div>
+
+  {{/each}}
+  </div>
 
 
 
 
 
 
-{{! End Pills }}
-{{! bas de page }}
+  {{! End Pills }}
+  {{! bas de page }}
 
 </div>
 </div>
@@ -291,47 +293,46 @@
 {{! modal de réponse au message }}
 {{#each dbMessage}}
 
-<div class="modal fade bg-success" id="messageModal{{@index}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade bg-success" id="messageModal{{@index}}" data-bs-backdrop="static" data-bs-keyboard="false"
+  tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content bg-dark">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">Réponse au utilisateurs</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      
+
       <form action="/mailReply" method="post" class="opacity-75 p-5">
-          <div class="col-md-12">
-            <div class="mb-6">
-              <label for="exampleInputEmail1" class="form-label">Mon nom d'utilisateur</label>
-              <input name="id_user" type="nom" value="{{this.name}}" class="form-control"
-                aria-describedby="emailHelp" />
-            </div>
-            <div class="mb-6">
-              <label for="exampleInputPassword"  class="form-label mt-2">Mon email:</label>
-              <input name="email" type="email" value="{{this.email}}" class="form-control"/>
-            </div>
+        <div class="col-md-12">
+          <div class="mb-6">
+            <label for="exampleInputEmail1" class="form-label">Mon nom d'utilisateur</label>
+            <input name="id_user" type="nom" value="{{this.name}}" class="form-control" aria-describedby="emailHelp" />
           </div>
+          <div class="mb-6">
+            <label for="exampleInputPassword" class="form-label mt-2">Mon email:</label>
+            <input name="email" type="email" value="{{this.email}}" class="form-control" />
+          </div>
+        </div>
 
-          <p>Sujet<br />
-            <span class="wpcf7-form-control-wrap menu-742">
-              <input name="sujet" type="text" class="form-control" placeholder="{{this.sujet}}" />
-            </span>
-          </p>
+        <p>Sujet<br />
+          <span class="wpcf7-form-control-wrap menu-742">
+            <input name="sujet" type="text" class="form-control" value="{{this.sujet}}"/>
+          </span>
+        </p>
+        <div class="container">
+          <div class="row">
+            <label for="exampleInputEmail1" class="form-label p-0">Tapez votre message ci-dessous</label>
+            <textarea name="content" placeholder="Votre text içi" cols="70" rows="5"></textarea>
+
+          </div>
           <div class="container">
-            <div class="row">
-              <label for="exampleInputEmail1" class="form-label p-0">Tapez votre message ci-dessous</label>
-              <textarea name="content" placeholder="{{this.content}}" cols="70" rows="5"></textarea>
-
-            </div>
-            <div class="container">
-              <div class="row d-flex justify-content-center">
-                <button type="submit" class="mt-2 w-auto btn btn-primary">Envoyer</button>
-              </div>
+            <div class="row d-flex justify-content-center">
+              <button type="submit" class="mt-2 w-auto btn btn-primary">Envoyer</button>
             </div>
           </div>
-        </form>
-      
+        </div>
+      </form>
+
     </div>
   </div>
 </div>
