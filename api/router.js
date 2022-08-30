@@ -167,10 +167,10 @@ router.get("/proposer", (req, res) => {
 // -----------------------------PROFIL------------------------------------ //
 // ----------------------------------------------------------------------- //
 router
-  .get("/profil", (req, res) => {
+  .get("/profil/::id", (req, res) => {
     res.render("profil");
   })
-  .put("/profilEdit", async (req, res) => {
+  .put("/profilEdit/:id", async (req, res) => {
     console.log("edit::profil", req.body);
     const { id } = req.params;
     const { avatar, name, email, password,confPassword, bio } = req.body;
@@ -251,7 +251,7 @@ router.post("/login", (req, res) => {
             bio: user.bio,
           };
           res.redirect("/");
-        } else return res.render("home", { flash: "Erreur de saisis vériefier vos information" });
+        } else return res.render("home", { flash: "Erreur de saisis vérifier vos information" });
       });
     }
   );
@@ -279,7 +279,7 @@ router
           bcrypt_salt
         )}", isAdmin=0,isVerified=0, isBan=0, avatar="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.ms_ni44c-_TBsdHzF0W5awHaHa%26pid%3DApi&f=1"`
       );
-      res.redirect("/");
+      res.render("home", { flashInscrit: "Vous êtes maintenant inscrit" });
       //return res.redirect("/");
     } else {
       console.log("PB inscription");
