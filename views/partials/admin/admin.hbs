@@ -1,6 +1,8 @@
 <div class="container col-md-12 mh100">
   <h1 class="text-center decallageTop">Page admin</h1>
-
+  {{#if flash}}
+  <h3 style="color:white;">{{this.flash}}</h3>
+  {{/if}}
   <div class="col-md-12 row">
     {{!--------------------------------------------------------------------------}}
     {{!--------------------------------------------------------------------------}}
@@ -32,11 +34,6 @@
       <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"
         tabindex="0">
         {{#each dbEnigmes}}
-        {{!--------------------------------------------------------------------------}}
-        {{!--------------------------------------------------------------------------}}
-        {{!-- Enigme proposer par les utilisateurs --}}
-        {{!--------------------------------------------------------------------------}}
-        {{!--------------------------------------------------------------------------}}
 
         <div class="col-md-12 text-dark m-0 row">
           {{!--------------------------------------------------------------------------}}
@@ -51,6 +48,7 @@
                 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
               <div class="text-center ">
                 <h2> {{ upper this.name }} : {{this.id_user}} </h2>
+                <p> {{ this.is_Verified }} </p>
               </div>
 
             </div>
@@ -110,23 +108,32 @@
                           rows="15" name="solus">{{ this.solus }}
                         </textarea>
 
+          <label for="">Verified</label>
+          <input type="checkbox" id="isVerified{{ this.id_enigme }}" name="is_Verified" />
+
 
                         {{!--------------------------------------------------------------------------}}
                         {{!--------------------------------------------------------------------------}}
                         {{!-- modifier l'énigme --}}
                         <button type="submit" class="m-2 btn btn-labeled btn-success col-md-12">
-                          <span class="btn-label"><i class="fa fa-check m-1"></i></span>Modifier
+                          <span class="btn-label"><i class="fa fa-check m-1"></i></span>Valider
                         </button>
                   </form>
+
                   {{!--------------------------------------------------------------------------}}
                   {{!--------------------------------------------------------------------------}}
                   {{!-- data-bs-dismiss="modal" --}}
                   {{!-- envoyer l'énigme // Valider l'enigme pour faire la modif sur is_verified--}}
-                  <form action="/insertEnigme/{{ this.id_enigme }}?_method=PUT" method="post">
+
+
+                  {{!-- <form action="/insertEnigme/{{ this.id_enigme }}?_method=PUT" method="post">
                     <button type="submit" class="m-2 btn btn-labeled btn-success col-md-12">
                       <span class="btn-label"><i class="fa fa-check m-1"></i></span>Valider
                     </button>
-                  </form>
+                  </form> --}}
+
+
+
                   {{!--------------------------------------------------------------------------}}
                   {{!--------------------------------------------------------------------------}}
                   {{!-- Supprimer l'énigme --}}
@@ -142,6 +149,13 @@
         </div>
       </div>
     </div>
+
+    <script>
+
+      const isVerified{{ this.id_enigme }} = document.getElementById('isVerified{{ this.id_enigme }}')
+      const vrf{{ this.id_enigme }} = {{ this.is_Verified }} 
+      if ( vrf{{ this.id_enigme }} === 1 ) isVerified{{ this.id_enigme }}.checked = true
+    </script>
     {{/each}}
 
   </div>
@@ -201,7 +215,7 @@
     {{!--------------------------------------------------------------------------}}
     {{!--------------------------------------------------------------------------}}
 
-  {{/each}}
+    {{/each}}
   </div>
 
 
@@ -254,7 +268,7 @@
 
 
         <button type="button" class="h-50  btn btn-labeled btn-light m-3">
-          <a class="text-decoration-none" href="/profil/:{{this.id}}">
+          <a class="text-decoration-none" href="/profil/{{this.id}}">
             <div class="row">
 
               <p class="d-flex align-items-center">Voir le profil<span class="btn-label"><i
@@ -272,7 +286,7 @@
 
     </div>
 
-  {{/each}}
+    {{/each}}
   </div>
 
 
@@ -316,7 +330,7 @@
 
         <p>Sujet<br />
           <span class="wpcf7-form-control-wrap menu-742">
-            <input name="sujet" type="text" class="form-control" value="{{this.sujet}}"/>
+            <input name="sujet" type="text" class="form-control" value="{{this.sujet}}" />
           </span>
         </p>
         <div class="container">

@@ -6,7 +6,7 @@ exports.getAdminPage = async (req, res) => {
   const dbEnigmes = await db.query(`SELECT * FROM enigme AS en INNER JOIN membres AS mb ON en.id_user = mb.id`);
   const dbMembres = await db.query(`SELECT * FROM membres`);
   const dbMessage = await db.query(`SELECT * FROM message `);
-  console.log("enigmes OK", dbEnigmes);
+  console.log("enigmes OK", dbEnigmes);   
   
   res.render("admin", {
     // Quand nous utilisons un layout qui n'est pas celui par default nous devons le spécifié

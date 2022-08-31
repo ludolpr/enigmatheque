@@ -1,3 +1,4 @@
+{{!-- {{#each dbEnigmes}} --}}
 <div class="col-md-12 mh100 decallageTop">
   <div class="col-md-12 d-flex justify-content-center mb-5">
     <img src="/assets/images/chapeau-etudiant.jpg" alt="" />
@@ -10,7 +11,7 @@
   <label class="label">
     <input  class="label__checkbox" type="checkbox" />
     <span class=" label__text">
-      <span class="label__check" id="check" >
+      <span class="label__check" id="check">
         <i class="fa fa-check icon"></i>
       </span>
     </span>
@@ -20,22 +21,10 @@
   </div class="row mx-auto">
   
     <div class="boite d-flex justify-content-center">
-        <h1 class="text-center mb-3">L'énigme de Stanford</h1>
+        <h1 class="text-center mb-3">{{this.titre}}</h1>
     
     <p class="text-center ms-3">
-      Cette énigme fut posée aux étudiants de l'université de Stanford lors
-      d'une épreuve de réflexion.
-    </p>
-      C'est mieux que Dieu.
-      C'est pire que le Diable.
-      Les pauvres en ont.
-      Les riches en ont besoin.
-      Et si on en mange, on meurt.
-      Qu'est ce que c'est ?
-    </div>
-    <p class="ms-3 text-center">La version originale en anglais : "What is
-      greater than God, More evil than the devil, The poor have it, The rich
-      need it, And if you eat it, you'll die."
+    {{content}}
     </p>
 
   </div>
@@ -50,3 +39,4 @@
     <a class="text-light" href=""><i class="fa-solid fa-circle-arrow-right"></i></a>
   </div>
 </div>
+{{!-- {{/if}} --}}

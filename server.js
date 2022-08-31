@@ -86,7 +86,7 @@ app.use(ROUTER);
 
 
 /* ERROR 404 */
-// A Mettre a la fin
+// A Mettre a la fin ( a bouger dans router)
 app.get('/*', function (req, res) {
   res.render('page404',{
   });
