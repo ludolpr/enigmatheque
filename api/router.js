@@ -26,7 +26,7 @@ router.get("/", (req, res) => {
 
 // Liste des éngimes + id
 router.get("/enigme", async (req, res) => {
-  console.log('enigmes', req.query)
+  console.log("enigmes", req.query);
   let dif;
   switch (req.query.q) {
     case "facile":
@@ -58,51 +58,60 @@ router.get("/enigme", async (req, res) => {
     enigmes: dbEnigmes,
     titre: req.query.q,
   });
-})
+});
 
 // ----------------------------------------------------------------------- //
 // -----------------------CRUD PROPOSER ÉNIGME---------------------------- //
 // ----------------------------------------------------------------------- //
 
-  
-  // CRUD PROPOSER ÉNIGME
+// CRUD PROPOSER ÉNIGME
 router
-// CREATE IN FORM
-.post("/insertEnigme", async (req, res) => {
-  console.log("create::enigme", req.body);
-  const { titre, difficulty, content, solus } = req.body;
-  // Ajout d'une énigme
-  await db.query(
-    `INSERT INTO enigme (titre , difficulty, content, solus, id_user) VALUES ("${titre}", "${difficulty}", "${content}", "${solus}", "1" AND is_Verified=0);`
-  );
-  res.render("proposer", { flash: "Votre enigme à été envoyé" });
-})
-// AFFICHER ENIGME
-.get("/enigme/:id", (req, res) => {
-  res.render("enigme_details", {});
-})
-// EDIT ENIGME
-.put("/updateEnigme/:id", async (req, res) => {
-  console.log("edit::enigme", req.body);
-  const { id } = req.params;
-  const { titre, difficulty, content, solus, is_Verified } = req.body;
+  // CREATE IN FORM
+  .post("/insertEnigme", async (req, res) => {
+    console.log("create::enigme", req.body);
+    const { titre, difficulty, content, solus } = req.body;
+    // Ajout d'une énigme
+    await db.query(
+      `INSERT INTO enigme (titre , difficulty, content, solus, id_user) VALUES ("${titre}", "${difficulty}", "${content}", "${solus}", "1" AND is_Verified=0);`
+    );
+    res.render("proposer", { flash: "Votre enigme à été envoyé" });
+  })
+  // AFFICHER ENIGME
+  .get("/enigme/:id", async (req, res) => {
+    const { id } = req.params;
+    const enigme = await db.query(
+      `select * from enigme WHERE id_enigme = ${id}`
+    );
+    if (enigme.lenght <= 0) res.redirect("/");
+    else
+      res.render("enigme_details", {
+        enigme: enigme[0],
+      });
+  })
+  // EDIT ENIGME
+  .put("/updateEnigme/:id", async (req, res) => {
+    console.log("edit::enigme", req.body);
+    const { id } = req.params;
+    const { titre, difficulty, content, solus, is_Verified } = req.body;
 
-  // if (titre)
-  await db.query(
-    `UPDATE enigme SET titre="${titre}", difficulty="${difficulty}", content="${content}", solus="${solus}", is_Verified="${is_Verified === "on" ? 1 : 0}" WHERE id_enigme="${id}";`
-  );
-  // Redirection vers la page admin
-  res.redirect("/admin");
-})
-// DELETE ÉNIGME
-.delete("/deleteEnigme/:id", async (req, res) => {
-  console.log("delete::enigme", req.params);
-  const { id } = req.params;
+    // if (titre)
+    await db.query(
+      `UPDATE enigme SET titre="${titre}", difficulty="${difficulty}", content="${content}", solus="${solus}", is_Verified="${
+        is_Verified === "on" ? 1 : 0
+      }" WHERE id_enigme="${id}";`
+    );
+    // Redirection vers la page admin
+    res.redirect("/admin");
+  })
+  // DELETE ÉNIGME
+  .delete("/deleteEnigme/:id", async (req, res) => {
+    console.log("delete::enigme", req.params);
+    const { id } = req.params;
 
-  if (id) await db.query(`DELETE FROM enigme WHERE id_enigme = "${id}";`);
+    if (id) await db.query(`DELETE FROM enigme WHERE id_enigme = "${id}";`);
 
-  res.redirect("/admin");
-});
+    res.redirect("/admin");
+  });
 
 // ----------------------------------------------------------------------- //
 // ---------------------CRUD MESSAGE A L'ADMIN---------------------------- //
@@ -169,29 +178,31 @@ router.get("/proposer", (req, res) => {
 // -----------------------------PROFIL------------------------------------ //
 // ----------------------------------------------------------------------- //
 router
-  .get("/profil/:id", (req, res) => {
-    res.render("profil");
+  .get("/profil/:id", async (req, res) => {
+    const { id } = req.params;
+    const profil = await db.query(
+      `select * from membres WHERE id = ${id}`
+    );
+    if (profil.lenght <= 0) res.redirect("/");
+    else
+      res.render("profil", {
+        profil: profil[0],
+      });
   })
   .put("/profilEdit/:id", async (req, res) => {
     console.log("edit::profil", req.body);
     const { id } = req.params;
-    const { avatar, name, email, password,confPassword, bio } = req.body;
+    const { avatar, name, email, password, confPassword, bio } = req.body;
     if (avatar) {
-      await db.query(
-        `UPDATE membres SET name="${avatar}" WHERE id=${id}`
-      );
+      await db.query(`UPDATE membres SET name="${avatar}" WHERE id=${id}`);
     }
     if (name) {
-      await db.query(
-        `UPDATE membres SET name="${name}" WHERE id=${id}`
-      );
+      await db.query(`UPDATE membres SET name="${name}" WHERE id=${id}`);
     }
     if (email) {
-      await db.query(
-        `UPDATE membres SET email="${email}" WHERE id=${id}`
-      );
+      await db.query(`UPDATE membres SET email="${email}" WHERE id=${id}`);
     }
-    if (password === confPassword) {
+    if ( password.lenght > 0 && password === confPassword) {
       bcrypt.hash(
         password,
         confPassword,
@@ -204,9 +215,7 @@ router
       );
     }
     if (bio) {
-      await db.query(
-        `UPDATE membres SET name="${bio}" WHERE id=${id}`
-      );
+      await db.query(`UPDATE membres SET bio="${bio}" WHERE id=${id}`);
     }
 
     let userget = await db.query(
@@ -221,10 +230,10 @@ router
       account_create: user.create_time,
       isAdmin: user.isAdmin,
       avatar: user.avatar,
-      bio: user.bio
+      bio: user.bio,
     };
 
-    res.redirect("/profil");
+    res.render("profil");
   });
 
 // ----------------------------------------------------------------------- //
@@ -269,17 +278,17 @@ router
   .post("/inscription", async (req, res) => {
     console.log("inscription OK !", req.body);
     const { name, email, password, confPassword } = req.body;
-    const checkEmail = await db.query(`SELECT email FROM membres`)
-    const checkName = await db.query(`SELECT name FROM membres`)
+    const checkEmail = await db.query(`SELECT email FROM membres`);
+    const checkName = await db.query(`SELECT name FROM membres`);
     // if(password !== confPassword) return res.redirect('/')
     if (name === "" || email === "") {
       res.render("inscription", {
         flash: "Veuillez définir un nom ainsi qu'un email",
       });
-    }else if(email === checkEmail || name === checkName){
+    } else if (email === checkEmail || name === checkName) {
       console.log("mail ou name identique");
-      res.render('back')
-    }else if (password === confPassword) {
+      res.render("back");
+    } else if (password === confPassword) {
       await db.query(
         `INSERT INTO membres SET name="${name}", email="${email}", password="${await bcrypt.hash(
           password,
