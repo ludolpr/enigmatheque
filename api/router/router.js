@@ -1,18 +1,22 @@
 const { Router } = require("express");
 const router = Router();
-const { getAdminPage } = require("./controllers/adminController");
+const { getAdminPage } = require("../controllers/adminController");
 // const fkdb = require("./json/array.json");
-const db = require("./config/db");
+const db = require("../config/db");
 const // session user
-  { setSession } = require("./utils/setSession"),
-  { mailSend } = require("./config/nodeMailer");
+  { setSession } = require("../utils/setSession"),
+  { mailSend } = require("../config/nodeMailer");
 // import de flash
 const flash = require("flash");
 require("dotenv").config();
+// mail secure .env
 const { MAIL_USER } = process.env;
-const transporter = require("./config/nodeMailer");
+const transporter = require("../config/nodeMailer");
+// bcrypt pour hash le mot de passe
 const bcrypt = require("bcrypt");
 const bcrypt_salt = 10;
+// appel de multer
+const upload = require('../middlewares/multer');
 // Page home
 router.get("/", (req, res) => {
   res.render("home");
@@ -235,6 +239,23 @@ router
 
     res.render("profil");
   });
+// ----------------------------------------------------------------------- //
+// -----------------------------MULTER------------------------------------ //
+// ----------------------------------------------------------------------- //
+ // Dans mon controlleur
+// Envoi du commentaire
+exports.sendComment = async (req, res) => {
+  const { profil, id } = req.body;
+  const image = req.file ? req.file.filename : false;
+  // console.log("image", req.file);
+  if (image) await db.query(`INSERT INTO membres SET profil="${profil}", id_user="${req.session.user.id}" , image="${image}"`),
+  console.log("image OK");
+else await db.query(`INSERT INTO membres SET profil="${profil}", id_user="${req.session.user.id}" , image=''`), 
+console.log("image NOK");
+
+console.log("envoi du controller OK");
+res.redirect("back");
+}
 
 // ----------------------------------------------------------------------- //
 // -----------------------------CONNEXION--------------------------------- //
