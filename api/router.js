@@ -147,7 +147,7 @@ router
   });
 
 // ----------------------------------------------------------------------- //
-// -----------------------------SEPARATE---------------------------------- //
+// -----------------------------DEVINETTES-------------------------------- //
 // ----------------------------------------------------------------------- //
 
 // Liste des devinettes + id
@@ -286,7 +286,7 @@ router
         flash: "Veuillez définir un nom ainsi qu'un email",
       });
     } else if (email === checkEmail || name === checkName) {
-      console.log("mail ou name identique");
+      console.log("mail ou name déjà utilisé");
       res.render("back");
     } else if (password === confPassword) {
       await db.query(

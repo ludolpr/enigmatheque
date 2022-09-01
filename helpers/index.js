@@ -21,12 +21,7 @@ exports.upper = (str) => str.toUpperCase();
 // fonction nombres de caractere max 40 
 exports.cutStr = (str) => str.substr(0, 40)
 
-// function saut de ligne
-
-exports.lign = (lign) => {
-
-    return lign.replaceAll("~","\n")
-}
+// function incrémenter de + 1
 
 exports.inc = (value, option) => {
     return parseInt(value)

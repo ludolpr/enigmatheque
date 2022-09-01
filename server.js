@@ -3,7 +3,7 @@
 const express = require("express");
 const { engine } = require("express-handlebars");
 const app = express();
-const port = 1990;
+const { PORT_NODE } = process.env;
 const morgan = require("morgan");
 const bodyParser = require('body-parser');
 app.use(morgan("dev"));
@@ -20,7 +20,7 @@ const { isAdmin } = require("./api/middlewares/admin");
 
 
 // config handlebars
-const { cutStr, upper, lign } = require('./helpers/index');
+const { cutStr, upper } = require('./helpers/index');
 app.engine(
 
   ".hbs",
@@ -31,7 +31,7 @@ app.engine(
     // Que nous avons créé dans ./views/layouts/adminLayout
     adminLayout: "adminLayout",
     helpers :{
-      cutStr, upper, lign
+      cutStr, upper
     }
   })
   
@@ -92,7 +92,8 @@ app.get('/*', function (req, res) {
   });
 })
 
+
 // run server
-app.listen(port, () =>
-  console.log(`Ludolpr: Exemple d'application sur le port ${port} ! Lancé le : ${new Date().toLocaleString()});`)
+app.listen(PORT_NODE, () =>
+  console.log(`Ludolpr: Exemple d'application sur le port ${PORT_NODE} ! Lancé le : ${new Date().toLocaleString()});`)
 );
