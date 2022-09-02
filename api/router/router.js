@@ -11,12 +11,14 @@ const flash = require("flash");
 require("dotenv").config();
 // mail secure .env
 const { MAIL_USER } = process.env;
+const {middlewareImage} = require ('../middlewares/middlewareImage');
+const {controllerImage} = require ('../controllers/controllerImage')
 const transporter = require("../config/nodeMailer");
 // bcrypt pour hash le mot de passe
 const bcrypt = require("bcrypt");
 const bcrypt_salt = 10;
 // appel de multer
-const upload = require('../middlewares/multer');
+const upload = require('../utils/multer');
 // Page home
 router.get("/", (req, res) => {
   res.render("home");
@@ -193,13 +195,11 @@ router
         profil: profil[0],
       });
   })
-  .put("/profilEdit/:id", async (req, res) => {
+  .put("/profilEdit/:id", upload.single('avatar'), async (req, res) => {
     console.log("edit::profil", req.body);
     const { id } = req.params;
-    const { avatar, name, email, password, confPassword, bio } = req.body;
-    if (avatar) {
-      await db.query(`UPDATE membres SET name="${avatar}" WHERE id=${id}`);
-    }
+    const {name, email, password, confPassword, bio } = req.body;
+    
     if (name) {
       await db.query(`UPDATE membres SET name="${name}" WHERE id=${id}`);
     }
@@ -237,25 +237,15 @@ router
       bio: user.bio,
     };
 
-    res.render("profil");
+    res.redirect("back");
   });
-// ----------------------------------------------------------------------- //
-// -----------------------------MULTER------------------------------------ //
-// ----------------------------------------------------------------------- //
- // Dans mon controlleur
-// Envoi du commentaire
-exports.sendComment = async (req, res) => {
-  const { profil, id } = req.body;
-  const image = req.file ? req.file.filename : false;
-  // console.log("image", req.file);
-  if (image) await db.query(`INSERT INTO membres SET profil="${profil}", id_user="${req.session.user.id}" , image="${image}"`),
-  console.log("image OK");
-else await db.query(`INSERT INTO membres SET profil="${profil}", id_user="${req.session.user.id}" , image=''`), 
-console.log("image NOK");
 
-console.log("envoi du controller OK");
-res.redirect("back");
-}
+// // ----------------------------------------------------------------------- //
+// // -----------------------------IMAGE PROFIL------------------------------ //
+// // ----------------------------------------------------------------------- //
+// router.route("/profilEdit")
+// .post(upload.single('image'), controllerImage, middlewareImage)
+
 
 // ----------------------------------------------------------------------- //
 // -----------------------------CONNEXION--------------------------------- //

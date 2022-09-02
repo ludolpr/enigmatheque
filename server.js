@@ -1,5 +1,9 @@
 // import module global
 
+// dotenv mis en haut pour l'appel des données sécurisé
+require("dotenv").config();
+
+
 const express = require("express");
 const { engine } = require("express-handlebars");
 const app = express();
@@ -10,6 +14,8 @@ app.use(morgan("dev"));
 const methodOverride = require('method-override');
 const expressSession = require("express-session");
 const MySQLStore = require("express-mysql-session")(expressSession);
+// multer
+const multer  = require('multer')
 
 
 // Import des middlewares
@@ -69,8 +75,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
-// dotenv
-require("dotenv").config();
 // app set
 app.set("view engine", ".hbs");
 app.set("views", "./views");
