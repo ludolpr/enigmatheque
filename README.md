@@ -23,8 +23,7 @@ Les étapes pour installer:
 
 
  Executez la commande ``npm i`` pour installer les modules, installer ``Mysql`` et connecter vous à la base de données. 
- <br> N'oublier pas votre ``.
- env``
+ <br> N'oublier pas votre ``.env``
 
 
 ## Démarrage
