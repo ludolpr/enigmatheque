@@ -1,6 +1,6 @@
 const mysql = require("mysql");
 const config = require('./config_db')
-
+const assert = require("assert");
 // mysql instance
 db = mysql.createConnection(config);
 
