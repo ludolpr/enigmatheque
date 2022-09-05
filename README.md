@@ -1,6 +1,71 @@
-# repos-site-enigmes
+# ENIGMATHEQUE 
+_(juste en dessous des badges sympatiques à placer)_
+
+[![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com)  [![forthebadge](http://forthebadge.com/images/badges/powered-by-electricity.svg)](http://forthebadge.com)
+
+Mon projet d'examen, pour valider mes compétences
+
+## Pour commencer
+
+Developper l'interface et les visuels du site puis compttnuer avec le backend
+
+### Pré-requis
+
+Ce qu'il est requis pour commencer avec votre projet...
+
+- html, css, bootstrap, sass
+- MySql, workbench
+- VPS, nginx
+
+### Installation
+
+Les étapes pour installer:
 
 
+ Executez la commande ``npm i`` pour installer les modules, installer ``Mysql`` et connecter vous à la base de données. 
+ <br> N'oublier pas votre ``.env``
+
+
+## Démarrage
+
+Pour lancer le projet taper la commande ``npm run dev``
+
+## Fabriqué avec
+
+Entrez les programmes/logiciels/ressources que vous avez utilisé pour développer votre projet
+
+_exemples :_
+* [vscode](https://code.visualstudio.com/) - Visual Studio Code
+* [Atom](https://atom.io/) - Editeur de textes
+
+## Contributing
+
+Si vous souhaitez contribuer, lisez le fichier [CONTRIBUTING.md](https://example.org) pour savoir comment le faire.
+
+## Versions
+Listez les versions ici 
+_exemple :_
+**Dernière version stable :** 5.0
+**Dernière version :** 5.1
+Liste des versions : [Cliquer pour afficher](https://github.com/your/project-name/tags)
+_(pour le lien mettez simplement l'URL de votre projets suivi de ``/tags``)_
+
+## Auteurs
+Listez le(s) auteur(s) du projet ici !
+* **Jhon doe** _alias_ [@outout14](https://github.com/outout14)
+
+Lisez la liste des [contributeurs](https://github.com/your/project/contributors) pour voir qui à aidé au projet !
+
+_(pour le lien mettez simplement l'URL de votre projet suivi de ``/contirubors``)_
+
+## License
+
+Ce projet est sous licence ``exemple: WTFTPL`` - voir le fichier [LICENSE.md](LICENSE.md) pour plus d'informations
+
+
+
+
+NOTE CI DESSOUS
 
 get    -> Select      -> Recruperation
 post   -> inset into  -> Ajouter
@@ -53,83 +118,3 @@ db.query('DELETE FROM articles WHERE id = 1;', (err, data) => {
  render  = renvoie la view ("home) + un objet au besoin.
  redirect = redirige sur une URL donc sur une route puis un controller
 
- <!--  formulaire de mail to admin
-<form action="/mail" method="post" class="opacity-75 p-5">
-          <div class="col-md-12">
-            <div class="mb-6">
-              <label for="exampleInputEmail1" class="form-label">Nom d'utilisateur</label>
-              <input name="id_user" type="nom" class="form-control" placeholder="Votre nom d'utilisateur"
-                aria-describedby="emailHelp" />
-            </div>
-            <div class="mb-6">
-              <label for="exampleInputPassword" class="form-label">Votre email*</label>
-              <input name="email" type="email" class="form-control" placeholder="Votre email" />
-            </div>
-          </div>
-
-          <p>Sujet<br />
-            <span class="wpcf7-form-control-wrap menu-742">
-              <select name="sujet"
-                class="form-label wpcf7-form-control form-control wpcf7-select wpcf7-validates-as-required"
-                aria-required="true" aria-invalid="false">
-                <option value="Contacter le webmaster">Contacter le webmaster</option>
-                <option value="Signaler un bug">Signaler un bug</option>
-                <option value="Autre">Autre</option>
-              </select>
-            </span>
-          </p>
-          <div class="container">
-            <div class="row">
-            <label for="exampleInputEmail1" class="form-label p-0">Tapez votre message ci-dessous</label>
-              <textarea name="content" placeholder="Votre message" cols="70" rows="5"></textarea>
-
-            </div>
-            <div class="container">
-              <div class="row d-flex justify-content-center">
-                <button type="submit" class="mt-2 w-auto btn btn-primary">Envoyer</button>
-              </div>
-            </div>
-          </div>
-        </form>
-  -->
-
-  <!--  formulaire to message to pannel admin
-  <form action="/message" method="post" class="opacity-75 p-5">
-          <div class="col-md-12">
-            <div class="mb-6">
-              <label for="exampleInputEmail1" class="form-label">Nom d'utilisateur</label>
-              <input name="name" type="nom" class="form-control" placeholder="Votre nom d'utilisateur"
-                aria-describedby="emailHelp" />
-            </div>
-            <div class="mb-6">
-              <label for="exampleInputPassword" class="form-label">Votre email*</label>
-              <input name="email" type="email" class="form-control" placeholder="Votre email" />
-            </div>
-          </div>
-
-          <p>Sujet<br />
-            <span class="wpcf7-form-control-wrap menu-742">
-              <select name="sujet"
-                class="form-label wpcf7-form-control form-control wpcf7-select wpcf7-validates-as-required"
-                aria-required="true" aria-invalid="false">
-                <option value="Contacter le webmaster">Contacter le webmaster</option>
-                <option value="Signaler un bug">Signaler un bug</option>
-                <option value="Autre">Autre</option>
-              </select>
-            </span>
-          </p>
-          <div class="container">
-            <div class="row">
-            <label for="exampleInputEmail1" class="form-label p-0">Tapez votre message ci-dessous</label>
-              <textarea name="message" placeholder="Votre message" cols="70" rows="5"></textarea>
-
-            </div>
-            <div class="container">
-              <div class="row d-flex justify-content-center">
-                <button type="submit" class="mt-2 w-auto btn btn-primary">Envoyer</button>
-              </div>
-            </div>
-          </div>
-        </form>
-  
-   -->
