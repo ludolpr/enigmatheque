@@ -22,22 +22,20 @@ Ce qu'il est requis pour commencer avec votre projet...
 Les étapes pour installer:
 
 
- Executez la commande ``npm i`` pour installer les module, installer ``Mysql`` et connecter vous à la base de données. N'oublier pas votre `.
- env`
+ Executez la commande ``npm i`` pour installer les modules, installer ``Mysql`` et connecter vous à la base de données. N'oublier pas votre ``.
+ env``
 
-
-Ensuite vous pouvez montrer ce que vous obtenez au final...
 
 ## Démarrage
 
-Dites comment faire pour lancer votre projet
+Pour lancer le projet taper la commande ``npm run dev``
 
 ## Fabriqué avec
 
 Entrez les programmes/logiciels/ressources que vous avez utilisé pour développer votre projet
 
 _exemples :_
-* [Materialize.css](http://materializecss.com) - Framework CSS (front-end)
+* [vscode](https://code.visualstudio.com/) - Visual Studio Code
 * [Atom](https://atom.io/) - Editeur de textes
 
 ## Contributing
