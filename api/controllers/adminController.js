@@ -1,5 +1,6 @@
 const db = require('../config/db')
-
+// dotenv mis en haut pour l'appel des données sécurisé
+require("../../server").config();
 
 exports.getAdminPage = async (req, res) => {
   console.log("getAdminPage");

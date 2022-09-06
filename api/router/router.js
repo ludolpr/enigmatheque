@@ -11,14 +11,14 @@ const flash = require("flash");
 require("dotenv").config();
 // mail secure .env
 const { MAIL_USER } = process.env;
-const {middlewareImage} = require ('../middlewares/middlewareImage');
-const {controllerImage} = require ('../controllers/controllerImage')
+const { middlewareImage } = require("../middlewares/middlewareImage");
+const { controllerImage } = require("../controllers/controllerImage");
 const transporter = require("../config/nodeMailer");
 // bcrypt pour hash le mot de passe
 const bcrypt = require("bcrypt");
 const bcrypt_salt = 10;
 // appel de multer
-const upload = require('../utils/multer');
+const upload = require("../utils/multer");
 // Page home
 router.get("/", (req, res) => {
   res.render("home");
@@ -80,7 +80,10 @@ router
     await db.query(
       `INSERT INTO enigme (titre , difficulty, content, solus, id_user) VALUES ("${titre}", "${difficulty}", "${content}", "${solus}", "1" AND is_Verified=0);`
     );
-    res.render("proposer", { flash: "Votre enigme à été envoyé" });
+
+    if (process.env.MODE === "test")
+      res.json({ flash: "Votre enigme à été envoyé", dbEnigmes });
+    else res.render("proposer", { flash: "Votre enigme à été envoyé" });
   })
   // AFFICHER ENIGME
   .get("/enigme/:id", async (req, res) => {
@@ -186,27 +189,25 @@ router.get("/proposer", (req, res) => {
 router
   .get("/profil/:id", async (req, res) => {
     const { id } = req.params;
-    const profil = await db.query(
-      `select * from membres WHERE id = ${id}`
-    );
+    const profil = await db.query(`select * from membres WHERE id = ${id}`);
     if (profil.lenght <= 0) res.redirect("/");
     else
       res.render("profil", {
         profil: profil[0],
       });
   })
-  .put("/profilEdit/:id", upload.single('avatar'), async (req, res) => {
+  .put("/profilEdit/:id", upload.single("avatar"), async (req, res) => {
     console.log("edit::profil", req.body);
     const { id } = req.params;
-    const {name, email, password, confPassword, bio } = req.body;
-    
+    const { name, email, password, confPassword, bio } = req.body;
+
     if (name) {
       await db.query(`UPDATE membres SET name="${name}" WHERE id=${id}`);
     }
     if (email) {
       await db.query(`UPDATE membres SET email="${email}" WHERE id=${id}`);
     }
-    if ( password.lenght > 0 && password === confPassword) {
+    if (password.lenght > 0 && password === confPassword) {
       bcrypt.hash(
         password,
         confPassword,
@@ -245,7 +246,6 @@ router
 // // ----------------------------------------------------------------------- //
 // router.route("/profilEdit")
 // .post(upload.single('image'), controllerImage, middlewareImage)
-
 
 // ----------------------------------------------------------------------- //
 // -----------------------------CONNEXION--------------------------------- //
