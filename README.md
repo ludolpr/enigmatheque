@@ -73,7 +73,7 @@ put    -> Upadtae     -> Editer
 delete -> Delete      -> Suprimer
 
 
-
+JSON (JavaScript Objet Notation) est un langage léger d’échange de données textuelles. Pour les ordinateurs, ce format se génère et s’analyse facilement. Pour les humains, il est pratique à écrire et à lire grâce à une syntaxe simple et à une structure en arborescence. JSON permet de représenter des données structurées (comme XML par exemple)
 
 
 // Connect node -> mysql

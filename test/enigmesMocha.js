@@ -24,7 +24,7 @@ describe("Début des tests", function () {
     let enigmes = {};
 
     beforeEach(async () => {
-      console.log("beforeEach");
+      // console.log("beforeEach");
       let art = await db.query(
         `INSERT INTO enigme (titre, difficulty, content, solus, id_user) VALUES ("TITRE1", 1, "oops", "cool", 1);`
       );
@@ -37,7 +37,7 @@ describe("Début des tests", function () {
 
     // effacer les enigmes apres chaque test
     afterEach(async () => {
-      console.log("after each", enigmes);
+      // console.log("after each", enigmes);
       await db.query(
         `DELETE FROM enigme WHERE id_enigme = "${enigmes.id_enigme}";`
       );
@@ -45,14 +45,14 @@ describe("Début des tests", function () {
 
     // get
     it("Test Async getEnigmes", async () => {
-      console.log("it");
+      // console.log("it");
       let res = await db.query(`Select * from enigme;`);
       assert.strictEqual(typeof res, typeof []);
     });
 
     // Get ID
     it("Test Async getEnigmes ID", async () => {
-      console.log("getEnigmes ID");
+      // console.log("getEnigmes ID");
       let res = await db.query(
         `SELECT * FROM enigme WHERE id_enigme = "${enigmes.id_enigme}";`
       );
@@ -61,9 +61,9 @@ describe("Début des tests", function () {
 
     // put
     it("Test Async putEnigmes", async () => {
-      console.log("put", enigmes);
+      // console.log("put", enigmes);
       let data = await db.query(`UPDATE enigme SET titre="bijour" WHERE id_enigme = "${enigmes.id_enigme}";`)
-        console.log("update de mes datas", typeof data);
+        // console.log("update de mes datas", typeof data);
         assert.equal(typeof data, typeof {});
     });
 

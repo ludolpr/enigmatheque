@@ -101,3 +101,5 @@ app.get('/*', function (req, res) {
 app.listen(PORT_NODE, () =>
   console.log(`Ludolpr: Exemple d'application sur le port ${PORT_NODE} ! Lancé le : ${new Date().toLocaleString()});`)
 );
+
+module.exports = {db, app}

@@ -12,7 +12,8 @@ require("dotenv").config();
 // mail secure .env
 const { MAIL_USER } = process.env;
 const { middlewareImage } = require("../middlewares/middlewareImage");
-const { controllerImage } = require("../controllers/controllerImage");
+const { controllerImage } = require("../controllers/imageControllers");
+const { getEnigmes } = require("../controllers/enigmeControllers");
 const transporter = require("../config/nodeMailer");
 // bcrypt pour hash le mot de passe
 const bcrypt = require("bcrypt");
@@ -23,6 +24,11 @@ const upload = require("../utils/multer");
 router.get("/", (req, res) => {
   res.render("home");
 });
+// ----------------------------------------------------------------------- //
+// ----------------------------TEST UNITAIRES----------------------------- //
+// ----------------------------------------------------------------------- //
+router.route("/enigme")
+      .get(getEnigmes);
 
 // ----------------------------------------------------------------------- //
 // -------------------LISTE DES ENIGMES + ID------------------------------ //
@@ -30,41 +36,41 @@ router.get("/", (req, res) => {
 // il permet de voir les enigmes dans leurs categories
 // ----------------------------------------------------------------------- //
 
-// Liste des éngimes + id
-router.get("/enigme", async (req, res) => {
-  console.log("enigmes", req.query);
-  let dif;
-  switch (req.query.q) {
-    case "facile":
-      dif = 1;
-      break;
-    case "normal":
-      dif = 2;
-      break;
-    case "difficile":
-      dif = 3;
-      break;
-    case "devinettes":
-      dif = 4;
-      break;
-    case "sage":
-      dif = 5;
-      break;
-    default:
-      dif = 1;
-  }
-  console.log("difficulty lvl", dif);
-  const dbEnigmes = await db.query(
-    // `SELECT * FROM enigme WHERE difficulty=${dif}`
-    `SELECT * FROM enigme WHERE difficulty=${dif} AND is_Verified=1`
-  );
-  console.log(dbEnigmes);
-  // const proposEnigme = await db.query (`SELECT * FROM enigme `)
-  res.render("enigme", {
-    enigmes: dbEnigmes,
-    titre: req.query.q,
-  });
-});
+// // Liste des éngimes + id
+// router.get("/enigme", async (req, res) => {
+//   console.log("enigmes", req.query);
+//   let dif;
+//   switch (req.query.q) {
+//     case "facile":
+//       dif = 1;
+//       break;
+//     case "normal":
+//       dif = 2;
+//       break;
+//     case "difficile":
+//       dif = 3;
+//       break;
+//     case "devinettes":
+//       dif = 4;
+//       break;
+//     case "sage":
+//       dif = 5;
+//       break;
+//     default:
+//       dif = 1;
+//   }
+//   console.log("difficulty lvl", dif);
+//   const dbEnigmes = await db.query(
+//     // `SELECT * FROM enigme WHERE difficulty=${dif}`
+//     `SELECT * FROM enigme WHERE difficulty=${dif} AND is_Verified=1`
+//   );
+//   console.log(dbEnigmes);
+//   // const proposEnigme = await db.query (`SELECT * FROM enigme `)
+//   res.render("enigme", {
+//     enigmes: dbEnigmes,
+//     titre: req.query.q,
+//   });
+// });
 
 // ----------------------------------------------------------------------- //
 // -----------------------CRUD PROPOSER ÉNIGME---------------------------- //
