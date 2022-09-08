@@ -90,6 +90,7 @@ router
       `INSERT INTO enigme (titre , difficulty, content, solus, id_user) VALUES ("${titre}", "${difficulty}", "${content}", "${solus}", 1);`
     );
     const [newEnigme] = await db.query(`SELECT * FROM enigme WHERE id_enigme = ${insertEnigme.insertId}`)
+    console.log('memotechnik', insertEnigme, newEnigme)
 
     if (MODE === "test")
       res.json({
@@ -104,21 +105,17 @@ router
   // AFFICHER ENIGME
   .get("/enigme/:id", async (req, res) => {
     const { id } = req.params;
-    const enigme = await db.query(
-      `select * from enigme WHERE id_enigme = ${id}`
+    const [enigme] = await db.query(
+      `select * from enigme WHERE id_enigme = ${id};`
     );
-    if (enigme.lenght <= 0) res.redirect("/");
-    else
-      res.render("enigme_details", {
-        enigme: enigme[0],
-      });
-      if (MODE === "test")
-      res.json({
-        newEnigme,
-        flash: "Votre enigme à été envoyé",
-        dbEnigmes: await db.query('SELECT * FROM enigme')
-      });
-    else res.render("proposer", { flash: "Votre enigme à été envoyé" });
+    if (!enigme) return res.redirect("/");
+
+    if (MODE === "test") res.json({
+      enigme
+    })
+    else res.render("enigme_details", {
+      enigme,
+    })
   })
 
 
@@ -134,10 +131,10 @@ router
     const updateEnigme = await db.query(
       `UPDATE enigme SET titre="${titre}", difficulty="${difficulty}", content="${content}", solus="${solus}", is_Verified="${is_Verified === "on" ? 1 : 0
       }" WHERE id_enigme="${id}";`
-    );
+      );
+      console.log(putEnigme);
     const [putEnigme] = await db.query(`UPDATE enigme SET titre="${titre}", difficulty="${difficulty}", content="${content}", solus="${solus}", is_Verified="${is_Verified === "on" ? 1 : 0
   }" WHERE id_enigme="${updateEnigme.insertId}";`)
-  console.log(putEnigme);
 
     // Redirection vers la page admin
     if (MODE === "test")
@@ -146,8 +143,7 @@ router
         flash: "Votre enigme à été modifié",
         dbEnigmes: await db.query('SELECT * FROM enigme')
       });
-    else res.render("back", { flash: "Votre enigme à été envoyé" });
-    res.redirect("/admin");
+    else res.redirect("/admin");
   })
 
 router
@@ -228,7 +224,7 @@ router.get("/proposer", (req, res) => {
 router
   .get("/profil/:id", async (req, res) => {
     const { id } = req.params;
-    console.log("IDDD",id);
+    // console.log("IDDD",id);
     const profil = await db.query(`select * from membres WHERE id="${id}"`);
     if (profil.lenght <= 0) res.redirect("/");
     else

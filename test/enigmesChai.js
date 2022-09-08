@@ -27,7 +27,7 @@ describe("Enigme test, chai !", () => {
   let cookieSession = "";
 
   // test de la route Post Enigmes
-  it("getEnigmes // Get // Enigmes", (done) => {
+  it("GET CATEGORIES 1", (done) => {
     // appel de chai avec .request(app)
     chai
       .request(app)
@@ -44,9 +44,96 @@ describe("Enigme test, chai !", () => {
         done();
       });
   });
+  it("GET CATEGORIES 2", (done) => {
+    // appel de chai avec .request(app)
+    chai
+      .request(app)
+      // route choisi
+      .get("/enigme?q=normal")
+      // format de la réponse
+      .end((err, res) => {
+        if (err) return done(err);
+        console.log("res GET enigmes", res.body);
+
+        // on lui dit que ça doit etre un array
+        res.body.enigmes.should.be.a("array")
+        // cloture du test
+        done();
+      });
+  });
+  it("GET CATEGORIES 3", (done) => {
+    // appel de chai avec .request(app)
+    chai
+      .request(app)
+      // route choisi
+      .get("/enigme?q=difficile")
+      // format de la réponse
+      .end((err, res) => {
+        if (err) return done(err);
+        console.log("res GET enigmes", res.body);
+
+        // on lui dit que ça doit etre un array
+        res.body.enigmes.should.be.a("array")
+        // cloture du test
+        done();
+      });
+  });
+  it("GET CATEGORIES 4", (done) => {
+    // appel de chai avec .request(app)
+    chai
+      .request(app)
+      // route choisi
+      .get("/enigme?q=devinettes")
+      // format de la réponse
+      .end((err, res) => {
+        if (err) return done(err);
+        console.log("res GET enigmes", res.body);
+
+        // on lui dit que ça doit etre un array
+        res.body.enigmes.should.be.a("array")
+        // cloture du test
+        done();
+      });
+  });
+  it("GET CATEGORIES 5", (done) => {
+    // appel de chai avec .request(app)
+    chai
+      .request(app)
+      // route choisi
+      .get("/enigme?q=sage")
+      // format de la réponse
+      .end((err, res) => {
+        if (err) return done(err);
+        console.log("res GET enigmes", res.body);
+
+        // on lui dit que ça doit etre un array
+        res.body.enigmes.should.be.a("array")
+        // cloture du test
+        done();
+      });
+  });
+
+  it("GET ID ", (done) => {
+    // appel de chai avec .request(app)
+    chai
+      .request(app)
+      // route choisi
+      .get(`/enigme/${id_enigme}`)
+      // format de la réponse
+      .end((err, res) => {
+        if (err) return done(err);
+        console.log("res GET enigmes", res.body);
+
+        // on lui dit que ça doit etre un array
+        res.body.enigme.should.be.a("array")
+        // cloture du test
+        done();
+      });
+  });
+
 
   // test Route Post Login
-  it("chai // POST // Login", (done) => {
+  it("LOGIN", (done) => {
     chai
       .request(app)
       .post("/login")
@@ -63,7 +150,7 @@ describe("Enigme test, chai !", () => {
   });
 
   // test de mon POST Enigme
-  it("chai // POST // enigme", (done) => {
+  it("POST", (done) => {
     chai
       .request(app)
       .post("/insertEnigme")
@@ -76,7 +163,7 @@ describe("Enigme test, chai !", () => {
         solus: "lol"
       })
       .end((err, res) => {
-        console.log("test n°10499")
+        
         if (err) return done(err);
         res.body.flash.should.be.a("string");
         res.body.newEnigme.should.be.a("object");
@@ -85,22 +172,31 @@ describe("Enigme test, chai !", () => {
         newEnigme = res.body.newEnigme
         done();
       });
+      console.log("test n°10499")
   });
 
   // Test de mon PUT Enigme
-  it(" chai // PUT // id_enigme", (done) => {
+  it("PUT", (done) => {
     chai
+      // import express (appli , route , ect)
       .request(app)
+      // methode utilisé (PUT,POST,GET,DELETE) et route (/exemple)
       .put(`/updateEnigme/${newEnigme}`)
+      // transforme en json OK
       .set("Accept", "application/json")
+      // session user/admin
       .set("Cookie", cookieSession)
+      // données modifier
       .send({
         titre: "titremon",
         difficulty: 2,
         content: "ok ah",
         solus: "lolipop"
       })
+      // ci dessous .attach permet de tester les images, __dirname & le chemin du fichier
       //   .attach("avatar", path.resolve(__dirname, "../public/images"))
+
+      // pour finir il envoie la réponse 
       .end((err, res) => {
         console.log("test n°11578")
         if (err) return done(err);
@@ -132,3 +228,6 @@ describe("Enigme test, chai !", () => {
 });
 
 // res.body. "ce que tu viens chercher exempple un ID".should.be
+
+
+// GET / GET ID / POST / PUT / DELETE / LOGIN
