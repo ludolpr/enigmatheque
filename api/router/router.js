@@ -20,6 +20,9 @@ const bcrypt = require("bcrypt");
 const bcrypt_salt = 10;
 // appel de multer
 const upload = require("../utils/multer");
+
+const { MODE } = process.env
+
 // Page home
 router.get("/", (req, res) => {
   res.render("home");
@@ -28,7 +31,7 @@ router.get("/", (req, res) => {
 // ----------------------------TEST UNITAIRES----------------------------- //
 // ----------------------------------------------------------------------- //
 router.route("/enigme")
-      .get(getEnigmes);
+  .get(getEnigmes);
 
 // ----------------------------------------------------------------------- //
 // -------------------LISTE DES ENIGMES + ID------------------------------ //
@@ -80,17 +83,24 @@ router.route("/enigme")
 router
   // CREATE IN FORM
   .post("/insertEnigme", async (req, res) => {
-    console.log("create::enigme", req.body);
+    console.log("create::enigme");
     const { titre, difficulty, content, solus } = req.body;
     // Ajout d'une énigme
-    await db.query(
-      `INSERT INTO enigme (titre , difficulty, content, solus, id_user) VALUES ("${titre}", "${difficulty}", "${content}", "${solus}", "1" AND is_Verified=0);`
+    const insertEnigme = await db.query(
+      `INSERT INTO enigme (titre , difficulty, content, solus, id_user) VALUES ("${titre}", "${difficulty}", "${content}", "${solus}", 1);`
     );
+    const [newEnigme] = await db.query(`SELECT * FROM enigme WHERE id_enigme = ${insertEnigme.insertId}`)
 
-    if (process.env.MODE === "test")
-      res.json({ flash: "Votre enigme à été envoyé", dbEnigmes });
+    if (MODE === "test")
+      res.json({
+        newEnigme,
+        flash: "Votre enigme à été envoyé",
+        dbEnigmes: await db.query('SELECT * FROM enigme')
+      });
     else res.render("proposer", { flash: "Votre enigme à été envoyé" });
   })
+
+router
   // AFFICHER ENIGME
   .get("/enigme/:id", async (req, res) => {
     const { id } = req.params;
@@ -102,22 +112,45 @@ router
       res.render("enigme_details", {
         enigme: enigme[0],
       });
+      if (MODE === "test")
+      res.json({
+        newEnigme,
+        flash: "Votre enigme à été envoyé",
+        dbEnigmes: await db.query('SELECT * FROM enigme')
+      });
+    else res.render("proposer", { flash: "Votre enigme à été envoyé" });
   })
+
+
+router
   // EDIT ENIGME
   .put("/updateEnigme/:id", async (req, res) => {
     console.log("edit::enigme", req.body);
     const { id } = req.params;
+    console.log(req.params);
     const { titre, difficulty, content, solus, is_Verified } = req.body;
 
     // if (titre)
-    await db.query(
-      `UPDATE enigme SET titre="${titre}", difficulty="${difficulty}", content="${content}", solus="${solus}", is_Verified="${
-        is_Verified === "on" ? 1 : 0
+    const updateEnigme = await db.query(
+      `UPDATE enigme SET titre="${titre}", difficulty="${difficulty}", content="${content}", solus="${solus}", is_Verified="${is_Verified === "on" ? 1 : 0
       }" WHERE id_enigme="${id}";`
     );
+    const [putEnigme] = await db.query(`UPDATE enigme SET titre="${titre}", difficulty="${difficulty}", content="${content}", solus="${solus}", is_Verified="${is_Verified === "on" ? 1 : 0
+  }" WHERE id_enigme="${updateEnigme.insertId}";`)
+  console.log(putEnigme);
+
     // Redirection vers la page admin
+    if (MODE === "test")
+      res.json({
+        putEnigme,
+        flash: "Votre enigme à été modifié",
+        dbEnigmes: await db.query('SELECT * FROM enigme')
+      });
+    else res.render("back", { flash: "Votre enigme à été envoyé" });
     res.redirect("/admin");
   })
+
+router
   // DELETE ÉNIGME
   .delete("/deleteEnigme/:id", async (req, res) => {
     console.log("delete::enigme", req.params);
@@ -195,7 +228,8 @@ router.get("/proposer", (req, res) => {
 router
   .get("/profil/:id", async (req, res) => {
     const { id } = req.params;
-    const profil = await db.query(`select * from membres WHERE id = ${id}`);
+    console.log("IDDD",id);
+    const profil = await db.query(`select * from membres WHERE id="${id}"`);
     if (profil.lenght <= 0) res.redirect("/");
     else
       res.render("profil", {
@@ -206,7 +240,9 @@ router
     console.log("edit::profil", req.body);
     const { id } = req.params;
     const { name, email, password, confPassword, bio } = req.body;
-
+    if(req.file.completed){
+      await db.query(`UPDATE membres SET avatar="/assets/images/${req.file.completed}" WHERE id=${id}`);
+    }
     if (name) {
       await db.query(`UPDATE membres SET name="${name}" WHERE id=${id}`);
     }

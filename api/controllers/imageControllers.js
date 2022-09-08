@@ -12,3 +12,4 @@ exports.controllerImage = async (req, res) => {
   console.log("envoi du controller OK");
   res.redirect("back");
   } 
+  // NE SERF A RIEN !!
