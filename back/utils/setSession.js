@@ -1,4 +1,4 @@
-exports.setSession = async function (req, res, email) {
+const setSession = async function (req, res, email) {
   let userget = await db.query(`SELECT * FROM membres WHERE email=${email}`)
   let user = userget[0];
   
@@ -12,3 +12,4 @@ exports.setSession = async function (req, res, email) {
 
   res.redirect('/')
 }
+module.exports = { setSession }

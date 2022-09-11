@@ -123,9 +123,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
 INSERT INTO `membres` (`id`,`name`,`password`,`email`,`isVerified`,`isAdmin`,`isBan`,`avatar`) VALUES (1,'Admin','$2b$10$3xZYGlHNX0XSn/D28.9e.Od608tlJ3ip2W2SqWKQEzrZJfwJ5i56e','ludolpr@gmail.com',0,1,0,'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.ms_ni44c-_TBsdHzF0W5awHaHa%26pid%3DApi&f=1');
-INSERT INTO `message` (`message`,`name`,`sujet`,`email`) VALUES 
-('test Admin','Admin','test','ludolpr@gmail.com');
-('ddd Admin','ddd','test','ludolpr@gmail.com');
+INSERT INTO `message` (`message`,`name`,`sujet`,`email`) VALUES ('test Admin','Admin','test','ludolpr@gmail.com');
 
 INSERT INTO `enigme` (`titre`,`difficulty`,`content`,`solus`,`id_user`,`is_Verified`)
   VALUES 

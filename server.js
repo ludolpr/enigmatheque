@@ -19,7 +19,7 @@ const multer  = require('multer')
 
 
 // Import des middlewares
-const { isAdmin } = require("./api/middlewares/admin");
+const { isAdmin } = require("./back/middlewares/admin");
 
 // // Utilisation du middleware pour toute les routes suivante
 // app.use(isAdmin);
@@ -49,7 +49,7 @@ app.engine(
 // app.use(isAdmin);
 
 // sessions des membres
-var sessionStore = new MySQLStore(require('./api/config/config_db'));
+var sessionStore = new MySQLStore(require('./back/config/dbConfig'));
 
 app 
 .use(
@@ -85,7 +85,7 @@ app.use(methodOverride('_method'))
 
 
 // Router
-const ROUTER = require("./api/router/router");
+const ROUTER = require("./back/router/route");
 app.use(ROUTER);
 
 

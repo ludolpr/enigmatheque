@@ -3,7 +3,7 @@ const assert = require("assert");
 const mysql = require("mysql");
 
 // Import config DB
-const configDB = require("../api/config/config_db");
+const configDB = require("../back/config/dbConfig");
 // Création de la connection avec les paramètres donner
 db = mysql.createConnection(configDB);
 // Config ASYNC

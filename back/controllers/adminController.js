@@ -14,24 +14,3 @@ exports.getAdminPage = async (req, res) => {
     dbEnigmes, dbMembres, dbMessage
   });
 };
-
-
-  // .get("/admin", async (req, res) => { 
-  //   // ajout d'un article
-  //   /*
-  // // Redirection vers la page Admin
-  //   if ( isAdmin() === true ) {
-  //     // page admin
-  //     res.redirect("/admin")
-  // } else {
-  //     // page proposer
-  //     res.redirect("/proposer")
-  //     console.log("hey",isAdmin);
-  // }
-  // */
-
-  // console.log('admin page', dbEnigmes)
-  //   res.render("admin", {
-  //     dbEnigmes
-  //   });
-  // });
