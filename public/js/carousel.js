@@ -2,8 +2,8 @@ let i = 0;  //  current slide
 let j = 4; //  total slide
 
 
-console.log("1", i);
-console.log("2", j);
+// console.log("1", i);
+// console.log("2", j);
 
 const dots = document.querySelectorAll(".dotContainer button");
 // console.log(dots);

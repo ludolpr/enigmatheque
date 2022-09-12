@@ -1,8 +1,10 @@
-const
+require("dotenv").config()
+const transporter = require("../utils/nodeMailer")
+
 // ----------------------------------------------------------------------- //
 // ---------------------------NODEMAILER---------------------------------- //
 // ----------------------------------------------------------------------- //
-mail = async (req, res) => {
+const mail = async (req, res) => {
     const { content, sujet, email } = req.body;
     console.log("mail envoyé", req.body);
 
@@ -16,7 +18,7 @@ mail = async (req, res) => {
             <h3> son message : ${content}</h3>
         `,
         },
-        function (err, info) {
+        (err, info) => {
             if (err) {
                 callback(err, info);
             } else {
@@ -25,22 +27,24 @@ mail = async (req, res) => {
             transporter.close();
         }
     );
-
+    
+    mailSend(
+      `Email de l'administrateur <${process.env.MAIL_USER}>`,
+      `Vous <${email}>`,
+      sujet,
+      content,
+      async function (err, info) {
+      }
+    );
+    
     res.redirect("/");
 
-    // mailSend(
-    //   `Email de l'administrateur <${process.env.MAIL_USER}>`,
-    //   `Vous <${email}>`,
-    //   sujet,
-    //   content,
-    //   async function (err, info) {
-    //   }
-    // );
-},
+}
 // ----------------------------------------------------------------------- //
 // ------------------------NODEMAILER REPLY------------------------------- //
 // ----------------------------------------------------------------------- //
-mailReply = async (req, res) => {
+
+const mailReply = async (req, res) => {
     const { content, sujet, email } = req.body;
     console.log("mail envoyé", req.body);
 
@@ -53,7 +57,7 @@ mailReply = async (req, res) => {
             <h2> Réponse de l'administrateur : ${content}</h2>
         `,
         },
-        function (err, info) {
+        (err, info) => {
             if (err) {
                 callback(err, info);
             } else {
@@ -63,18 +67,20 @@ mailReply = async (req, res) => {
             transporter.close();
         }
     );
+    mailSend(
+      `Email de l'administrateur <${process.env.MAIL_USER}>`,
+      `Vous <${email}>`,
+      sujet,
+      content,
+      async function (err, info) {
+      }
+    );
 
     res.redirect("/");
 
-    // mailSend(
-    //   `Email de l'administrateur <${process.env.MAIL_USER}>`,
-    //   `Vous <${email}>`,
-    //   sujet,
-    //   content,
-    //   async function (err, info) {
-    //   }
-    // );
 };
 
-
+// ----------------------------------------------------------------------- //
+// -----------------------------EXPORTS MODULE---------------------------- //
+// ----------------------------------------------------------------------- //
 module.exports = { mail, mailReply}

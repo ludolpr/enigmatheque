@@ -32,7 +32,7 @@ describe("Enigme test, chai !", () => {
     chai
       .request(app)
       // route choisi
-      .get("/enigme?q=facile")
+      .get("/enigme")
       // format de la réponse
       .end((err, res) => {
         if (err) return done(err);
@@ -44,74 +44,7 @@ describe("Enigme test, chai !", () => {
         done();
       });
   });
-  it("GET CATEGORIES 2", (done) => {
-    // appel de chai avec .request(app)
-    chai
-      .request(app)
-      // route choisi
-      .get("/enigme?q=normal")
-      // format de la réponse
-      .end((err, res) => {
-        if (err) return done(err);
-        console.log("res GET enigmes", res.body);
-
-        // on lui dit que ça doit etre un array
-        res.body.enigmes.should.be.a("array")
-        // cloture du test
-        done();
-      });
-  });
-  it("GET CATEGORIES 3", (done) => {
-    // appel de chai avec .request(app)
-    chai
-      .request(app)
-      // route choisi
-      .get("/enigme?q=difficile")
-      // format de la réponse
-      .end((err, res) => {
-        if (err) return done(err);
-        console.log("res GET enigmes", res.body);
-
-        // on lui dit que ça doit etre un array
-        res.body.enigmes.should.be.a("array")
-        // cloture du test
-        done();
-      });
-  });
-  it("GET CATEGORIES 4", (done) => {
-    // appel de chai avec .request(app)
-    chai
-      .request(app)
-      // route choisi
-      .get("/enigme?q=devinettes")
-      // format de la réponse
-      .end((err, res) => {
-        if (err) return done(err);
-        console.log("res GET enigmes", res.body);
-
-        // on lui dit que ça doit etre un array
-        res.body.enigmes.should.be.a("array")
-        // cloture du test
-        done();
-      });
-  });
-  it("GET CATEGORIES 5", (done) => {
-    // appel de chai avec .request(app)
-    chai
-      .request(app)
-      // route choisi
-      .get("/enigme?q=sage")
-      // format de la réponse
-      .end((err, res) => {
-        if (err) return done(err);
-        console.log("res GET enigmes", res.body);
-
-        // on lui dit que ça doit etre un array
-        res.body.enigmes.should.be.a("array")
-        // cloture du test
-        done();
-      });
-  });
+  
 
   it("GET ID ", (done) => {
     // appel de chai avec .request(app)

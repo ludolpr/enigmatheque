@@ -155,9 +155,10 @@
 
     <script>
 
-      const isVerified{{ this.id_enigme }} = document.getElementById('isVerified{{ this.id_enigme }}')
-      const vrf{{ this.id_enigme }} = { { this.is_Verified } }
-      if (vrf{ { this.id_enigme } } === 1 ) isVerified{ { this.id_enigme } }.checked = true
+      const isVerified{{ this.id_enigme }} = document.getElementById('isVerified{{this.id_enigme}}')
+      const vrf{{ this.id_enigme }} = {{ this.is_Verified }}
+      if (vrf{{this.id_enigme}} === "1" ) isVerified {{this.id_enigme}}.checked = true;
+      
     </script>
 
     {{/each}}

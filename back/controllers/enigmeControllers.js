@@ -1,4 +1,7 @@
+// IMPORTS DES MODULES
 require("dotenv").config();
+const flash = require("flash")
+
 
 // ----------------------------------------------------------------------- //
 // -------------------LISTE DES ENIGMES + ID------------------------------ //
@@ -6,10 +9,13 @@ require("dotenv").config();
 // il permet de voir les enigmes dans leurs categories
 // ----------------------------------------------------------------------- //
 const
-  // FILTRE DES ENIGMES
-  filtreEnigmes = async  (req, res) => {
-    console.log("getEnigmes");
 
+  getPageProposer = async (req, res) => {
+    res.render("proposer")
+  },
+
+  // FILTRE DES ENIGMES
+  filtreEnigmes = async (req, res) => {
     let dif;
     switch (req.query.q) {
       case "facile":
@@ -47,7 +53,7 @@ const
     }
   },
 
-  postEnigmes =  async (req, res) => {
+  postEnigmes = async (req, res) => {
     console.log("create::enigme");
     const { titre, difficulty, content, solus } = req.body;
     // Ajout d'une énigme
@@ -56,14 +62,16 @@ const
     );
     const [newEnigme] = await db.query(`SELECT * FROM enigme WHERE id_enigme = ${insertEnigme.insertId}`)
     console.log('memotechnik', insertEnigme, newEnigme)
+    // console.log("mode", MODE);
 
-    if (MODE === "test")
+    if (process.env.MODE === "test")
       res.json({
         newEnigme,
         flash: "Votre enigme à été envoyé",
         dbEnigmes: await db.query('SELECT * FROM enigme')
       });
-    else res.render("proposer", { flash: "Votre enigme à été envoyé" });
+    else 
+    res.render("proposer", { flash: "Votre enigme à été envoyé" } );
   },
 
   // AFFICHER ENIGME
@@ -94,12 +102,12 @@ const
       `UPDATE enigme SET titre="${titre}", difficulty="${difficulty}", content="${content}", solus="${solus}", is_Verified="${is_Verified === "on" ? 1 : 0
       }" WHERE id_enigme="${id}";`
     );
-    console.log(putEnigme);
-    const [putEnigme] = await db.query(`UPDATE enigme SET titre="${titre}", difficulty="${difficulty}", content="${content}", solus="${solus}", is_Verified="${is_Verified === "on" ? 1 : 0
+    console.log(updateEnigme.insertId);
+    const putEnigme = await db.query(`UPDATE enigme SET titre="${titre}", difficulty="${difficulty}", content="${content}", solus="${solus}", is_Verified="${is_Verified === "on" ? 1 : 0
       }" WHERE id_enigme="${updateEnigme.insertId}";`)
 
     // Redirection vers la page admin
-    if (MODE === "test")
+    if (process.env.MODE  === "test")
       res.json({
         putEnigme,
         flash: "Votre enigme à été modifié",
@@ -108,7 +116,7 @@ const
     else res.redirect("/admin");
   },
   // DELETE ÉNIGME
-  deleteEnigmes =  async (req, res) => {
+  deleteEnigmes = async (req, res) => {
     console.log("delete::enigme", req.params);
     const { id } = req.params;
 
@@ -119,5 +127,7 @@ const
 
 
 
-
-module.exports = { filtreEnigmes, getEnigmes, putEnigmes, deleteEnigmes, postEnigmes }
+// ----------------------------------------------------------------------- //
+// -----------------------------EXPORTS MODULE---------------------------- //
+// ----------------------------------------------------------------------- //
+module.exports = { filtreEnigmes, getEnigmes, putEnigmes, deleteEnigmes, postEnigmes, getPageProposer }

@@ -1,8 +1,12 @@
+// IMPORT DES MODULES 
+const bcrypt = require('bcrypt');
+const bcrypt_salt = 10;
+
 const
-// ----------------------------------------------------------------------- //
-// -----------------------------PROFIL------------------------------------ //
-// ----------------------------------------------------------------------- //
-profilId = async (req, res) => {
+  // ----------------------------------------------------------------------- //
+  // -----------------------------PROFIL------------------------------------ //
+  // ----------------------------------------------------------------------- //
+  profilId = async (req, res) => {
     const { id } = req.params;
     // console.log("IDDD",id);
     const profil = await db.query(`select * from membres WHERE id="${id}"`);
@@ -12,13 +16,13 @@ profilId = async (req, res) => {
         profil: profil[0],
       });
   },
-  profilEdit =  async (req, res) => {
-    // upload.single("avatar")
+  profilEdit = async (req, res) => {
+    const image = req.file ? req.file.filename : false;
     console.log("edit::profil", req.body);
     const { id } = req.params;
     const { name, email, password, confPassword, bio } = req.body;
-    if (req.file.completed) {
-      await db.query(`UPDATE membres SET avatar="/assets/images/${req.file.completed}" WHERE id=${id}`);
+    if (image) {
+      await db.query(`UPDATE membres SET avatar="/assets/images/${image}" WHERE id=${id}`);
     }
     if (name) {
       await db.query(`UPDATE membres SET name="${name}" WHERE id=${id}`);
@@ -59,5 +63,7 @@ profilId = async (req, res) => {
 
     res.redirect("back");
   };
-
-  module.exports = { profilId, profilEdit }
+// ----------------------------------------------------------------------- //
+// -----------------------------EXPORTS MODULE---------------------------- //
+// ----------------------------------------------------------------------- //
+module.exports = { profilId, profilEdit }

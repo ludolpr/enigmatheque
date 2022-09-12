@@ -1,10 +1,11 @@
 const { setSession } = require("../utils/setSession")
+
 const bcrypt = require('bcrypt');
 const bcrypt_salt = 10;
 
 const
     // ----------------------------------------------------------------------- //
-    // -----------------------------LOGIN------------------------------------- //
+    // -----------------------------CONNEXION--------------------------------- //
     // ----------------------------------------------------------------------- //
     login = async (req, res) => {
         const { email, password } = req.body;
@@ -35,6 +36,9 @@ const
     // ----------------------------------------------------------------------- //
     // -----------------------------INSCRIPTION------------------------------- //
     // ----------------------------------------------------------------------- //
+  getPageInscription = async (req, res) => {
+    res.render("inscription")
+  },
     inscription = async (req, res) => {
         console.log("inscription OK !", req.body);
         const { name, email, password, confPassword } = req.body;
@@ -67,12 +71,14 @@ const
     // ----------------------------------------------------------------------- //
     // -----------------------------LOGOUT------------------------------------ //
     // ----------------------------------------------------------------------- //
-    logout = async  (req, res) => {
+    logout = async (req, res) => {
         req.session.destroy(() => {
             res.clearCookie('poti-gato');
             console.log("Clear Cookie session :", req.sessionID);
             res.redirect('/');
         })
     };
-
-module.exports = { login, inscription, logout }
+// ----------------------------------------------------------------------- //
+// -----------------------------EXPORTS MODULE---------------------------- //
+// ----------------------------------------------------------------------- //u
+module.exports = { login, inscription, logout, getPageInscription }
