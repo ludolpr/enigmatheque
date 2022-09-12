@@ -24,9 +24,8 @@ const
   // { mailSend } = require("../utils/nodeMailer"),
   { getPageHome } = require("../controllers/homeControler"),
   { getAdminPage } = require("../controllers/adminController"),
-  { MAIL_USER } = process.env,
   { middlewareImage } = require("../middlewares/middlewareImage"),
-  { getEnigmes, putEnigmes, deleteEnigmes, filtreEnigmes, postEnigmes, getPageProposer } = require("../controllers/enigmeControllers"),
+  { getEnigmes, putEnigmes, deleteEnigmes, filtreEnigmes, postEnigmes, getPageProposer, getPageEnigmeId } = require("../controllers/enigmeControllers"),
   { mail, mailReply } = require("../controllers/nodeMailer"),
   { message, messageId, deleteMessage } = require("../controllers/messageAdmin"),
   { profilId, profilEdit } = require("../controllers/profil"),
@@ -71,7 +70,7 @@ router.route("/logout").post(logout)
 
 // AFFICHER ENIGME
 router.route("/enigme").get(filtreEnigmes)
-
+router.route("/enigme/{{this.id_enigme}}").get(getPageEnigmeId)
 // PROPOSER ÉNIGME
 router.route("/proposer").get(getPageProposer)
 router.route("/insertEnigme").post(postEnigmes)

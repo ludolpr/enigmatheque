@@ -1,6 +1,6 @@
 require("dotenv").config()
-const transporter = require("../utils/nodeMailer")
-
+const transporter = require("../utils/nodeMailer"),
+{ MAIL_USER } = process.env
 // ----------------------------------------------------------------------- //
 // ---------------------------NODEMAILER---------------------------------- //
 // ----------------------------------------------------------------------- //
@@ -27,17 +27,6 @@ const mail = async (req, res) => {
             transporter.close();
         }
     );
-    
-    mailSend(
-      `Email de l'administrateur <${process.env.MAIL_USER}>`,
-      `Vous <${email}>`,
-      sujet,
-      content,
-      async function (err, info) {
-      }
-    );
-    
-    res.redirect("/");
 
 }
 // ----------------------------------------------------------------------- //
@@ -66,16 +55,7 @@ const mailReply = async (req, res) => {
             }
             transporter.close();
         }
-    );
-    mailSend(
-      `Email de l'administrateur <${process.env.MAIL_USER}>`,
-      `Vous <${email}>`,
-      sujet,
-      content,
-      async function (err, info) {
-      }
-    );
-
+    )
     res.redirect("/");
 
 };

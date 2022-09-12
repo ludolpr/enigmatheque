@@ -13,7 +13,9 @@ const
   getPageProposer = async (req, res) => {
     res.render("proposer")
   },
-
+  getPageEnigmeId= async (req, res) => {
+    res.render("enigme_details")
+  },
   // FILTRE DES ENIGMES
   filtreEnigmes = async (req, res) => {
     let dif;
@@ -44,7 +46,7 @@ const
     //   console.log(dbEnigmes);
 
     if (process.env.MODE === "test") {
-      res.json({ enigmes: dbEnigmes, titre: req.query.q });
+      res.json({ filEnigmes: dbEnigmes, titre: req.query.q });
     } else {
       res.render("enigme", {
         enigmes: dbEnigmes,
@@ -83,7 +85,7 @@ const
     if (!enigme) return res.redirect("/");
 
     if (MODE === "test") res.json({
-      enigme
+      getEnigme
     })
     else res.render("enigme_details", {
       enigme
@@ -121,8 +123,13 @@ const
     const { id } = req.params;
 
     if (id) await db.query(`DELETE FROM enigme WHERE id_enigme = "${id}";`);
-
-    res.redirect("/admin");
+    if (process.env.MODE  === "test")
+      res.json({
+        delEnigme,
+        flash: "Votre enigme à été modifié",
+        dbEnigmes: await db.query('SELECT * FROM enigme')
+      });
+    else res.redirect("/admin");
   };
 
 
@@ -130,4 +137,4 @@ const
 // ----------------------------------------------------------------------- //
 // -----------------------------EXPORTS MODULE---------------------------- //
 // ----------------------------------------------------------------------- //
-module.exports = { filtreEnigmes, getEnigmes, putEnigmes, deleteEnigmes, postEnigmes, getPageProposer }
+module.exports = { filtreEnigmes, getEnigmes, putEnigmes, deleteEnigmes, postEnigmes, getPageProposer, getPageEnigmeId }

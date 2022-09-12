@@ -1,5 +1,8 @@
 // const { application } = require("express");
 // const { disconnect } = require("process");
+
+const { deleteEnigmes } = require("../back/controllers/enigmeControllers");
+
 // const getEnigmes = require("../test/enigmesChai")
 require("dotenv").config();
 
@@ -16,8 +19,8 @@ const chaiHttp = require("chai-http"),
   path = require('path'),
   // deprecation const for use
   process = require('process'),
-  { MAIL_USER, DB_PASSWORD } = process.env;
-
+  { MAIL_USER, DB_PASSWORD } = process.env,
+  { putEnigme, delEnigmes, getEnigme, newEnigme, filEnigmes} = require("../back/controllers/enigmeControllers")
 chai.use(chaiHttp);
 
 // description du tets
@@ -25,7 +28,42 @@ describe("Enigme test, chai !", () => {
   // definition des vazriables à utiliser
   let id, newEnigme, putEnigme;
   let cookieSession = "";
+  // ----------------------------------------------------------------------- //
+  // ------------------------------PING-TEST-------------------------------- //
+  // ----------------------------------------------------------------------- //
+  // it('PING', (done) => {
+  //   chai
+  //     .request(app)
+  //     .get('/ping')
+  //     .end((err, res) => {
+  //       if (err) return done(err);
+  //       res.body.data.should.be.a('object');
+  //       res.should.have.status(200);
 
+  //       done()
+  //     })
+  // });
+  // ----------------------------------------------------------------------- //
+  // -------------------LOGIN------------------------------ //
+  // ----------------------------------------------------------------------- //
+  it("LOGIN", (done) => {
+    chai
+      .request(app)
+      .post("/login")
+      .set("Accept", "application/json")
+      .send({ email: MAIL_USER, password: DB_PASSWORD })
+      .end((err, res) => {
+        cookieSession = res.res.headers["set-cookie"][0].split(";")[0]
+        if (err) return done(err);
+
+        console.log("res POST => Login => enigmes", res.body);
+        res.should.have.status(200);
+        done();
+      });
+  });
+  // ----------------------------------------------------------------------- //
+  // -------------------LISTE DES ENIGMES + ID------------------------------ //
+  // ----------------------------------------------------------------------- //
   // test de la route Post Enigmes
   it("GET CATEGORIES 1", (done) => {
     // appel de chai avec .request(app)
@@ -40,11 +78,12 @@ describe("Enigme test, chai !", () => {
 
         // on lui dit que ça doit etre un array
         res.body.enigmes.should.be.a("array")
+        res.should.have.status(200);
         // cloture du test
         done();
       });
   });
-  
+
 
   it("GET ID ", (done) => {
     // appel de chai avec .request(app)
@@ -64,23 +103,7 @@ describe("Enigme test, chai !", () => {
       });
   });
 
-
-  // test Route Post Login
-  it("LOGIN", (done) => {
-    chai
-      .request(app)
-      .post("/login")
-      .set("Accept", "application/json")
-      .send({ email: MAIL_USER, password: DB_PASSWORD })
-      .end((err, res) => {
-        cookieSession = res.res.headers["set-cookie"][0].split(";")[0]
-        if (err) return done(err);
-
-        console.log("res POST => Login => enigmes", res.body);
-        res.should.have.status(200);
-        done();
-      });
-  });
+  
 
   // test de mon POST Enigme
   it("POST", (done) => {
@@ -96,19 +119,22 @@ describe("Enigme test, chai !", () => {
         solus: "lol"
       })
       .end((err, res) => {
-        
+
         if (err) return done(err);
         res.body.flash.should.be.a("string");
         res.body.newEnigme.should.be.a("object");
         res.body.dbEnigmes.should.be.a("array");
+        id= res.body.newEnigme
         res.should.have.status(200);
         newEnigme = res.body.newEnigme
         done();
       });
-      console.log("test n°10499")
+    console.log("test n°10499")
   });
 
-  // Test de mon PUT Enigme
+  // ----------------------------------------------------------------------- //
+  // --------------------------------PUT------------------------------------ //
+  // ----------------------------------------------------------------------- //
   it("PUT", (done) => {
     chai
       // import express (appli , route , ect)
@@ -141,8 +167,9 @@ describe("Enigme test, chai !", () => {
         done();
       });
   });
-
-  // // Test de mon DELETE Enigme
+// ----------------------------------------------------------------------- //
+// ------------------------------DELETE----------------------------------- //
+// ----------------------------------------------------------------------- //
   // it(" chai // DELETE // id_enigme ID", (done) => {
   //   chai
   //     .request(app)
