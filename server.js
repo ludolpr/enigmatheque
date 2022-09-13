@@ -24,8 +24,8 @@ const { isAdmin } = require("./back/middlewares/admin");
 // // Utilisation du middleware pour toute les routes suivante
 // app.use(isAdmin);
 /// Swagger Config
-// const swaggerUi = require('swagger-ui-express'),
-// swaggerDocument = require("./test/swagger.json")
+// const swaggerUi = require('swagger-ui-express')
+// swaggerDocument = require("./back/config/swagger.json")
 
 // Générateur Swagger // Uncomment pour crée le json
 const expressOasGenerator = require('express-oas-generator');
@@ -90,10 +90,11 @@ app.use(methodOverride('_method'))
 
 // Router
 const ROUTER = require("./back/router/route");
-app.use(ROUTER);
+app.use("/", ROUTER);
 
 // app.use('/api/v1', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-// // run server
+// run server
+
 app.listen(PORT_NODE, () =>
   console.log(`Ludolpr: Exemple d'application sur le port ${PORT_NODE} ! Lancé le : ${new Date().toLocaleString()});`)
 );
