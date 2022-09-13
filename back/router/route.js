@@ -12,8 +12,6 @@ const { Router } = require("express"),
   upload = require("../utils/multer"),
   // MODE pour test ( Mocha, Chai)
   { MODE } = process.env
-// Page home
-
 
 // ----------------------------------------------------------------------- //
 // --------------------------IMPORT DES CONTROLLER------------------------ //
@@ -21,12 +19,11 @@ const { Router } = require("express"),
 
 const
   { setSession } = require("../utils/setSession"),
-  // { mailSend } = require("../utils/nodeMailer"),
   { getPageHome } = require("../controllers/homeControler"),
   { getAdminPage } = require("../controllers/adminController"),
   { MAIL_USER } = process.env,
   { middlewareImage } = require("../middlewares/middlewareImage"),
-  { getEnigmes, putEnigmes, deleteEnigmes, filtreEnigmes, postEnigmes, getPageProposer } = require("../controllers/enigmeControllers"),
+  { getEnigmeId, putEnigme, deleteEnigme, filtreEnigmes, postEnigme, getPageProposer } = require("../controllers/enigmeControllers"),
   { mail, mailReply } = require("../controllers/nodeMailer"),
   { message, messageId, deleteMessage } = require("../controllers/messageAdmin"),
   { profilId, profilEdit } = require("../controllers/profil"),
@@ -70,17 +67,17 @@ router.route("/logout").post(logout)
 // ----------------------------------------------------------------------- //
 
 // AFFICHER ENIGME
+router.route("/enigme/:id").get(getEnigmeId)
 router.route("/enigme").get(filtreEnigmes)
-
 // PROPOSER ÉNIGME
 router.route("/proposer").get(getPageProposer)
-router.route("/insertEnigme").post(postEnigmes)
+router.route("/insertEnigme").post(postEnigme)
 
 // EDIT ENIGME
-router.route("/updateEnigme/:id").put(putEnigmes)
+router.route("/updateEnigme/:id").put(putEnigme)
 
 // DELETE ÉNIGME
-router.route("/deleteEnigme/:id").post(deleteEnigmes)
+router.route("/deleteEnigme/:id").post(deleteEnigme)
 
 // ----------------------------------------------------------------------- //
 // -----------------------------PROFIL------------------------------------ //

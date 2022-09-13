@@ -20,50 +20,13 @@ const chaiHttp = require("chai-http"),
 
 chai.use(chaiHttp);
 
+
 // description du tets
 describe("Enigme test, chai !", () => {
   // definition des vazriables à utiliser
-  let id, newEnigme, putEnigme;
+  console.log("1");
+  let newEnigme;
   let cookieSession = "";
-
-  // test de la route Post Enigmes
-  it("GET CATEGORIES 1", (done) => {
-    // appel de chai avec .request(app)
-    chai
-      .request(app)
-      // route choisi
-      .get("/enigme")
-      // format de la réponse
-      .end((err, res) => {
-        if (err) return done(err);
-        console.log("res GET enigmes", res.body);
-
-        // on lui dit que ça doit etre un array
-        res.body.enigmes.should.be.a("array")
-        // cloture du test
-        done();
-      });
-  });
-  
-
-  it("GET ID ", (done) => {
-    // appel de chai avec .request(app)
-    chai
-      .request(app)
-      // route choisi
-      .get(`/enigme/${id_enigme}`)
-      // format de la réponse
-      .end((err, res) => {
-        if (err) return done(err);
-        console.log("res GET enigmes", res.body);
-
-        // on lui dit que ça doit etre un array
-        res.body.enigme.should.be.a("array")
-        // cloture du test
-        done();
-      });
-  });
-
 
   // test Route Post Login
   it("LOGIN", (done) => {
@@ -73,11 +36,34 @@ describe("Enigme test, chai !", () => {
       .set("Accept", "application/json")
       .send({ email: MAIL_USER, password: DB_PASSWORD })
       .end((err, res) => {
-        cookieSession = res.res.headers["set-cookie"][0].split(";")[0]
-        if (err) return done(err);
-
         console.log("res POST => Login => enigmes", res.body);
+        if (err) return done(err);
+        cookieSession = res.res.headers["set-cookie"][0].split(";")[0]
+
         res.should.have.status(200);
+        done();
+      });
+  });
+
+  // test de la route Post Enigmes
+  it("GET CATEGORIES 1", (done) => {
+    // appel de chai avec .request(app)
+    console.log("2");
+
+    chai
+      .request(app)
+      // route choisi
+      .get("/enigme")
+      // format de la réponse
+      .set("Accept", "application/json")
+      .set("Cookie", cookieSession)
+      .end((err, res) => {
+        if (err) return done(err);
+        console.log("res GET enigmes", res.body);
+
+        // on lui dit que ça doit etre un array
+        res.body.enigmes.should.be.a("array")
+        // cloture du test
         done();
       });
   });
@@ -96,7 +82,7 @@ describe("Enigme test, chai !", () => {
         solus: "lol"
       })
       .end((err, res) => {
-        
+        // console.log("test res newEnigme", res.body);
         if (err) return done(err);
         res.body.flash.should.be.a("string");
         res.body.newEnigme.should.be.a("object");
@@ -105,7 +91,28 @@ describe("Enigme test, chai !", () => {
         newEnigme = res.body.newEnigme
         done();
       });
-      console.log("test n°10499")
+    // console.log("test n°10499")
+  });
+
+
+  it("GET ID ", (done) => {
+    // appel de chai avec .request(app)
+    chai
+      .request(app)
+      .get(`/enigme/${newEnigme.id_enigme}`)
+      .set("Accept", "application/json")
+      .set("Cookie", cookieSession)
+      // route choisi
+      // format de la réponse
+      .end((err, res) => {
+        if (err) return done(err);
+        // console.log("res GET enigmes", res.body);
+
+        // on lui dit que ça doit etre un array
+        res.body.enigme.should.be.a("object")
+        // cloture du test
+        done();
+      });
   });
 
   // Test de mon PUT Enigme
@@ -114,7 +121,7 @@ describe("Enigme test, chai !", () => {
       // import express (appli , route , ect)
       .request(app)
       // methode utilisé (PUT,POST,GET,DELETE) et route (/exemple)
-      .put(`/updateEnigme/${newEnigme}`)
+      .put(`/updateEnigme/${newEnigme.id_enigme}`)
       // transforme en json OK
       .set("Accept", "application/json")
       // session user/admin
@@ -142,22 +149,21 @@ describe("Enigme test, chai !", () => {
       });
   });
 
-  // // Test de mon DELETE Enigme
-  // it(" chai // DELETE // id_enigme ID", (done) => {
-  //   chai
-  //     .request(app)
-  //     .delete(`/enigme/${id}`)
-  //     .set("Accept", "application/json")
-  //     .set("Cookie", cookieSession)
-  //     .end((err, res) => {
-  //       if (err) return done(err);
-  //       console.log("res DELETE => enigmes", res.body);
+  // Test de mon DELETE Enigme
+  it(" chai // DELETE // id_enigme ID", (done) => {
+    chai
+      .request(app)
+      .delete(`/enigme/${newEnigme.id_enigme}`)
+      .set("Accept", "application/json")
+      .set("Cookie", cookieSession)
+      .end((err, res) => {
+        if (err) return done(err);
+        console.log("res DELETE => enigme", res.body);
 
-  //       res.should.have.status(200);
-  //       done();
-  //     });
-  // });
-  // bas du descripbe
+        res.should.have.status(200);
+        done();
+      });
+  });
 });
 
 // res.body. "ce que tu viens chercher exempple un ID".should.be

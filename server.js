@@ -10,25 +10,26 @@ const app = express();
 const { PORT_NODE } = process.env;
 const morgan = require("morgan");
 const bodyParser = require('body-parser');
-app.use(morgan("dev"));
 const methodOverride = require('method-override');
 const expressSession = require("express-session");
 const MySQLStore = require("express-mysql-session")(expressSession);
 // multer
 const multer  = require('multer')
 
+// app.use(morgan("dev"));
 
 // Import des middlewares
 const { isAdmin } = require("./back/middlewares/admin");
 
 // // Utilisation du middleware pour toute les routes suivante
 // app.use(isAdmin);
-
+/// Swagger Config
+const swaggerUi = require('swagger-ui-express'),
+swaggerDocument = require("./back/api/swagger")
 
 // config handlebars
 const { cutStr, upper } = require('./helpers/index');
 app.engine(
-
   ".hbs",
   engine({
     extname: ".hbs",
@@ -42,8 +43,6 @@ app.engine(
   })
   
 )
-
-
 
 // // Utilisation du middleware pour toute les routes suivante
 // app.use(isAdmin);
@@ -64,6 +63,7 @@ app
 
 // Session Connexion for HBS
 app.use('*', (req, res, next) => {
+  // console.log("md session",req.session);
   res.locals.user = req.session.user;
   next();
 })
@@ -96,7 +96,7 @@ app.get('/*', function (req, res) {
   });
 })
 
-
+app.use('/api/v1', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 // run server
 app.listen(PORT_NODE, () =>
   console.log(`Ludolpr: Exemple d'application sur le port ${PORT_NODE} ! Lancé le : ${new Date().toLocaleString()});`)

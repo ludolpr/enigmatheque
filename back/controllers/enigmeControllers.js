@@ -2,6 +2,8 @@
 require("dotenv").config();
 const flash = require("flash")
 
+const { MODE } = process.env
+
 
 // ----------------------------------------------------------------------- //
 // -------------------LISTE DES ENIGMES + ID------------------------------ //
@@ -13,7 +15,6 @@ const
   getPageProposer = async (req, res) => {
     res.render("proposer")
   },
-
   // FILTRE DES ENIGMES
   filtreEnigmes = async (req, res) => {
     let dif;
@@ -30,7 +31,7 @@ const
       case "devinettes":
         dif = 4;
         break;
-      case "sage":
+      case "du_sage":
         dif = 5;
         break;
       default:
@@ -53,7 +54,7 @@ const
     }
   },
 
-  postEnigmes = async (req, res) => {
+  postEnigme = async (req, res) => {
     console.log("create::enigme");
     const { titre, difficulty, content, solus } = req.body;
     // Ajout d'une énigme
@@ -61,26 +62,35 @@ const
       `INSERT INTO enigme (titre , difficulty, content, solus, id_user) VALUES ("${titre}", "${difficulty}", "${content}", "${solus}", 1);`
     );
     const [newEnigme] = await db.query(`SELECT * FROM enigme WHERE id_enigme = ${insertEnigme.insertId}`)
-    console.log('memotechnik', insertEnigme, newEnigme)
+    // console.log('memotechnik', insertEnigme, newEnigme)
     // console.log("mode", MODE);
 
-    if (process.env.MODE === "test")
+    if (MODE === "test")
       res.json({
         newEnigme,
         flash: "Votre enigme à été envoyé",
         dbEnigmes: await db.query('SELECT * FROM enigme')
       });
-    else 
-    res.render("proposer", { flash: "Votre enigme à été envoyé" } );
+    else
+      res.render("proposer", { flash: "Votre enigme à été envoyé" });
   },
 
   // AFFICHER ENIGME
-  getEnigmes = async (req, res) => {
+  getEnigmeId = async (req, res) => {
+    // console.log('getEnigmesId', req.params.id)
     const { id } = req.params;
-    const [enigme] = await db.query(
+    const [ enigme ] = await db.query(
       `select * from enigme WHERE id_enigme = "${id}";`
     );
-    if (!enigme) return res.redirect("/");
+
+
+    if (!enigme) {
+      console.log("1");
+      if (MODE === "test") res.json({
+        flash: "Enigme introuvable"
+      })
+      else res.redirect("/");
+    }
 
     if (MODE === "test") res.json({
       enigme
@@ -91,8 +101,8 @@ const
   },
 
   // EDIT ENIGME
-  putEnigmes = async (req, res) => {
-    console.log("edit::enigme", req.body);
+  putEnigme = async (req, res) => {
+    // console.log("edit::enigme", req.body);
     const { id } = req.params;
     console.log(req.params);
     const { titre, difficulty, content, solus, is_Verified } = req.body;
@@ -107,7 +117,7 @@ const
       }" WHERE id_enigme="${updateEnigme.insertId}";`)
 
     // Redirection vers la page admin
-    if (process.env.MODE  === "test")
+    if (MODE === "test")
       res.json({
         putEnigme,
         flash: "Votre enigme à été modifié",
@@ -116,7 +126,7 @@ const
     else res.redirect("/admin");
   },
   // DELETE ÉNIGME
-  deleteEnigmes = async (req, res) => {
+  deleteEnigme = async (req, res) => {
     console.log("delete::enigme", req.params);
     const { id } = req.params;
 
@@ -130,4 +140,4 @@ const
 // ----------------------------------------------------------------------- //
 // -----------------------------EXPORTS MODULE---------------------------- //
 // ----------------------------------------------------------------------- //
-module.exports = { filtreEnigmes, getEnigmes, putEnigmes, deleteEnigmes, postEnigmes, getPageProposer }
+module.exports = { filtreEnigmes, getEnigmeId, putEnigme, deleteEnigme, postEnigme, getPageProposer }

@@ -1,5 +1,3 @@
-const { setSession } = require("../utils/setSession")
-
 const bcrypt = require('bcrypt');
 const bcrypt_salt = 10;
 
@@ -9,15 +7,32 @@ const
     // ----------------------------------------------------------------------- //
     login = async (req, res) => {
         const { email, password } = req.body;
+        console.log("login !! ", req.body);
         db.query(
             `SELECT * FROM membres WHERE email="${email}"`,
             function (err, data) {
+
                 if (err) throw err;
 
                 let user = data[0];
-                if (!user) return res.render("home", { flash: "Ce compte n'existe pas" });
+                if (!user) {
+
+                    if (process.env.MODE === "test") {
+                        res.json({ flash: "Ce compte n'existe pas" });
+                    } else {
+                        res.render("home", { flash: "Ce compte n'existe pas" });
+                    }
+                }
                 bcrypt.compare(password, user.password, function (err, result) {
-                    if (result === true) {
+                    if (err) {
+                        if (process.env.MODE === "test") {
+                            res.json({ flash: "Erreur de saisis vérifier vos information" });
+                        } else {
+                            res.render("home", { flash: "Erreur de saisis vérifier vos information" })
+                        }
+                    }
+
+                    if (result) {
                         req.session.user = {
                             id: user.id,
                             email: user.email,
@@ -27,8 +42,14 @@ const
                             avatar: user.avatar,
                             bio: user.bio,
                         };
-                        res.redirect("/");
-                    } else return res.render("home", { flash: "Erreur de saisis vérifier vos information" });
+
+                        if (process.env.MODE === "test") {
+                            res.json({ flash: "Connexion success" });
+                        } else {
+                            res.redirect("/");
+                        }
+                        
+                    }
                 });
             }
         );
@@ -36,9 +57,9 @@ const
     // ----------------------------------------------------------------------- //
     // -----------------------------INSCRIPTION------------------------------- //
     // ----------------------------------------------------------------------- //
-  getPageInscription = async (req, res) => {
-    res.render("inscription")
-  },
+    getPageInscription = async (req, res) => {
+        res.render("inscription")
+    },
     inscription = async (req, res) => {
         console.log("inscription OK !", req.body);
         const { name, email, password, confPassword } = req.body;
