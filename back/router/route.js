@@ -9,9 +9,7 @@ const { Router } = require("express"),
   // import de flash
   flash = require("flash"),
   // middleware image multer
-  upload = require("../utils/multer"),
-  // MODE pour test ( Mocha, Chai)
-  { MODE } = process.env
+  upload = require("../utils/multer")
 
 // ----------------------------------------------------------------------- //
 // --------------------------IMPORT DES CONTROLLER------------------------ //
@@ -26,6 +24,7 @@ const
   { getEnigmeId, putEnigme, deleteEnigme, filtreEnigmes, postEnigme, getPageProposer } = require("../controllers/enigmeControllers"),
   { mail, mailReply } = require("../controllers/nodeMailer"),
   { message, messageId, deleteMessage } = require("../controllers/messageAdmin"),
+  { page404 } = require("../controllers/page404"),
   { profilId, profilEdit } = require("../controllers/profil"),
   { login, inscription, logout, getPageInscription } = require("../controllers/authController");
 // ----------------------------------------------------------------------- //
@@ -36,9 +35,10 @@ const
   { isAdmin } = require("../middlewares/admin"),
   { isSession } = require("../middlewares/isSession");
 
-
+// home
 router.route("/").get(getPageHome)
-
+// page 404
+// router.route("/*").get(page404)
 
 // ----------------------------------------------------------------------- //
 // -------------------------------AUTH------------------------------------ //

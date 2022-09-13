@@ -17,6 +17,7 @@ const
   },
   // FILTRE DES ENIGMES
   filtreEnigmes = async (req, res) => {
+    console.log("iiiiiii");
     let dif;
     switch (req.query.q) {
       case "facile":
@@ -31,7 +32,7 @@ const
       case "devinettes":
         dif = 4;
         break;
-      case "du_sage":
+      case "du_Sage":
         dif = 5;
         break;
       default:
@@ -45,6 +46,7 @@ const
     //   console.log(dbEnigmes);
 
     if (process.env.MODE === "test") {
+      console.log("salut !!!",dbEnigmes);
       res.json({ enigmes: dbEnigmes, titre: req.query.q });
     } else {
       res.render("enigme", {
