@@ -13,23 +13,18 @@ const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const expressSession = require("express-session");
 const MySQLStore = require("express-mysql-session")(expressSession);
-// multer
-const multer  = require('multer')
 
 // app.use(morgan("dev"));
-
-// Import des middlewares
-const { isAdmin } = require("./back/middlewares/admin");
 
 // // Utilisation du middleware pour toute les routes suivante
 // app.use(isAdmin);
 /// Swagger Config
-// const swaggerUi = require('swagger-ui-express')
-// swaggerDocument = require("./back/config/swagger.json")
+const swaggerUi = require('swagger-ui-express')
+swaggerDocument = require("./back/config/swagger.json")
 
 // Générateur Swagger // Uncomment pour crée le json
-const expressOasGenerator = require('express-oas-generator');
-expressOasGenerator.init(app, {})
+// const expressOasGenerator = require('express-oas-generator');
+// expressOasGenerator.init(app, {})
 
 // config handlebars
 const { cutStr, upper } = require('./helpers/index');
@@ -88,12 +83,13 @@ app.use("/assets", express.static("public"));
 app.use(methodOverride('_method'))
 
 
-// Router
+// Route  de l'app
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 const ROUTER = require("./back/router/route");
 app.use("/", ROUTER);
 
-// app.use('/api/v1', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-// run server
+
+
 
 app.listen(PORT_NODE, () =>
   console.log(`Ludolpr: Exemple d'application sur le port ${PORT_NODE} ! Lancé le : ${new Date().toLocaleString()});`)

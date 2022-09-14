@@ -1,1 +1,344 @@
- 
+{
+  "definitions": {},
+  "info": {
+    "title": "repos-site-enigmes",
+    "version": "1.0.0",
+    "license": {
+      "name": "Enigmatheque"
+    },
+    "description": "Specification JSONs: [v2](/api-spec/v2), [v3](/api-spec/v3).\n\nmon site d'enigme"
+  },
+  "paths": {
+    "/": {},
+    "/login": {
+      "post": {
+        "tags": ["Connexion"],
+        "summary": "Login user",
+        "description": "",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/enigme?q=facile": {
+      "get": {
+        "summary": "/enigme?q=facile",
+        "tags": ["Enigmes"],
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "flash": {
+                  "type": "string",
+                  "example": "get enigmes"
+                },
+
+                "message": {
+                  "type": "string",
+                  "example": "Succes Get"
+                },
+                "items": {},
+                "enigmes": {
+                  "type": "object",
+                  "properties": {
+                    "id_enigme": {
+                      "type": "number"
+                    },
+                    "titre": {
+                      "type": "string"
+                    },
+                    "difficulty": {
+                      "type": "integer"
+                    },
+                    "content": {
+                      "type": "string"
+                    },
+                    "solus": {
+                      "type": "string"
+                    },
+                    "required": ["id_enigme", "difficulty"]
+                  },
+                  "example": [
+                    {
+                      "id": 8,
+                      "titre": "string",
+                      "difficulty": 2,
+                      "content": "def",
+                      "solus": "dedh"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/enigme?q=normal": {
+      "get": {
+        "summary": "/enigme?q=normal",
+        "tags": ["Enigmes"],
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "flash": {
+                  "type": "string",
+                  "example": "get enigmes"
+                },
+
+                "message": {
+                  "type": "string",
+                  "example": "Succes Get"
+                },
+                "items": {},
+                "enigmes": {
+                  "type": "object",
+                  "properties": {
+                    "id_enigme": {
+                      "type": "number"
+                    },
+                    "titre": {
+                      "type": "string"
+                    },
+                    "difficulty": {
+                      "type": "integer"
+                    },
+                    "content": {
+                      "type": "string"
+                    },
+                    "solus": {
+                      "type": "string"
+                    },
+                    "required": ["id_enigme", "difficulty"]
+                  },
+                  "example": [
+                    {
+                      "id": 8,
+                      "titre": "string",
+                      "difficulty": 2,
+                      "content": "def",
+                      "solus": "dedh"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/enigme?q=difficile": {
+      "get": {
+        "summary": "/enigme?q=difficile",
+        "tags": ["Enigmes"],
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "flash": {
+                  "type": "string",
+                  "example": "get enigmes"
+                },
+
+                "message": {
+                  "type": "string",
+                  "example": "Succes Get"
+                },
+                "items": {},
+                "enigmes": {
+                  "type": "object",
+                  "properties": {
+                    "id_enigme": {
+                      "type": "number"
+                    },
+                    "titre": {
+                      "type": "string"
+                    },
+                    "difficulty": {
+                      "type": "integer"
+                    },
+                    "content": {
+                      "type": "string"
+                    },
+                    "solus": {
+                      "type": "string"
+                    },
+                    "required": ["id_enigme", "difficulty"]
+                  },
+                  "example": [
+                    {
+                      "id": 8,
+                      "titre": "string",
+                      "difficulty": 2,
+                      "content": "def",
+                      "solus": "dedh"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/enigme/{id_enigme}": {
+      "get": {
+        "summary": "/enigme/{id_enigme}",
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "name": "id_enigme",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        },
+        "tags": ["Enigmes"]
+      }
+    },
+    "/insertEnigme": {
+      "post": {
+        "summary": "/insertEnigme",
+        "tags": ["Enigmes"],
+        "consumes": ["application/json"
+      ],
+        "parameters": [
+          {
+            "name": "titre",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "difficulty",
+            "in": "path",
+            "required": true,
+            "type": "number"
+          },
+          {
+            "name": "content",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "solus",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id_user",
+            "in": "path",
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/updateEnigme/{id}": {
+      "put": {
+        "summary": "/updateEnigme/{id_enigme}",
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "name": "id_enigme",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "titre",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "difficulty",
+            "in": "formData",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "content",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "solus",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "is_Verified",
+            "in": "formData",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        },
+        "tags": ["Enigmes"]
+      }
+    },
+    "/deleteEnigme/{id}": {
+      "delete": {
+        "summary": "/deleteEnigme/{id_enigme}",
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": ["Enigmes"]
+      }
+    }
+  },
+  "swagger": "2.0",
+  "tags": []
+}

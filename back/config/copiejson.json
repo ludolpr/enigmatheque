@@ -1,0 +1,228 @@
+{
+  "definitions": {},
+  "info": {
+    "title": "repos-site-enigmes",
+    "version": "1.0.0",
+    "license": {
+      "name": "ISC"
+    },
+    "description": "Specification JSONs: [v2](/api-spec/v2), [v3](/api-spec/v3).\n\nmon site personel"
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "/",
+        "consumes": ["application/json"],
+        "parameters": [],
+        "responses": {
+          "304": {}
+        },
+        "tags": []
+      }
+    },
+    "/login": {
+      "post": {
+        "summary": "/login",
+        "consumes": ["application/json"],
+        "parameters": [],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/inscription": {
+      "post": {
+        "summary": "/inscription",
+        "consumes": ["application/json"],
+        "parameters": [],
+        "responses": {},
+        "tags": []
+      },
+      "get": {
+        "summary": "/inscription",
+        "consumes": ["application/json"],
+        "parameters": [],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/mail": {
+      "post": {
+        "summary": "/mail",
+        "consumes": ["application/json"],
+        "parameters": [],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/logout": {
+      "post": {
+        "summary": "/logout",
+        "consumes": ["application/json"],
+        "parameters": [],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/enigme/{id}": {
+      "get": {
+        "summary": "/enigme/{id}",
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/enigme": {
+      "get": {
+        "summary": "/enigme",
+        "consumes": ["application/json"],
+        "parameters": [],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/proposer": {
+      "get": {
+        "summary": "/proposer",
+        "consumes": ["application/json"],
+        "parameters": [],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/insertEnigme": {
+      "post": {
+        "summary": "/insertEnigme",
+        "consumes": ["application/json"],
+        "parameters": [],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/updateEnigme/{id}": {
+      "put": {
+        "summary": "/updateEnigme/{id}",
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/deleteEnigme/{id}": {
+      "post": {
+        "summary": "/deleteEnigme/{id}",
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/profil/{id}": {
+      "get": {
+        "summary": "/profil/{id}",
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/profilEdit/{id}": {
+      "put": {
+        "summary": "/profilEdit/{id}",
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/message": {
+      "post": {
+        "summary": "/message",
+        "consumes": ["application/json"],
+        "parameters": [],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/message/{id}": {
+      "get": {
+        "summary": "/message/{id}",
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/deleteMessage/{id}": {
+      "delete": {
+        "summary": "/deleteMessage/{id}",
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/admin": {
+      "get": {
+        "summary": "/admin",
+        "consumes": ["application/json"],
+        "parameters": [],
+        "responses": {},
+        "tags": []
+      }
+    },
+    "/mailReply": {
+      "post": {
+        "summary": "/mailReply",
+        "consumes": ["application/json"],
+        "parameters": [],
+        "responses": {},
+        "tags": []
+      }
+    }
+  },
+  "swagger": "2.0",
+  "tags": []
+}

@@ -50,14 +50,14 @@ router.route("/inscription").post(inscription).get(getPageInscription)
 
 // ----------------------------------------------------------------------- //
 // -----------------------------NODEMAILER-------------------------------- //
+router.use(isSession)
 // ----------------------------------------------------------------------- //
 
 // DIRECT MAIL ( NO CONNECTED )
-router.route("/").post(mail)
+router.route("/mail").post(mail)
 
 
 // // CONNECT REQUIRED
-router.use(isSession)
 // LOGOUT
 router.route("/logout").post(logout)
 
@@ -95,6 +95,8 @@ router.route("/profilEdit/:id").put(upload.single("avatar"), profilEdit)
 // MESSAGE A L'ADMIN
 router.route("/message").post(message)
 
+router.use(isAdmin)
+
 // GET MESSAGE
 router.route("/message/:id").get(messageId)
 
@@ -108,7 +110,6 @@ router.route("/admin").get(getAdminPage)
 router.route("/mailReply").post(mailReply)
 
 // ADMIN
-router.use(isAdmin)
 // ----------------------------------------------------------------------- //
 // -----------------------------EXPORTS MODULE---------------------------- //
 // ----------------------------------------------------------------------- //

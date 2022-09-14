@@ -17,7 +17,7 @@ const
   },
   // FILTRE DES ENIGMES
   filtreEnigmes = async (req, res) => {
-    console.log("iiiiiii");
+    console.log("iiiiiii", req.query);
     let dif;
     switch (req.query.q) {
       case "facile":
