@@ -9,7 +9,6 @@
     "description": "Specification JSONs: [v2](/api-spec/v2), [v3](/api-spec/v3).\n\nmon site d'enigme"
   },
   "paths": {
-    "/": {},
     "/login": {
       "post": {
         "tags": ["Connexion"],
@@ -31,7 +30,7 @@
         ],
         "responses": {
           "200": {
-            "description": "successful operation"
+            "description": "successful login"
           }
         }
       }
@@ -134,7 +133,7 @@
                     "solus": {
                       "type": "string"
                     },
-                    "required": ["id_enigme", "difficulty"]
+                    "required": ["id_enigme", "difficulty", "content"]
                   },
                   "example": [
                     {
@@ -223,7 +222,7 @@
         ],
         "responses": {
           "200": {
-            "description": "successful operation"
+            "description": "successful, ID was took"
           }
         },
         "tags": ["Enigmes"]
@@ -233,8 +232,7 @@
       "post": {
         "summary": "/insertEnigme",
         "tags": ["Enigmes"],
-        "consumes": ["application/json"
-      ],
+        "consumes": ["application/json"],
         "parameters": [
           {
             "name": "titre",
@@ -244,7 +242,7 @@
           },
           {
             "name": "difficulty",
-            "in": "path",
+            "in": "formData",
             "required": true,
             "type": "number"
           },
@@ -262,7 +260,7 @@
           },
           {
             "name": "id_user",
-            "in": "path",
+            "in": "formData",
             "required": true,
             "type": "number"
           }
@@ -276,7 +274,7 @@
     },
     "/updateEnigme/{id}": {
       "put": {
-        "summary": "/updateEnigme/{id_enigme}",
+        "summary": "/updateEnigme/{id}",
         "consumes": ["application/json"],
         "parameters": [
           {
@@ -294,7 +292,7 @@
             "name": "difficulty",
             "in": "formData",
             "required": true,
-            "type": "integer"
+            "type": "number"
           },
           {
             "name": "content",
@@ -312,7 +310,7 @@
             "name": "is_Verified",
             "in": "formData",
             "required": true,
-            "type": "integer"
+            "type": "number"
           }
         ],
         "responses": {
@@ -325,7 +323,7 @@
     },
     "/deleteEnigme/{id}": {
       "delete": {
-        "summary": "/deleteEnigme/{id_enigme}",
+        "summary": "/deleteEnigme/{id}",
         "consumes": ["application/json"],
         "parameters": [
           {
@@ -334,11 +332,12 @@
             "required": true
           }
         ],
-        "responses": {},
+        "responses": {"200": {
+          "description": "successful delete"},
         "tags": ["Enigmes"]
       }
     }
-  },
-  "swagger": "2.0",
-  "tags": []
+  }
+},
+  "swagger": "2.0"
 }

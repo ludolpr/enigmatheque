@@ -17,7 +17,7 @@ const
   },
   // FILTRE DES ENIGMES
   filtreEnigmes = async (req, res) => {
-    console.log("iiiiiii", req.query);
+    // console.log("iiiiiii", req.query);
     let dif;
     switch (req.query.q) {
       case "facile":
@@ -57,7 +57,7 @@ const
   },
 
   postEnigme = async (req, res) => {
-    console.log("create::enigme");
+    console.log("create::enigme", req.body);
     const { titre, difficulty, content, solus } = req.body;
     // Ajout d'une énigme
     const insertEnigme = await db.query(

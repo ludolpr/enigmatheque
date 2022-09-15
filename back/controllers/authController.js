@@ -11,30 +11,29 @@ const
         db.query(
             `SELECT * FROM membres WHERE email="${email}"`,
             function (err, data) {
-                console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+                console.log("1", data);
                 if (err) throw err;
-    
+
                 let user = data[0];
-                if (!user) 
-                
-                if (process.env.MODE === "test") {
-                    console.log("dddddddddddddddddddddd");
-                     return res.json({ flash: "Votre compte n'est pas correct" });
-    
-                } else {
-                return res.render("home", { flash: "Ce compte n'existe pas" });
-                }
-    
-    
+                if (!user)
+                    if (process.env.MODE === "test") {
+                        return res.json({ flash: "Votre compte n'est pas correct" });
+
+                    } else {
+                        return res.render("home", { flash: "Ce compte n'existe pas" });
+                    }
+
+
+                // console.log("2", user, password);
                 bcrypt.compare(password, user.password, function (err, result) {
-                    if (err) {
+                    if (err || !result) {
                         if (process.env.MODE === "test") {
                             res.json({ flash: "Erreur de saisis vérifier vos information" });
                         } else {
                             res.render("home", { flash: "Erreur de saisis vérifier vos information" })
                         }
                     }
-    
+
                     if (result) {
                         req.session.user = {
                             id: user.id,
@@ -45,18 +44,18 @@ const
                             avatar: user.avatar,
                             bio: user.bio,
                         };
-    
+
                         if (process.env.MODE === "test") {
-                            console.log("eeeeeeeeeeeee");
-                             return res.json({ flash: "Connexion success" });
-    
+                            // console.log("3");
+                            return res.json({ flash: "Connexion success" });
+
                         } else {
-                            console.log("eeeeeeeeeeeeeeeeeeeeeeeeeee");
+                            console.log("4");
                             return res.redirect("/");
-    
-    
+
+
                         }
-    
+
                     }
                 });
             }
