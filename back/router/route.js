@@ -76,7 +76,7 @@ router.route("/insertEnigme").post(postEnigme)
 router.route("/updateEnigme/:id").put(putEnigme)
 
 // DELETE ÉNIGME
-router.route("/deleteEnigme/:id").post(deleteEnigme)
+router.route("/deleteEnigme/:id").delete(deleteEnigme)
 
 // ----------------------------------------------------------------------- //
 // -----------------------------PROFIL------------------------------------ //
@@ -95,7 +95,7 @@ router.route("/profilEdit/:id").put(upload.single("avatar"), profilEdit)
 // MESSAGE A L'ADMIN
 router.route("/message").post(message)
 
-router.use(isAdmin)
+// router.use(isAdmin)
 
 // GET MESSAGE
 router.route("/message/:id").get(messageId)
