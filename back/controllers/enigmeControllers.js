@@ -62,9 +62,12 @@ const
     const { titre, difficulty, content, solus } = req.body;
     // Ajout d'une énigme
     console.log(req.session);
-    const insertEnigme = await db.query(
-      `INSERT INTO enigme (titre , difficulty, content, solus, id_user) VALUES ("${titre}", "${difficulty}", "${content}", "${solus}", "${req.session.user.id}");`
-    );
+    // const insertEnigme = await db.query(
+    //   `INSERT INTO enigme (titre , difficulty, content, solus, id_user) VALUES ("${titre}", "${difficulty}", "${content}", "${solus}", "${req.session.user.id}");`,
+    // );
+    //
+    const insertEnigme = await db.query(`INSERT INTO enigme SET titre=:titre, difficulty=:difficulty, content=:content, solus=:solus, id_user="${req.session.user.id}"`, {titre, difficulty, content, solus});
+   
     const [newEnigme] = await db.query(`SELECT * FROM enigme WHERE id_enigme = ${insertEnigme.insertId}`)
     console.log('memotechnik', insertEnigme, newEnigme)
     // console.log("mode", MODE);
@@ -114,7 +117,7 @@ const
       `UPDATE enigme SET titre="${titre}", difficulty="${difficulty}", content="${content}", solus="${solus}", is_Verified="${is_Verified === "on" ? 1 : 0
       }" WHERE id_enigme="${id}";`
     );
-    // console.log(updateEnigme);
+    // // console.log(updateEnigme);
     // const putEnigme = await db.query(`UPDATE enigme SET titre="${titre}", difficulty="${difficulty}", content="${content}", solus="${solus}", is_Verified="${is_Verified === "on" ? 1 : 0
     //   }" WHERE id_enigme="${updateEnigme.insertId}";`)
 

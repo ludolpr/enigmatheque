@@ -109,7 +109,7 @@
                           id="solus" cols="70" rows="15" name="solus">{{ this.solus }}
                         </textarea>
                         <div class="col-md-12 m-3 ">
-                          <label class=" text-dark" for="">Verified</label>
+                          <label class=" text-dark" for="">Enigme verifiée</label>
                           <input type="checkbox" id="isVerified{{ this.id_enigme }}" name="is_Verified" class="bg-successform-check-input" />
                         </div>
 
@@ -153,13 +153,6 @@
       </div>
     </div>
 
-    <script>
-
-      const isVerified{{ this.id_enigme }} = document.getElementById('isVerified{{this.id_enigme}}')
-      const vrf{{ this.id_enigme }} = {{ this.is_Verified }}
-      if (vrf{{this.id_enigme}} === "1" ) isVerified {{this.id_enigme}}.checked = true;
-      
-    </script>
     
     
  <script>
@@ -425,6 +418,14 @@
         ]
       });
     </script>
+    <script>
+
+      const isVerified{{ this.id_enigme }} = document.getElementById('isVerified{{this.id_enigme}}')
+      const vrf{{ this.id_enigme }} = {{ this.is_Verified }}
+      if (vrf{{this.id_enigme}} === "1" ) isVerified{{this.id_enigme}}.checked = true;
+      
+    </script>
+    
     {{/each}}
     {{!-- ckeditor boucle --}}
    

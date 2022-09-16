@@ -45,6 +45,7 @@ app.engine(
 
 // // Utilisation du middleware pour toute les routes suivante
 // app.use(isAdmin);
+// config pour la db
 
 // sessions des membres
 var sessionStore = new MySQLStore(require('./back/config/dbConfig'));
