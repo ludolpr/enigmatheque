@@ -1,6 +1,6 @@
 <div class="col-md-12 mh100 decallageTop">
   <div class="col-md-12 d-flex justify-content-center mb-5">
-    <img src="/assets/images/chapeau-etudiant.jpg" alt="" />
+    <img src="" alt="enigme image" id="img" />
   </div>
   <div class="col-md-12">
     <div class="col-md-12 mb-3 d-flex justify-content-center align-items-center">
@@ -9,7 +9,7 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
       <div class="center">
         <label class="label">
-          <input class="label__checkbox" type="checkbox" />
+          <input class="label__checkbox" type="checkbox" disabled="disabled"/>
           <span class=" label__text">
             <span class="label__check" id="check">
               <i class="fa fa-check icon"></i>
@@ -22,12 +22,11 @@
 
     <div class=" row d-flex justify-content-center">
       <h1 class="text-center mb-3 ">{{enigme.titre}}</h1>
-
       
-        {{enigme.content}}
-
+       {{enigme.content}}
     </div>
-    <div class="col-md-12  d-flex justify-content-center mb-3">
+     
+    <div class="col-md-12  d-flex justify-content-center mt-3 mb-3">
       <input type="text" placeholder="votre texte içi" />
     </div>
     <div class="col-md-12 d-flex justify-content-center">
@@ -39,33 +38,4 @@
     </div>
   </div>
 </div>
-{{!--
-<script type="text/javascript">
-  function selectionner1() {
-    document.getElementById(id).id = id + '_onclick';
-  }
-  function deselectionner(id) {
-    var index = id.lastIndexOf('_');
-    var newid = id.substring(0, index - 1);
-    document.getElementById(id).id = newid;
-  }
-  document.getElementById('next').onclick = function () {
-    selectionner('next');
-  }
-  1
-</script>
-<script type="text/javascript">
-  function selectionner2(id) {
-    document.getElementById(id).id = id - '_onclick';
-  }
-  function deselectionner(id) {
-    var index = id.lastIndexOf('_');
-    var newid = id.substring(0, index - 1);
-    document.getElementById(id).id = newid;
-  }
-  document.getElementById('prec').onclick = function () {
-    selectionner('prec');
-  };
-
-  1
-</script> --}}
+<script src="../../../assets/js/fetch.js"></script>

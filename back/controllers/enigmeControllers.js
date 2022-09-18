@@ -55,7 +55,7 @@ const
       });
     }
   },
-
+ 
   postEnigme = async (req, res) => {
     console.log("create::enigme", req.body);
     const { titre, difficulty, content, solus } = req.body;
@@ -64,7 +64,7 @@ const
       `INSERT INTO enigme (titre , difficulty, content, solus, id_user) VALUES ("${titre}", "${difficulty}", "${content}", "${solus}", 1);`
     );
     const [newEnigme] = await db.query(`SELECT * FROM enigme WHERE id_enigme = ${insertEnigme.insertId}`)
-    // console.log('memotechnik', insertEnigme, newEnigme)
+    console.log('memotechnik', insertEnigme, newEnigme)
     // console.log("mode", MODE);
 
     if (MODE === "test")

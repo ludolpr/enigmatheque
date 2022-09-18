@@ -231,6 +231,7 @@
     "/insertEnigme": {
       "post": {
         "summary": "/insertEnigme",
+        "operationId": "uploadFile",
         "tags": ["Enigmes"],
         "consumes": ["application/json"],
         "parameters": [
@@ -263,7 +264,7 @@
             "in": "formData",
             "required": true,
             "type": "number"
-          }
+          } 
         ],
         "responses": {
           "200": {

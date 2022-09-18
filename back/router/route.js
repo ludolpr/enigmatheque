@@ -26,7 +26,7 @@ const
   { message, messageId, deleteMessage } = require("../controllers/messageAdmin"),
   { page404 } = require("../controllers/page404"),
   { profilId, profilEdit } = require("../controllers/profil"),
-  { login, inscription, logout, getPageInscription } = require("../controllers/authController");
+  { login, inscription, logout, getPageInscription } = require("../controllers/authController"); 
 // ----------------------------------------------------------------------- //
 // ----------------------------------------------------------------------- //
 
@@ -52,6 +52,7 @@ router.route("/inscription").post(inscription).get(getPageInscription)
 // -----------------------------NODEMAILER-------------------------------- //
 router.use(isSession)
 // ----------------------------------------------------------------------- //
+
 
 // DIRECT MAIL ( NO CONNECTED )
 router.route("/mail").post(mail)
@@ -94,7 +95,7 @@ router.route("/profilEdit/:id").put(upload.single("avatar"), profilEdit)
 
 // MESSAGE A L'ADMIN
 router.route("/message").post(message)
-
+// ADMIN
 router.use(isAdmin)
 
 // GET MESSAGE
@@ -109,7 +110,7 @@ router.route("/admin").get(getAdminPage)
 // MESSAGES DATABASE, REPLY BY MAIL
 router.route("/mailReply").post(mailReply)
 
-// ADMIN
+
 // ----------------------------------------------------------------------- //
 // -----------------------------EXPORTS MODULE---------------------------- //
 // ----------------------------------------------------------------------- //

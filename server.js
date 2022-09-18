@@ -62,7 +62,7 @@ app
 
 // Session Connexion for HBS
 app.use('*', (req, res, next) => {
-  console.log("md session", req.session);
+  // console.log("md session", req.session);
   res.locals.user = req.session.user;
   next();
 })
