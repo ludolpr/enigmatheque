@@ -258,7 +258,6 @@
             "in": "formData",
             "required": true,
             "type": "string"
-<<<<<<< HEAD
           },
           {
             "name": "id_user",
@@ -266,9 +265,6 @@
             "required": true,
             "type": "number"
           } 
-=======
-          }
->>>>>>> 4ba1c7f0f0cb76732a952d6ca8978f6bb4a94f5c
         ],
         "responses": {
           "200": {

@@ -99,24 +99,20 @@
                         </div>
 
                         <label for="content" class="form-label p-2 ps-0">Enigme que vous proposer</label>
-                        <textarea name="content" id="editorEnigme{{ this.id_enigme }}" placeholder="Votre Enigme" class="border-success"
-                          id='content' cols="70" rows="15" name="content">{{ this.content }}
+                        <textarea name="content" id="editorEnigme{{ this.id_enigme }}" placeholder="Votre Enigme"
+                          class="border-success" cols="70" rows="15" name="content">{{ this.content }}
                         </textarea>
 
 
                         <label for="solus" class="form-label p-2 ps-0">Réponse à votre énigme</label>
-                        <textarea name="solus" id="editorSolus{{ this.id_enigme }}" placeholder="Votre Solution" class="border-success"
-                          id="solus" cols="70" rows="15" name="solus">{{ this.solus }}
+                        <textarea name="solus" id="editorSolus{{ this.id_enigme }}" placeholder="Votre Solution"
+                          class="border-success" id="solus" cols="70" rows="15" name="solus">{{ this.solus }}
                         </textarea>
                         <div class="col-md-12 m-3 ">
                           <label class=" text-dark" for="">Enigme verifiée</label>
-<<<<<<< HEAD
-                          <input type="checkbox" id="is_Verified{{ this.id_enigme }}" name="isVerified" class="bg-successform-check-input" />
-=======
-                          <input type="checkbox" id="isVerified{{ this.id_enigme }}" name="is_Verified" class="bg-successform-check-input" />
->>>>>>> 4ba1c7f0f0cb76732a952d6ca8978f6bb4a94f5c
+                          <input type="checkbox" id="isVerified{{ this.id_enigme }}" name="is_Verified"
+                            class="bg-successform-check-input" />
                         </div>
-
 
 
                         {{!--------------------------------------------------------------------------}}
@@ -157,9 +153,9 @@
       </div>
     </div>
 
-    
-    
- <script>
+
+
+    <script>
       CKEDITOR.ClassicEditor.create(document.getElementById("editorEnigme{{ this.id_enigme }}"), {
 
         toolbar: {
@@ -424,15 +420,17 @@
     </script>
     <script>
 
-      const isVerified{{ this.id_enigme }} = document.getElementById('isVerified{{this.id_enigme}}')
-      const vrf{{ this.id_enigme }} = {{ this.is_Verified }}
-      if (vrf{{this.id_enigme}} === "1" ) isVerified{{this.id_enigme}}.checked = true;
-      
+      const isVerified{{this.id_enigme}} = document.getElementById('isVerified{{this.id_enigme}}')
+      const vrf{{this.id_enigme}} = {{this.is_Verified}}
+      if (vrf{{this.id_enigme}}.toString() === "1" ) isVerified{{ this.id_enigme }}.checked = true;
+
+      console.log('test', isVerified{{this.id_enigme}}, typeof vrf{{this.id_enigme}}, (vrf{{this.id_enigme}}.toString() === "1"))
+
     </script>
-    
+
     {{/each}}
     {{!-- ckeditor boucle --}}
-   
+
   </div>
 
   {{!--------------------------------------------------------------------------}}
@@ -525,25 +523,24 @@
       </div>
 
       <div class="col-md-7 d-flex justify-content-center align-items-center border-light border-bottom border-2">
-        
-        <form action="/maroute?_method=PUT" method="post" class="d-flex justify-content-center align-items-center">
-          <button type="button" class="h-50 d-flex align-items-center btn btn-labeled btn-light m-3">
-          <div class="form-check form-switch">
-            <span class="btn-label"><i data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Administrateur"
-                class="fs-4 fa-solid fa-image-portrait text-dark"></i></span>
-            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault1">
-          </div>
-        </button>
 
-          <button type="button" class="h-50 d-flex align-items-center btn btn-labeled btn-light m-3">
-          <div class="form-check form-switch">
-            <span class="btn-label"><i data-bs-toggle="popover" data-bs-placement="top"
-                data-bs-content="Utilisateur banni" class="fs-4 fa-solid fa-user-slash text-danger"></i></span>
-            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-          </div>
-        </button>
-          <button type="button"
-            class="h-50 d-flex align-items-center btn btn-labeled btn-light m-3">
+        <form action="/checkRoles?_method=PUT" method="post" class="d-flex justify-content-center align-items-center">
+          <button type="button" class="h-50 d-flex align-items-center btn btn-labeled btn-light m-3" name="isAdmin">
+            <div class="form-check form-switch">
+              <span class="btn-label"><i data-bs-toggle="popover" data-bs-placement="top"
+                  data-bs-content="Administrateur" class="fs-4 fa-solid fa-image-portrait text-dark"></i></span>
+              <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault1">
+            </div>
+          </button>
+
+          <button type="button" class="h-50 d-flex align-items-center btn btn-labeled btn-light m-3" name="isBan">
+            <div class="form-check form-switch">
+              <span class="btn-label"><i data-bs-toggle="popover" data-bs-placement="top"
+                  data-bs-content="Utilisateur banni" class="fs-4 fa-solid fa-user-slash text-danger"></i></span>
+              <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+            </div>
+          </button>
+          <button type="button" class="h-50 d-flex align-items-center btn btn-labeled btn-light m-3" name="isVerified">
             <div class="form-check form-switch">
               <span class="btn-label"><i data-bs-toggle="popover" data-bs-placement="top"
                   data-bs-content="Utilisateur verifier" class="fs-4 fa-solid fa-user-check text-warning"></i></span>
@@ -562,7 +559,7 @@
           </button>
         </form>
 
-         <button type="button"
+        <button type="button"
           class="h-50 w-25 btn btn-labeled btn-light mt-3 mb-3 d-flex justify-content-center align-items-center m-0 p-0">
           <a class="text-decoration-none" href="/profil/{{this.id}}">
             <div class="row">
@@ -573,18 +570,18 @@
           </a>
         </button>
 
-        
+
 
 
       </div>
       <div class="col-md-5 d-flex justify-content-center align-items-center border-light border-bottom border-2">
 
-        
-
-        
 
 
-       
+
+
+
+
 
 
       </div>
@@ -594,6 +591,8 @@
       {{!--------------------------------------------------------------------------}}
 
     </div>
+      {{!-- <script src="../../../public/js/adminCheck.js"></script> --}}
+
 
     {{/each}}
   </div>

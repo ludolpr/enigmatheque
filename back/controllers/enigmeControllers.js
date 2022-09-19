@@ -117,10 +117,6 @@ const
       `UPDATE enigme SET titre="${titre}", difficulty="${difficulty}", content="${content}", solus="${solus}", is_Verified="${is_Verified === "on" ? 1 : 0
       }" WHERE id_enigme="${id}";`
     );
-    // console.log(updateEnigme.insertId);
-    // const putEnigme = await db.query(
-    //   `UPDATE enigme SET titre="${titre}", difficulty="${difficulty}", content="${content}", solus="${solus}", is_Verified="${is_Verified === "on" ? 1 : 0
-    //   }" WHERE id_enigme="${updateEnigme.insertId}";`)
 
     // Redirection vers la page admin
     if (MODE === "test")
@@ -138,7 +134,6 @@ const
 
     if (id) {
       await db.query(`DELETE FROM enigme WHERE id_enigme = "${id}";`);
-    console.log("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
   }
   if (MODE === "test")
       res.json({

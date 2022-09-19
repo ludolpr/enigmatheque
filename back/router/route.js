@@ -26,7 +26,8 @@ const
   { message, messageId, deleteMessage } = require("../controllers/messageAdmin"),
   { page404 } = require("../controllers/page404"),
   { profilId, profilEdit } = require("../controllers/profil"),
-  { login, inscription, logout, getPageInscription } = require("../controllers/authController"); 
+  { login, inscription, logout, getPageInscription } = require("../controllers/authController"), 
+  {checkMembre} = require("../../public/js/adminCheck");
 // ----------------------------------------------------------------------- //
 // ----------------------------------------------------------------------- //
 
@@ -88,22 +89,17 @@ router.route("/profil/:id").get(profilId)
 // EDIT PROFILE ID
 router.route("/profilEdit/:id").put(upload.single("avatar"), profilEdit)
 
-
+// router.route("/checkRoles").put(checkMembre)
 // ----------------------------------------------------------------------- //
 // -------------------------MESSAGE A L'ADMIN----------------------------- //
 // ----------------------------------------------------------------------- //
 
 // MESSAGE A L'ADMIN
 router.route("/message").post(message)
-<<<<<<< HEAD
 // ----------------------------------------------------------------------- //
 // -------------------------------ADMIN----------------------------------- //
 // ----------------------------------------------------------------------- //
-router.use(isAdmin)
-=======
-
 // router.use(isAdmin)
->>>>>>> 4ba1c7f0f0cb76732a952d6ca8978f6bb4a94f5c
 
 // MAIL
 router.get('/verification/:token',(req, res) => {
