@@ -1,8 +1,18 @@
 const mysql = require("mysql");
-const config = require('./dbConfig')
+const configs = require('./dbConfig')
 const assert = require("assert");
 // mysql instance
-db = mysql.createConnection(config);
+db = mysql.createConnection(configs);
+
+db.config.queryFormat = function (query, values) {
+  if (!values) return query;
+  return query.replace(/\:(\w+)/g, function (txt, key) {
+    if (values.hasOwnProperty(key)) {
+      return this.escape(values[key]);
+    }
+    return txt;
+  }.bind(this));
+};
 
 const util = require("util");
 db.query = util.promisify(db.query).bind(db);

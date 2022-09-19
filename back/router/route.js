@@ -77,7 +77,7 @@ router.route("/insertEnigme").post(postEnigme)
 router.route("/updateEnigme/:id").put(putEnigme)
 
 // DELETE ÉNIGME
-router.route("/deleteEnigme/:id").post(deleteEnigme)
+router.route("/deleteEnigme/:id").delete(deleteEnigme)
 
 // ----------------------------------------------------------------------- //
 // -----------------------------PROFIL------------------------------------ //
@@ -95,10 +95,15 @@ router.route("/profilEdit/:id").put(upload.single("avatar"), profilEdit)
 
 // MESSAGE A L'ADMIN
 router.route("/message").post(message)
+<<<<<<< HEAD
 // ----------------------------------------------------------------------- //
 // -------------------------------ADMIN----------------------------------- //
 // ----------------------------------------------------------------------- //
 router.use(isAdmin)
+=======
+
+// router.use(isAdmin)
+>>>>>>> 4ba1c7f0f0cb76732a952d6ca8978f6bb4a94f5c
 
 // MAIL
 router.get('/verification/:token',(req, res) => {

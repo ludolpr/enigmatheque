@@ -57,16 +57,20 @@ const
   },
 
   postEnigme = async (req, res) => {
+        // console.log("iiiiiii", req.query);
     console.log("create::enigme", req.body);
     const { titre, difficulty, content, solus } = req.body;
     // Ajout d'une énigme
-    const insertEnigme = await db.query(
-      `INSERT INTO enigme (titre , difficulty, content, solus, id_user) VALUES ("${titre}", "${difficulty}", "${content}", "${solus}", 1);`
-    );
+    console.log(req.session);
+    // const insertEnigme = await db.query(
+    //   `INSERT INTO enigme (titre , difficulty, content, solus, id_user) VALUES ("${titre}", "${difficulty}", "${content}", "${solus}", "${req.session.user.id}");`,
+    // );
+    //
+    const insertEnigme = await db.query(`INSERT INTO enigme SET titre=:titre, difficulty=:difficulty, content=:content, solus=:solus, id_user="${req.session.user.id}"`, {titre, difficulty, content, solus});
+   
     const [newEnigme] = await db.query(`SELECT * FROM enigme WHERE id_enigme = ${insertEnigme.insertId}`)
     console.log('memotechnik', insertEnigme, newEnigme)
     // console.log("mode", MODE);
-
     if (MODE === "test")
       res.json({
         newEnigme,
@@ -93,8 +97,7 @@ const
       })
       else res.redirect("/");
     }
-
-    if (MODE === "test") res.json({
+    else if (MODE === "test") res.json({
       enigme
     })
     else res.render("enigme_details", {
@@ -130,12 +133,18 @@ const
   },
   // DELETE ÉNIGME
   deleteEnigme = async (req, res) => {
-    console.log("delete::enigme", req.params);
     const { id } = req.params;
+    console.log("delete::enigme", id);
 
-    if (id) await db.query(`DELETE FROM enigme WHERE id_enigme = "${id}";`);
-
-    res.redirect("/admin");
+    if (id) {
+      await db.query(`DELETE FROM enigme WHERE id_enigme = "${id}";`);
+    console.log("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
+  }
+  if (MODE === "test")
+      res.json({
+        flash: "Votre enigme à été supprimer"
+      });
+    else res.redirect("/admin");
   };
 
 

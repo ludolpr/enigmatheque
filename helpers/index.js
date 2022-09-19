@@ -26,7 +26,7 @@ exports.cutStr = (str) => str.substr(0, 40)
 exports.inc = (value, option) => {
     return parseInt(value)
 }
-
 exports.idPlusUn = () => {
 
 }
+

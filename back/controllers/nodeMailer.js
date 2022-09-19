@@ -47,7 +47,7 @@ const mail = async (req, res) => {
 const mailReply = async (req, res) => {
     const { content, sujet, email } = req.body;
     console.log("mail envoyé", req.body);
-
+// le transporte serf a se connec er a notre boite mail
     transporter.sendMail(
         {
             from: MAIL_USER,

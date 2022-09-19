@@ -9,7 +9,11 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
       <div class="center">
         <label class="label">
+<<<<<<< HEAD
           <input class="label__checkbox" type="checkbox" disabled="disabled"/>
+=======
+          <input class="label__checkbox" type="checkbox" disabled="disabled" />
+>>>>>>> 4ba1c7f0f0cb76732a952d6ca8978f6bb4a94f5c
           <span class=" label__text">
             <span class="label__check" id="check">
               <i class="fa fa-check icon"></i>
@@ -33,9 +37,68 @@
       <button>répondre</button>
     </div>
     <div class="col-md-12 d-flex justify-content-between p-5">
-      <a class="text-light" id="next" onclick="selectionner1()"><i class="fa-solid fa-circle-arrow-left"></i></a>
-      <a class="text-light" id="prec" onclick="selectionner2()"><i class="fa-solid fa-circle-arrow-right"></i></a>
+      <a class="text-light" type="button" id="next" onclick="selectionner1()"><i class="fa-solid fa-circle-arrow-left"></i></a>
+      <a class="text-light" type="button" id="prec" onclick="selectionner2()"><i class="fa-solid fa-circle-arrow-right"></i></a>
     </div>
   </div>
 </div>
+<<<<<<< HEAD
 <script src="../../../assets/js/fetch.js"></script>
+=======
+
+{{!-- <script>
+  document.getElementById('next').addEventListener('click', function(){
+  var i = document.getElementById("next").innerHTML;
+  i++;
+    document.getElementById("next").innerHTML = i;
+})
+
+document.getElementById('prec').addEventListener('click', function(){
+  var i = document.getElementById("prec").innerHTML;
+ i--
+
+    document.getElementById("prec").innerHTML = i;
+})</script> --}}
+
+{{!-- <script type="text/javascript">
+    index = 0;
+    increment1 = function(){ index++; }
+</script --}}
+
+{{!-- <script type="text/javascript">
+  function selectionner1() {
+    document.getElementById(id).id = id + '_onclick';
+    id +=1
+  }
+  function deselectionner(id) {
+    var index = id.lastIndexOf('_');
+    var newid = id.substring(0, index - 1);
+    document.getElementById(id).id = newid;
+  }
+  document.getElementById('next').onclick = function () {
+    selectionner('next');
+  }
+  1
+</script> --}}
+{{!-- <script type="text/javascript">
+  function selectionner2(id) {
+    document.getElementById(id).id = id - '_onclick';
+    index = 0;
+    increment = function(){ index++; }
+  }
+  function deselectionner(id) {
+    var index = id.lastIndexOf('_');
+    var newid = id.substring(0, index - 1);
+    document.getElementById(id).id = newid;
+  }
+  document.getElementById('prec').onclick = function () {
+    selectionner('prec');
+  };
+
+  1
+</script> --}}
+
+{{!-- function incrementIndex() {
+    index += 1;
+} --}}
+>>>>>>> 4ba1c7f0f0cb76732a952d6ca8978f6bb4a94f5c
