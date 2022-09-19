@@ -46,7 +46,7 @@ const
     //   console.log(dbEnigmes);
 
     if (process.env.MODE === "test") {
-      console.log("salut !!!",dbEnigmes);
+      console.log("salut !!!", dbEnigmes);
       res.json({ enigmes: dbEnigmes, titre: req.query.q });
     } else {
       res.render("enigme", {
@@ -55,7 +55,7 @@ const
       });
     }
   },
- 
+
   postEnigme = async (req, res) => {
     console.log("create::enigme", req.body);
     const { titre, difficulty, content, solus } = req.body;
@@ -81,7 +81,7 @@ const
   getEnigmeId = async (req, res) => {
     // console.log('getEnigmesId', req.params.id)
     const { id } = req.params;
-    const [ enigme ] = await db.query(
+    const [enigme] = await db.query(
       `select * from enigme WHERE id_enigme = "${id}";`
     );
 
@@ -110,13 +110,14 @@ const
     const { titre, difficulty, content, solus, is_Verified } = req.body;
 
     // if (titre)
-    const updateEnigme = await db.query(
+    const putEnigme = await db.query(
       `UPDATE enigme SET titre="${titre}", difficulty="${difficulty}", content="${content}", solus="${solus}", is_Verified="${is_Verified === "on" ? 1 : 0
       }" WHERE id_enigme="${id}";`
     );
-    console.log(updateEnigme.insertId);
-    const putEnigme = await db.query(`UPDATE enigme SET titre="${titre}", difficulty="${difficulty}", content="${content}", solus="${solus}", is_Verified="${is_Verified === "on" ? 1 : 0
-      }" WHERE id_enigme="${updateEnigme.insertId}";`)
+    // console.log(updateEnigme.insertId);
+    // const putEnigme = await db.query(
+    //   `UPDATE enigme SET titre="${titre}", difficulty="${difficulty}", content="${content}", solus="${solus}", is_Verified="${is_Verified === "on" ? 1 : 0
+    //   }" WHERE id_enigme="${updateEnigme.insertId}";`)
 
     // Redirection vers la page admin
     if (MODE === "test")

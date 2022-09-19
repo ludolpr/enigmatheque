@@ -89,11 +89,45 @@ const
             );
             res.render("home", { flashInscrit: "Vous êtes maintenant inscrit" });
             //return res.redirect("/");
-        } else {
+        } else if (err) {
             console.log("PB inscription");
             res.render("inscription", {
                 flash: "Probleme de confirmation entre vos deux mots de passe",
             });
+        } else {
+            const token = jwt.sign({
+                data: 'Token Data'  
+            }, 'MaCleSecrete', { expiresIn: '10m' }  
+        );
+            
+            mailOptions = {
+                from: MAIL_USER,
+                to: email,
+                subject: "Confirmation email.",
+                text: `
+                        <h2>Bonjour,</h2><br>
+                        <h5>Pour activer votre compte utilisateur, veuillez cliquer sur le lien ci-dessous</h5><br>
+                        http://localhost:1990/verification/${token}`
+
+            }
+            
+            console.log('Données de mailOption :', mailOptions)
+
+            transporter.sendMail(mailOptions, (err, res, next) => {
+                if (err) {
+                    throw err
+                } else {
+                    console.log("Message Envoyer")
+                    next()
+                }
+            })
+
+            res.render('connexion', { layout: 'main', success: 'Votre compte à bien été créé merci de vérifier vos emails !'})
+
+
+
+            console.log('Insertion effectuée avec succès');
+            //res.redirect('/connexion');
         }
     },
     // ----------------------------------------------------------------------- //

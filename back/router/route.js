@@ -95,8 +95,27 @@ router.route("/profilEdit/:id").put(upload.single("avatar"), profilEdit)
 
 // MESSAGE A L'ADMIN
 router.route("/message").post(message)
-// ADMIN
+// ----------------------------------------------------------------------- //
+// -------------------------------ADMIN----------------------------------- //
+// ----------------------------------------------------------------------- //
 router.use(isAdmin)
+
+// MAIL
+router.get('/verification/:token',(req, res) => {
+        
+  const {token} = req.params;
+
+  jwt.verification(token, 'MaCleSecrete', function(err, decoded){
+          if(err){
+                  console.log(err);
+                  res.send('Email de verification echoué, le lien est invalide');
+          }
+          else{
+                  
+                  res.send('Email de verification success');
+          }
+  })
+})
 
 // GET MESSAGE
 router.route("/message/:id").get(messageId)
@@ -109,6 +128,7 @@ router.route("/admin").get(getAdminPage)
 
 // MESSAGES DATABASE, REPLY BY MAIL
 router.route("/mailReply").post(mailReply)
+
 
 
 // ----------------------------------------------------------------------- //
