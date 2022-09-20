@@ -5,12 +5,12 @@ const tag = document.getElementById("tag")
 const motclef = tag.innerHTML
 
 getData = async (motclef) => {
-  img.src= "../images/question.jpg"
+  // img.src= "../images/question.jpg"
   fetch(`https://pixabay.com/api/?key=${keyGive}&per_page=72&lang=fr&q=${encodeURIComponent(motclef)}`)
     .then((response) => {
       if (response.ok) {
         response.json().then(function (pixdata) {
-          img.src = pixdata.hits[0].largeImageURL
+          img.src = pixdata.hits[0].webformatURL
           // console.log("pixdata", pixdata.hits[0].webformatURL);
           console.log(pixdata);
         })

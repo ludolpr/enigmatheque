@@ -14,6 +14,13 @@ exports.limitArrayReverse = (arrEnigme, limit) => {
     return arrEnigme.slice(0, limit);
 }
 
+exports.limitObjectReverse = (objEnigme, limit) => {
+    if (! Object.isArray(objEnigme.reverse())){
+        return [];
+    } 
+    return objEnigme.slice(0, limit);
+}
+
 // mettre en majuscule
 exports.upper = (str) => str.toUpperCase();
 
