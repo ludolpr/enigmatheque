@@ -109,7 +109,7 @@ const
   putEnigme = async (req, res) => {
     // console.log("edit::enigme", req.body);
     const { id } = req.params;
-    console.log(req.params);
+    // console.log(req.params);
     const { titre, difficulty, content, solus, is_Verified } = req.body;
 
     // if (titre)
