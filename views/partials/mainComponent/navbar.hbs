@@ -53,19 +53,19 @@
           <a class="nav-link text-light" href="/admin">Admin</a>
         </li>
         {{/if}}
-        <form action="/logout" method="post"></form>
-        <li>
+        <form action="/logout" method="post">
+          <li>
 
-          <a class="text-light text-decoration-none m-5" href="/profil/{{this.user.id}}">Vous êtes connecter en tant
-            que: {{upper user.name}}
+            <a class="text-light text-decoration-none m-5" href="/profil/{{this.user.id}}">Vous êtes connecter en tant
+              que: {{user.name}}
             </a>
-            <li>
-              <button type="submit" class="text-light btn btn-danger me-2" data-bs-target="#staticBackdrop">Deconnexion
-          </button>
-            </li>
-          
+          <li>
+            <button type="submit" class="text-light btn btn-danger me-2" data-bs-target="#staticBackdrop">Deconnexion
+            </button>
+          </li>
 
-        </li>
+
+          </li>
         </form>
       </ul>
       {{! Deconnexion }}
@@ -95,7 +95,7 @@
 
 <div class="modal fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
   aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog modal-dialog-centered">
+  <div class="modal-dialog  modal-dialog-centered">
     <div class="modal-content bg-success">
       <div class="modal-header">
         <h1 class="modal-title" id="staticBackdropLabel">Connexion</h1>
@@ -103,6 +103,9 @@
       </div>
       <form action="/login" method="post">
         <div class="modal-body">
+          {{#if flashResetPass}}
+          <h3 style="color:white;">{{this.flash}}</h3>
+          {{/if}}
           {{#if flash}}
           <h3 style="color:white;">{{this.flash}}</h3>
           {{/if}}
@@ -119,13 +122,40 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Mot de passe oublié
+          <button type="button" class="btn btn-secondary " action="/resetpassword" method="post" data-bs-toggle="modal"
+            data-bs-target="#staticPasswordBackdrop">Mot de passe oublié
           </button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer
+          <button type="button" class="btn btn-secondary">Fermer
           </button>
           <button type="submit" class="btn btn-primary">Envoyer</button>
         </div>
       </form>
     </div>
+    
   </div>
+  
 </div>
+{{!-- modal mot de passe oublié --}}
+<form action="/resetpassword" method="post">
+  <div class="modal fade" id="staticPasswordBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered">
+      <div class="modal-content  bg-success">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Mot de passe oublié</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <label for="exampleFormControlInput1" class="form-label text-white">Votre adresse
+            mail</label>
+          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="" name="email">
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+          <button type="submit" class="btn btn-primary">Envoyer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

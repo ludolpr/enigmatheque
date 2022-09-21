@@ -132,7 +132,7 @@ VALUES
     'Admin',
     '$2b$10$3xZYGlHNX0XSn/D28.9e.Od608tlJ3ip2W2SqWKQEzrZJfwJ5i56e',
     'ludolpr@gmail.com',
-    0,
+    1,
     1,
     0,
     'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.ms_ni44c-_TBsdHzF0W5awHaHa%26pid%3DApi&f=1'

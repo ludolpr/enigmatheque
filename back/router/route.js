@@ -26,8 +26,9 @@ const
   { message, messageId, deleteMessage } = require("../controllers/messageAdmin"),
   { page404 } = require("../controllers/page404"),
   { profilId, profilEdit } = require("../controllers/profil"),
-  { login, inscription, logout, getPageInscription } = require("../controllers/authController"), 
-  {checkMembre} = require("../../public/js/adminCheck");
+  { login, inscription, logout, getPageInscription,getPageVerification } = require("../controllers/authController"), 
+  {checkMembre} = require("../../public/js/adminCheck"),
+  {GetResetPassword,PostResetPassword,PutResetPassword} = require("../controllers/userController")
 // ----------------------------------------------------------------------- //
 // ----------------------------------------------------------------------- //
 
@@ -48,6 +49,11 @@ router.route("/").get(getPageHome)
 router.route("/login").post(login)
 // INSCRIPTION$
 router.route("/inscription").post(inscription).get(getPageInscription)
+router.route("/verification/:token").get(getPageVerification)
+router.route('/resetpassword')
+.get(GetResetPassword) // c'est la page du formulaire 
+.post(PostResetPassword) // c'est le formulaire de mot de passe oublier ( /connexion )
+.put(PutResetPassword) // c'est le formulaire d'edition du mot de passe ( /resetPassword )
 
 // ----------------------------------------------------------------------- //
 // -----------------------------NODEMAILER-------------------------------- //

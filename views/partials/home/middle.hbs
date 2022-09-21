@@ -19,14 +19,14 @@
             </div>
           </div> --}}
           {{#each enigmes}}
-          <div class="carousel-item active" data-bs-interval="3500">
+          <div class="carousel-item active" data-bs-interval="500">
             <img src="" style="min-height: 850px;" class="img-fluid d-block w-100 " alt="..." id="img">
             <div class="carousel-caption d-none d-md-block  bg-dark">
               <a href="/enigme/{{id_enigme }}" class=" text-decoration-none ">
 
                 <h3 id="tag" class="text-light text-decoration-none">{{this.titre}} </h3>
               </a>
-              <p>{{{this.content}}}</p>
+              <p>{{{cutStr this.content}}} ......</p>
             </div>
           </div>
           {{/each}}

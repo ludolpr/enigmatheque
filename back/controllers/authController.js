@@ -1,7 +1,9 @@
+require("dotenv").config();
 const bcrypt = require('bcrypt');
 const bcrypt_salt = 10;
+const transporter = require("../utils/nodeMailer")
 const jwt = require('jsonwebtoken');
-require("dotenv").config();
+
 
 const
     // ----------------------------------------------------------------------- //
@@ -19,10 +21,10 @@ const
                 let user = data[0];
                 if (!user)
                     if (process.env.MODE === "test") {
-                        return res.json({ flash: "Votre compte n'est pas correct" });
+                        return res.json({ flashConnexion: "Votre compte n'est pas correct" });
 
                     } else {
-                        return res.render("home", { flash: "Ce compte n'existe pas" });
+                        return res.render("home", { flashConnexion: "Ce compte n'existe pas" });
                     }
 
 
@@ -74,7 +76,7 @@ const
         const { name, email, password, confPassword } = req.body;
         const checkEmail = await db.query(`SELECT email FROM membres`);
         const checkName = await db.query(`SELECT name FROM membres`);
-        // if(password !== confPassword) return res.redirect('/')
+        if (password !== confPassword) return res.redirect('/')
         if (name === "" || email === "") {
             res.render("inscription", {
                 flash: "Veuillez définir un nom ainsi qu'un email",
@@ -83,15 +85,41 @@ const
             console.log("mail ou name déjà utilisé");
             res.render("back");
         } else if (password === confPassword) {
-            await db.query(
+            const newUser =  await db.query(
                 `INSERT INTO membres SET name="${name}", email="${email}", password="${await bcrypt.hash(
                     password,
                     bcrypt_salt
                 )}", isAdmin=0,isVerified=0, isBan=0, avatar="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.ms_ni44c-_TBsdHzF0W5awHaHa%26pid%3DApi&f=1"`
             );
-            res.render("home", { flashInscrit: "Vous êtes maintenant inscrit" });
+            const [membres] = await db.query(`SELECT * FROM membres WHERE id = ${newUser.insertId}`)
+            const token = jwt.sign({ membres }, "SecretKey");
+       
+            // req.session.membres = membres
+            req.session.token = token
+       
+            try {
+
+                const data = await transporter.sendMail({
+                    from:'"Enigmatheque" MAIL_USER' ,
+                    to: email,
+                    subject: `Confirmation du compte sur le site Enigmatheque.fr`,
+                    html: `
+                      <h2> Bonjour, </h2>
+                      <h5>Pour activer votre compte utilisateur, veuillez cliquer sur le lien ci-dessous </h5><br>
+                    ${process.env.DOMAIN}/verification/${token}
+                  `
+                })
+
+                console.log("Email de confirmation de compte est bien envoyé !!", data)
+                console.log("1er token", token);
+                // res.redirect('/');
+            } catch (error) {
+                console.log("error", error)
+                res.redirect('/')
+            }
+            res.render("home", { flash: "Vous êtes maintenant inscrit" });
             //return res.redirect("/");
-            
+
         } else {
             console.log("PB inscription");
             res.render("inscription", {
@@ -99,74 +127,33 @@ const
             });
         }
     },
+    getPageVerification = (req, res) => {
+        console.log("info req.session", req.session);
+        const { token }  = req.session
+        console.log("voici le token", token);
 
-    // inscription = async (req, res) => {
-    //     console.log("inscription OK !", req.body);
-    //     const { name, email, password, confPassword } = req.body;
-    //     const checkEmail = await db.query(`SELECT email FROM membres`);
-    //     const checkName = await db.query(`SELECT name FROM membres`);
-    //     // if(password !== confPassword) return res.redirect('/')
-    //     if (name === "" || email === "") {
-    //         res.render("inscription", {
-    //             flash: "Veuillez définir un nom ainsi qu'un email",
-    //         });
-    //     } else if (email === checkEmail || name === checkName) {
-    //         console.log("mail ou name déjà utilisé");
-    //         res.render("back");
-    //     } else if (password === confPassword) {
-    //         if (err) {
-    //             console.log("PB inscription");
-    //             res.render("inscription", {
-    //                 flash: "Probleme de confirmation entre vos deux mots de passe",
-    //             });
-    //         } else {
-    //             await db.query(
-    //                 `INSERT INTO membres SET name="${name}", email="${email}", password="${await bcrypt.hash(
-    //                     password,
-    //                     bcrypt_salt
-    //                 )}", isAdmin=0,isVerified=0, isBan=0, avatar="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.ms_ni44c-_TBsdHzF0W5awHaHa%26pid%3DApi&f=1"`
-    //             );
-    //             res.render("home", { flashInscrit: "Vous êtes maintenant inscrit" });
-    //             //return res.redirect("/");
-    //         }
+        jwt.verify(token, "SecretKey", async (err, decoded) => {
+            console.log("decoded", decoded);
+            if (err) {
+                console.log(err);
+                // ne passe pa splus loin ???
+                res.send('Email de verification echoué, le lien est invalide');
+            }
+            else {
+                const [membres] = await db.query(`SELECT * FROM membres WHERE id="${decoded.membres.id}"`)
 
-    //     } else {
-    //         const token = jwt.sign({
-    //             data: 'Token Data'
-    //         }, 'MaCleSecrete', { expiresIn: '10m' }
-    //         );
+                if (!membres) {
+                    console.log("pb membres");
+                    res.redirect("/")
+                } else {
+                    console.log('Email de verification success');
+                    db.query(`UPDATE membres SET isVerified="1" WHERE id="${decoded.membres.id}"`)
+                    res.redirect("/");
+                }
+            }
+        });
+    },
 
-    //         mailOptions = {
-    //             from: MAIL_USER,
-    //             to: email,
-    //             subject: "Confirmation email.",
-    //             text: `
-    //                         <h2>Bonjour,</h2><br>
-    //                         <h5>Pour activer votre compte utilisateur, veuillez cliquer sur le lien ci-dessous</h5><br>
-    //                         http://localhost:1990/verification/${token}`
-
-    //         }
-
-    //         console.log('Données de mailOption :', mailOptions)
-
-    //         transporter.sendMail(mailOptions, (err, res, next) => {
-    //             if (err) {
-    //                 throw err
-    //             } else {
-    //                 console.log("Message Envoyer")
-    //                 next()
-    //             }
-    //         })
-
-    //         res.render('connexion', { layout: 'main', success: 'Votre compte à bien été créé merci de vérifier vos emails !' })
-
-
-
-    //         console.log('Insertion effectuée avec succès');
-    //         //res.redirect('/connexion');
-    //     }
-
-    // },
     // ----------------------------------------------------------------------- //
     // -----------------------------LOGOUT------------------------------------ //
     // ----------------------------------------------------------------------- //
@@ -180,4 +167,4 @@ const
 // ----------------------------------------------------------------------- //
 // -----------------------------EXPORTS MODULE---------------------------- //
 // ----------------------------------------------------------------------- //u
-module.exports = { login, inscription, logout, getPageInscription }
+module.exports = { login, inscription, logout, getPageInscription, getPageVerification }
