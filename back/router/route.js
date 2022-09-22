@@ -28,7 +28,8 @@ const
   { profilId, profilEdit } = require("../controllers/profil"),
   { login, inscription, logout, getPageInscription,getPageVerification } = require("../controllers/authController"), 
   {checkMembre} = require("../../public/js/adminCheck"),
-  {GetResetPassword,PostResetPassword,PutResetPassword} = require("../controllers/userController")
+  {GetResetPassword,PostResetPassword,PutResetPassword} = require("../controllers/userController"),
+  {checkResponse} = require("../controllers/checkResponse")
 // ----------------------------------------------------------------------- //
 // ----------------------------------------------------------------------- //
 
@@ -76,6 +77,7 @@ router.route("/logout").post(logout)
 // AFFICHER ENIGME
 router.route("/enigme/:id").get(getEnigmeId)
 router.route("/enigme").get(filtreEnigmes)
+router.route("checkResponse").post(checkResponse)
 // PROPOSER ÉNIGME
 router.route("/proposer").get(getPageProposer)
 router.route("/insertEnigme").post(postEnigme)

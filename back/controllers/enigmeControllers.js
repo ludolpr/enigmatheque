@@ -61,6 +61,7 @@ const
     console.log("create::enigme", req.body);
     const { titre, difficulty, content, solus } = req.body;
     // Ajout d'une énigme
+    console.log("le body", req.body);
     console.log(req.session);
     // const insertEnigme = await db.query(
     //   `INSERT INTO enigme (titre , difficulty, content, solus, id_user) VALUES ("${titre}", "${difficulty}", "${content}", "${solus}", "${req.session.user.id}");`,
