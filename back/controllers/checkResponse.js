@@ -6,3 +6,7 @@ checkResponse = async (req, res) => {
    
 }
 checkResponse()
+
+
+const dbEnigmes = await db.query(`SELECT * FROM enigme`)
+const dbEnigmesReponse = await db.query(`SELECT * FROM enigme_reponse`)

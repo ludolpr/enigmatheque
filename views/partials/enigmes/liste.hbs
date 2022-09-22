@@ -7,17 +7,17 @@
   <div class="col-md-2 d-flex justify-content-center align-items-center">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 <div class="center">
-  <label class="label">
+  <label class="label" disabled="disabled">
     <input  class="label__checkbox" type="checkbox" disabled="disabled" />
     <span class=" label__text">
-      <span class="label__check" id="check" onclick="colorCheckbox(this.id)" >
+      <span class="label__check"  id="check" onclick="colorCheckbox(this.id)" >
         <i class="fa fa-check icon"></i>
       </span>
     </span>
   </label>
 </div>
   </div>
-  <div class="col-md-10  border-start-2 border-light p-3 ">
+  <div class="col-md-10  border-start-2 border-light p-3">
     <form action="">
       <h3 {{@index}} | class="text-left "> <a href="/enigme/{{this.id_enigme}}" class="text-decoration-none text-light">{{this.titre}}</a></h3>
     <p class="text-left">

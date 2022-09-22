@@ -51,7 +51,7 @@ const
 
                         if (process.env.MODE === "test") {
                             // console.log("3");
-                            return res.json({ flash: "Connexion success" });
+                            return res.json({ flash: "Connexion reussi" });
 
                         } else {
                             console.log("4");
@@ -105,8 +105,11 @@ const
                     subject: `Confirmation du compte sur le site Enigmatheque.fr`,
                     html: `
                       <h2> Bonjour, </h2>
-                      <h5>Pour activer votre compte utilisateur, veuillez cliquer sur le lien ci-dessous </h5><br>
-                    ${process.env.DOMAIN}/verification/${token}
+                      <h5>Pour activer votre compte utilisateur, veuillez cliquer sur le lien ci-dessous </h5>
+                      <br>
+                      <a href="${process.env.DOMAIN}/verification/${token}" style="display:inline-block;background-color:#000000;color:white;font-family:Helvetica Neue,sans-serif;font-size:16px;font-weight:700;line-height:120%;text-decoration:none;text-transform:none;border-radius:100px;box-sizing:border-box;margin:0;padding:10px 32px" rel="noreferrer" target="_blank" data-saferedirecturl="https://www.google.com/url?q=http://clicks.sorare.com/f/a/1ZPsQjLVf4lJx2fw2sZs4Q~~/AAAHagA~/RgRlC89QP0QhaHR0cHM6Ly9zb3JhcmUuY29tL2xvYmJ5L3VwY29taW5nVwVzcGNldUIKYyNQSiljS19Y7lIVZW9ndWFyZGlhbnNAZ21haWwuY29tWAQAAAFC&amp;source=gmail&amp;ust=1663915558713000&amp;usg=AOvVaw3HlTEOfUlHVkQ94gx8Xa54"> Cliquez-ici </a>
+
+                      
                   `
                 })
 

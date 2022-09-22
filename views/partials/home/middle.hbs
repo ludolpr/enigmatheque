@@ -8,27 +8,18 @@
       <div id="carouselExampleCaptions" class="carousel slide  " data-bs-ride="carousel">
         <div class="carousel-inner col-md-6 ">
           
-          {{!-- <div class="carousel-item" data-bs-interval="3500">
-            <img src="" style="min-height: 850px;" class="img-fluid d-block w-100" alt="..." id="img">
-            <div class="carousel-caption d-none d-md-block  bg-dark">
-              <a href="/enigme/{{id_enigme }}" class=" text-decoration-none ">
-
-                <h3 id="tag" class="text-light text-decoration-none">{{this.titre}} </h3>
-              </a>
-              <p>{{{this.content}}}</p>
-            </div>
-          </div> --}}
           {{#each enigmes}}
-          <div class="carousel-item active" data-bs-interval="500">
-            <img src="" style="min-height: 850px;" class="img-fluid d-block w-100 " alt="..." id="img">
+          <div id="it-" class="carousel-item"style="min-height: 650px; max-height: 650px;" data-bs-interval="2500">
+            <img src=""  class="img-fluid d-block w-100 " alt="..." id="img">
             <div class="carousel-caption d-none d-md-block  bg-dark">
               <a href="/enigme/{{id_enigme }}" class=" text-decoration-none ">
 
                 <h3 id="tag" class="text-light text-decoration-none">{{this.titre}} </h3>
               </a>
-              <p>{{{cutStr this.content}}} ......</p>
+              <p>{{{cutStr this.content}}}......</p>
             </div>
           </div>
+          
           {{/each}}
 
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
@@ -45,7 +36,12 @@
       </div>
 
     </div>
-
+      <script>
+    function ef() {
+        document.getElementById(`it-`).classList.add('active')
+    }
+    ef()
+</script>
 
   </div>
 </div>

@@ -1,6 +1,5 @@
-
 <div class="col-md-12 mh100 decallageTop">
-  <div class="col-md-12 d-flex justify-content-center mb-5">
+  <div class="col-md-12 d-flex justify-content-center mb-1">
     <img src="" class="img-fluid p-5" alt="enigme image" id="img" />
   </div>
   <div class="col-md-12">
@@ -10,7 +9,7 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
       <div class="center">
         <label class="label">
-          <input class="label__checkbox" type="checkbox" disabled="disabled"/>
+          <input class="label__checkbox" type="checkbox" disabled="disabled" />
           <span class=" label__text">
             <span class="label__check" id="check">
               <i class="fa fa-check icon"></i>
@@ -20,23 +19,25 @@
       </div>
 
     </div class="col-md-12 d-flex justify-content-center mx-auto">
+    <form action="" method="post">
+      <div class="text-center">
+        <h1 class="text-center mb-3 img-fluid " id="tag">{{enigme.titre}}</h1>
 
-    <div class="text-center">
-      <h1 class="text-center mb-3 img-fluid " id="tag">{{enigme.titre}}</h1>
-      
-       {{{enigme.content}}}
-    </div>
-     
-    <div class="col-md-12  d-flex justify-content-center mt-3 mb-3">
-      <input type="text" placeholder="votre texte içi" />
-    </div>
-    <div class="col-md-12 d-flex justify-content-center">
-      <button>répondre</button>
-    </div>
-    <div class="col-md-12 d-flex justify-content-between p-5">
-      <a class="text-light" type="button" id="next" onclick="selectionner1()"><i class="fa-solid fa-circle-arrow-left"></i></a>
-      <a class="text-light" type="button" id="prec" onclick="selectionner2()"><i class="fa-solid fa-circle-arrow-right"></i></a>
-    </div>
+        {{{enigme.content}}}
+      </div>
+
+      <div class="col-md-12  d-flex justify-content-center mt-3 mb-3">
+        <input type="text" placeholder="votre texte içi" />
+      </div>
+      <div class="col-md-12 d-flex justify-content-center">
+        <button>répondre</button>
+      </div>
+
+    </form>
+
+
+
   </div>
+
 </div>
 <script src="../../../assets/js/fetch.js"></script>

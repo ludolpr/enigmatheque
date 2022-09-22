@@ -58,7 +58,7 @@ exports.PutResetPassword = async (req, res) => {
     await db.query(`UPDATE membres SET password="${await bcrypt.hash(password, bcrypt_salt)}" WHERE email="${email}"`)
 
     res.render('home', {
-        flash: `mot de passe modifier avec succes`
+        flash: `mot de passe modifié avec succès`
     })
 
 }

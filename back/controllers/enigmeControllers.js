@@ -32,7 +32,7 @@ const
       case "devinettes":
         dif = 4;
         break;
-      case "du_Sage":
+      case "homme-sage":
         dif = 5;
         break;
       default:
