@@ -82,11 +82,9 @@ ENGINE = InnoDB;
 -- Table `dataenigme`.`images`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dataenigme`.`images` (
-  `name_image` VARCHAR(45) NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `path` VARCHAR(45) NOT NULL,
-  `url` VARCHAR(150) NOT NULL,
-  `id_enigme` INT NOT NULL,
   UNIQUE INDEX `id_enigme_UNIQUE` (`id_enigme` ASC),
   CONSTRAINT `fk_images_1`
     FOREIGN KEY (`id_enigme`)

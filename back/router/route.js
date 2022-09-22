@@ -102,11 +102,6 @@ router.route("/profilEdit/:id").put(upload.single("avatar"), profilEdit)
 
 // MESSAGE A L'ADMIN
 router.route("/message").post(message)
-// ----------------------------------------------------------------------- //
-// -------------------------------ADMIN----------------------------------- //
-// ----------------------------------------------------------------------- //
-// router.use(isAdmin)
-
 // MAIL
 router.get('/verification/:token',(req, res) => {
         
@@ -123,6 +118,12 @@ router.get('/verification/:token',(req, res) => {
           }
   })
 })
+// ----------------------------------------------------------------------- //
+// -------------------------------ADMIN----------------------------------- //
+// ----------------------------------------------------------------------- //
+// router.use(isAdmin)
+
+
 
 // GET MESSAGE
 router.route("/message/:id").get(messageId)
