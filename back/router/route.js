@@ -29,7 +29,7 @@ const
   { login, inscription, logout, getPageInscription,getPageVerification } = require("../controllers/authController"), 
   {checkMembre} = require("../../public/js/adminCheck"),
   {GetResetPassword,PostResetPassword,PutResetPassword} = require("../controllers/userController"),
-  {checkResponse} = require("../controllers/checkResponse")
+  {checkReponse} = require("../controllers/checkReponse");
 // ----------------------------------------------------------------------- //
 // ----------------------------------------------------------------------- //
 
@@ -77,7 +77,7 @@ router.route("/logout").post(logout)
 // AFFICHER ENIGME
 router.route("/enigme/:id").get(getEnigmeId)
 router.route("/enigme").get(filtreEnigmes)
-router.route("checkResponse").post(checkResponse)
+router.route("/checkReponse").post(checkReponse)
 // PROPOSER ÉNIGME
 router.route("/proposer").get(getPageProposer)
 router.route("/insertEnigme").post(postEnigme)
@@ -123,7 +123,7 @@ router.get('/verification/:token',(req, res) => {
 // ----------------------------------------------------------------------- //
 // -------------------------------ADMIN----------------------------------- //
 // ----------------------------------------------------------------------- //
-// router.use(isAdmin)
+router.use(isAdmin)
 
 
 

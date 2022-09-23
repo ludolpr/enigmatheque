@@ -107,7 +107,7 @@ const
   },
 
   // EDIT ENIGME
-  putEnigme = async (req, res) => {
+  putEnigme = async (req, res) => { 
     // console.log("edit::enigme", req.body);
     const { id } = req.params;
     // console.log(req.params);

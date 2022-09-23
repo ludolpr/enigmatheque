@@ -119,6 +119,23 @@ CREATE TABLE IF NOT EXISTS `dataenigme`.`enigme_reponse` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `dataenigme`.`enigme_reponse COPY`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `dataenigme`.`enigme_reponse` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `id_enigme` INT NOT NULL,
+  `id_user` INT NOT NULL,
+  `id_solus` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `index2` (`id` ASC) VISIBLE,
+  INDEX `fk_enigme_reponse_1_idx` (`id_enigme` ASC) VISIBLE,
+  CONSTRAINT `fk_enigme_reponse_1`
+    FOREIGN KEY (`id_enigme`)
+    REFERENCES `dataenigme`.`enigme` (`id_enigme`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

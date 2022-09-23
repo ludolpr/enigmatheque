@@ -4,11 +4,11 @@ const img = document.getElementById("img")
 const tag = document.getElementById("tag")
 const motclef = tag.innerText
 
-console.log(motclef);
-console.log(motclef.toLowerCase().replaceAll(' ', '+').replaceAll("l'", ''));
-console.log(motclef.split(' '));
-console.log([motclef.split(' ').length - 1]);
-console.log(motclef.split(' ')[motclef.split(' ').length - 1]);
+// console.log(motclef);
+// console.log(motclef.toLowerCase().replaceAll(' ', '+').replaceAll("l'", ''));
+// console.log(motclef.split(' '));
+// console.log([motclef.split(' ').length - 1]);
+// console.log(motclef.split(' ')[motclef.split(' ').length - 1]);
 
 let getData = async (keys) => {
   // img.src= "../images/question.jpg"
@@ -16,12 +16,12 @@ let getData = async (keys) => {
     .then((response) => {
       if (response.ok) {
         response.json().then(function (pixdata) {
-          console.log(pixdata);
+          // console.log(pixdata);
 
           if (pixdata.hits[0]) img.src = pixdata.hits[0].webformatURL
           else {
             const lastKey = motclef.split(' ')[motclef.split(' ').length - 1]
-            console.log("lastKey", lastKey)
+            console.log("lastKey", lastKey,pixdata.hits[0].hits.tag)
             getData(lastKey)
           }
           // console.log("pixdata", pixdata.hits[0].webformatURL);
@@ -34,4 +34,4 @@ let getData = async (keys) => {
     })
 }
 
-getData(motclef.toLowerCase().replaceAll(' ', '+').replaceAll("l'", ''))
+getData(motclef.toLowerCase().replaceAll(' ', '+').replaceAll("l'" || "s'" || "c'" || "n'" || "m'" || "d'", ''))

@@ -100,6 +100,7 @@ CREATE TABLE IF NOT EXISTS `dataenigme`.`enigme_reponse` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `id_enigme` INT NOT NULL,
   `id_user` INT NOT NULL,
+  `id_solus` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `index2` (`id` ASC) VISIBLE,
   INDEX `fk_enigme_reponse_1_idx` (`id_enigme` ASC) VISIBLE,
@@ -141,7 +142,12 @@ VALUES
 INSERT INTO
   `message` (`message`, `name`, `sujet`, `email`)
 VALUES
-  ('test Admin', 'Admin', 'test', 'ludolpr@gmail.com');
+  (
+    'test Admin',
+    'Admin',
+    'test',
+    'ludolpr@gmail.com'
+  );
 
 INSERT INTO
   `enigme` (
@@ -159,7 +165,7 @@ VALUES
     "Combien peut t'on mettre de gouttes d'eau dans un verre vide ?",
     '1',
     1,
-    0
+    1
   ),
   (
     "Le nénuphar géant",
@@ -169,7 +175,7 @@ VALUES
 Combien de jours lui aura-t-il fallu en tout pour le recouvrir entièrement ?",
     'rien',
     1,
-    0
+    1
   ),
   (
     "L'énigme de Stanford",
@@ -184,7 +190,7 @@ Et si on en mange, on meurt.
 Qu'est ce que c'est ?",
     '11',
     1,
-    0
+    1
   ),
   (
     "La prescription",
@@ -194,5 +200,5 @@ Qu'est ce que c'est ?",
 Quelle est la durée du traitement (en minutes) ?",
     '60 minutes',
     1,
-    0
+    1
   );
