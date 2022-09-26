@@ -4,21 +4,21 @@ const bcrypt_salt = 10;
 
 const
   // ----------------------------------------------------------------------- //
-  // -----------------------------PROFIL------------------------------------ //
+  // -----------------------------PROFILE------------------------------------ //
   // ----------------------------------------------------------------------- //
-  profilId = async (req, res) => {
+  profileId = async (req, res) => {
     const { id } = req.params;
     // console.log("IDDD",id);
-    const profil = await db.query(`select * from membres WHERE id="${id}"`);
-    if (profil.lenght <= 0) res.redirect("/");
+    const profile = await db.query(`select * from membres WHERE id="${id}"`);
+    if (profile.lenght <= 0) res.redirect("/");
     else
-      res.render("profil", {
-        profil: profil[0],
+      res.render("profile", {
+        profile: profile[0],
       });
   },
-  profilEdit = async (req, res) => {
+  profileEdit = async (req, res) => {
     const image = req.file ? req.file.filename : false;
-    console.log("edit::profil", req.body);
+    console.log("edit::profile", req.body);
     const { id } = req.params;
     const { name, email, password, confPassword, bio } = req.body;
     if (image) {
@@ -66,4 +66,4 @@ const
 // ----------------------------------------------------------------------- //
 // -----------------------------EXPORTS MODULE---------------------------- //
 // ----------------------------------------------------------------------- //
-module.exports = { profilId, profilEdit }
+module.exports = { profileId, profileEdit }

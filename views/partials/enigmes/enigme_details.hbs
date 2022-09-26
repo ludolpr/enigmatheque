@@ -19,7 +19,7 @@
       </div>
 
     </div class="col-md-12 d-flex justify-content-center mx-auto">
-    <form action="/checkReponse/{id_enigme}} " method="post" name="solus">
+    <form action="/checkReponse/{{enigme.id_enigme}} " method="post" >
       <div class="text-center">
         <h1 class="text-center mb-3 img-fluid " id="tag">{{enigme.titre}}</h1>
 
@@ -27,7 +27,7 @@
       </div>
 
       <div class="col-md-12  d-flex justify-content-center mt-3 mb-3">
-        <input type="text" placeholder="votre texte içi" />
+        <input type="text" placeholder="votre texte içi" name="solus"/>
       </div>
       <div class="col-md-12 d-flex justify-content-center">
         <button type="submit">répondre</button>

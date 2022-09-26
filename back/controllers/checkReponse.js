@@ -2,21 +2,21 @@ const flash = require("flash");
 
 exports.checkReponse = async (req, res) => {
     
-    console.log("params:",req.params);
+    // console.log("params:",req.params);
 
     const { id } = req.params
     const {solus} = req.body
     
     console.log("id:",id);
-    console.log("solus:",solus);
+    // console.log("solus:",solus);
 
-    const [en] = await db.query(`select * from engime where id_enigme =${id}`)
-    
+    const [enigme] = await db.query(`select * from enigme where id_enigme=${id}`)
+    console.log(enigme.solus.toString().toLowerCase());
     if (solus) {
-        if (en.solus.toLowerCase() === solus.toLowerCase()) res.render("back", { flash: "Réponse exacte" });
-        else res.render("", { flash: "Mauvaise réponse" });
-    } else res.render("", { flash: "Il manque une réponse" })
-    
+        if (enigme.solus.toString().toLowerCase() === solus.toString().toLowerCase()) res.render("enigme_details", {enigme, flash: "Réponse exacte" });
+        else res.render("enigme_details",  {enigme, flash: "Mauvaise réponse" });
+    } else res.render("enigme_details", { enigme, flash: "Il manque une réponse" })
+
    
 }
 

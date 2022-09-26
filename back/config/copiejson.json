@@ -135,9 +135,9 @@
         "tags": []
       }
     },
-    "/profil/{id}": {
+    "/profile/{id}": {
       "get": {
-        "summary": "/profil/{id}",
+        "summary": "/profile/{id}",
         "consumes": ["application/json"],
         "parameters": [
           {
@@ -150,9 +150,9 @@
         "tags": []
       }
     },
-    "/profilEdit/{id}": {
+    "/profileEdit/{id}": {
       "put": {
-        "summary": "/profilEdit/{id}",
+        "summary": "/profileEdit/{id}",
         "consumes": ["application/json"],
         "parameters": [
           {

@@ -1,8 +1,12 @@
 var keyGive = "28067265-e1b2e13d58c37680a1a031824";
 // key & import de paxabay
 const img = document.getElementById("img")
-const tag = document.getElementById("tag")
+// ici le querry selector
+const tag = document.getElementById("tag") 
 const motclef = tag.innerText
+
+// faire un querry selector + boucle  for 
+
 
 // console.log(motclef);
 // console.log(motclef.toLowerCase().replaceAll(' ', '+').replaceAll("l'", ''));
@@ -16,7 +20,7 @@ let getData = async (keys) => {
     .then((response) => {
       if (response.ok) {
         response.json().then(function (pixdata) {
-          // console.log(pixdata);
+          console.log(pixdata.hits[0].webformatURL);
 
           if (pixdata.hits[0]) img.src = pixdata.hits[0].webformatURL
           else {

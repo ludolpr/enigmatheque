@@ -25,7 +25,7 @@ const
   { mail, mailReply } = require("../controllers/nodeMailer"),
   { message, messageId, deleteMessage } = require("../controllers/messageAdmin"),
   { page404 } = require("../controllers/page404"),
-  { profilId, profilEdit } = require("../controllers/profil"),
+  { profileId, profileEdit } = require("../controllers/profile"),
   { login, inscription, logout, getPageInscription,getPageVerification } = require("../controllers/authController"), 
   {checkMembre} = require("../../public/js/adminCheck"),
   {GetResetPassword,PostResetPassword,PutResetPassword} = require("../controllers/userController"),
@@ -77,7 +77,7 @@ router.route("/logout").post(logout)
 // AFFICHER ENIGME
 router.route("/enigme/:id").get(getEnigmeId)
 router.route("/enigme").get(filtreEnigmes)
-router.route("/checkReponse").post(checkReponse)
+router.route("/checkReponse/:id").post(checkReponse)
 // PROPOSER ÉNIGME
 router.route("/proposer").get(getPageProposer)
 router.route("/insertEnigme").post(postEnigme)
@@ -89,13 +89,13 @@ router.route("/updateEnigme/:id").put(putEnigme)
 router.route("/deleteEnigme/:id").delete(deleteEnigme)
 
 // ----------------------------------------------------------------------- //
-// -----------------------------PROFIL------------------------------------ //
+// -----------------------------PROFILE----------------------------------- //
 // ----------------------------------------------------------------------- //
 
 // profile ID
-router.route("/profil/:id").get(profilId)
+router.route("/profile/:id").get(profileId)
 // EDIT PROFILE ID
-router.route("/profilEdit/:id").put(upload.single("avatar"), profilEdit)
+router.route("/profileEdit/:id").put(upload.single("avatar"), profileEdit)
 
 // router.route("/checkRoles").put(checkMembre)
 // ----------------------------------------------------------------------- //
