@@ -25,7 +25,7 @@ const
   { mail, mailReply } = require("../controllers/nodeMailer"),
   { message, messageId, deleteMessage } = require("../controllers/messageAdmin"),
   { page404 } = require("../controllers/page404"),
-  { profileId, profileEdit } = require("../controllers/profile"),
+  { profilId, profilEdit } = require("../controllers/profil"),
   { login, inscription, logout, getPageInscription,getPageVerification } = require("../controllers/authController"), 
   {checkMembre} = require("../../public/js/adminCheck"),
   {GetResetPassword,PostResetPassword,PutResetPassword} = require("../controllers/userController"),
@@ -89,13 +89,13 @@ router.route("/updateEnigme/:id").put(putEnigme)
 router.route("/deleteEnigme/:id").delete(deleteEnigme)
 
 // ----------------------------------------------------------------------- //
-// -----------------------------PROFILE----------------------------------- //
+// -----------------------------PROFIL------------------------------------ //
 // ----------------------------------------------------------------------- //
 
-// profile ID
-router.route("/profile/:id").get(profileId)
-// EDIT PROFILE ID
-router.route("/profileEdit/:id").put(upload.single("avatar"), profileEdit)
+// profil ID
+router.route("/profil/:id").get(profilId)
+// EDIT PROFIL ID
+router.route("/profilEdit/:id").put(upload.single("avatar"), profilEdit)
 
 // router.route("/checkRoles").put(checkMembre)
 // ----------------------------------------------------------------------- //

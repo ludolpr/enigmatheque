@@ -1,19 +1,19 @@
 <div class="col-md-12 mh100 decallageTop">
 
   <div class="col-md-12 text-center mb-5">
-    <h1 class="container border-bottom border-secondary border-3">Votre profile
+    <h1 class="container border-bottom border-secondary border-3">Votre profil
       personnel</h1>
   </div>
 
   <div class="d-flex justify-content-center">
-    <img src="{{profile.avatar}}" class="img500 border-success rounded-4 img-thumbnail img-fluid " alt="" />
+    <img src="{{profil.avatar}}" class="img500 border-success rounded-4 img-thumbnail img-fluid " alt="" />
   </div>
   <div class="col-md-12 d-flex justify-content-center row">
     <div class="col-md-12 d-flex justify-content-center mb-3 mt-3">
-      <h2>Nom d'utilisateur: {{profile.name }}</h2>
+      <h2>Nom d'utilisateur: {{profil.name }}</h2>
     </div>
     <div class="col-md-12 d-flex justify-content-center mb-3 ">
-      <h3>Ton email: {{profile.email}}</h3>
+      <h3>Ton email: {{profil.email}}</h3>
 
     </div>
     <div class="bioBG p-3 m-5 w-50">
@@ -23,7 +23,7 @@
       </div>
       <div class="col-md-12 d-flex justify-content-center mb-3">
         <p>
-          {{{profile.bio}}}
+          {{{profil.bio}}}
         </p>
       </div>
     </div>
@@ -41,36 +41,36 @@
     </button>
   </div>
 
-  <form action="/profileEdit/{{profile.id}}?_method=PUT" method="post" enctype="multipart/form-data">
+  <form action="/profilEdit/{{profil.id}}?_method=PUT" method="post" enctype="multipart/form-data">
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-fullscreen ">
         <div class="modal-content bg-dark">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modification de votre profile : {{upper profile.name}}</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Modification de votre profil : {{upper profil.name}}</h5>
             <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <div class="col-md-12 text-center mb-3 d-flex justify-content-center">
 
-              <img src="{{profile.avatar}}" class="img500 border-success rounded-4 img-thumbnail img-fluid" alt="" />
+              <img src="{{profil.avatar}}" class="img500 border-success rounded-4 img-thumbnail img-fluid" alt="" />
 
             </div>
             <div class="col-md-12 d-flex justify-content-center">
 
               <input type="file" id="avatar" class="border border-3 border-success mt-3 mb-3" name="avatar"
-                accept="image/png, image/jpeg" value="{{profile.avatar}}" />
+                accept="image/png, image/jpeg" value="{{profil.avatar}}" />
               <i class="fa-regular fa-circle-check d-flex align-items-center ms-2"></i>
             </div>
             <div class="container col-md-12 text-center d-flex justify-content-center mb-3">
 
-              <input type="text" class="border border-3 border-success" name="name" value="{{profile.name}}"
+              <input type="text" class="border border-3 border-success" name="name" value="{{profil.name}}"
                 placeholder="nom d'utilisateur" />
               <i class="fa-regular fa-circle-check d-flex align-items-center ms-2"></i>
             </div>
             <div class="container col-md-12 text-center d-flex justify-content-center mb-3">
 
-              <input type="email" class="border border-3 border-success" name="email" value="{{profile.email}}"
+              <input type="email" class="border border-3 border-success" name="email" value="{{profil.email}}"
                 placeholder="email" />
               <i class="fa-regular fa-circle-check d-flex align-items-center ms-2"></i>
             </div>
@@ -95,7 +95,7 @@
 
               <div id="container">
                 <textarea value="" name="bio" id="editor" cols="30" rows="10">
-              {{profile.bio}}
+              {{profil.bio}}
 
               </textarea>
 
