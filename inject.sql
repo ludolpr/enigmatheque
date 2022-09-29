@@ -1,1 +1,2 @@
 INSERT INTO `membres` (`id`,`name`,`password`,`email`,`isVerified`,`isAdmin`,`isBan`,`avatar`) VALUES (1,'Admin',('ludo90Eni-'),'ludolpr@gmail.com',0,1,0,'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.ms_ni44c-_TBsdHzF0W5awHaHa%26pid%3DApi&f=1');
+ 
