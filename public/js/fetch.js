@@ -28,7 +28,7 @@ let getData = async (keys) => {
         response.json().then(function (pixdata) {
           console.log(pixdata.hits[0].webformatURL);
 
-          if (pixdata.hits[0]) img.src = pixdata.hits[i].webformatURL
+          if (pixdata.hits[0]) img.src = pixdata.hits[0].webformatURL
           else {
             const lastKey = motclef.split(' ')[motclef.split(' ').length - 1]
             console.log("lastKey", lastKey,pixdata.hits[0].hits.tag)
