@@ -67,10 +67,13 @@ const
     //   `INSERT INTO enigme (titre , difficulty, content, solus, id_user) VALUES ("${titre}", "${difficulty}", "${content}", "${solus}", "${req.session.user.id}");`,
     // );
     //
-    const insertEnigme = await db.query(`INSERT INTO enigme SET titre=:titre, difficulty=:difficulty, content=:content, solus=:solus, id_user="${req.session.user.id}"`, {titre, difficulty, content, solus});
+    const insertEnigme = await db.query(`INSERT INTO enigme SET titre=:titre, difficulty=:difficulty, content=:content, solus=:solus,
+     id_user="${req.session.user.id}"`, {titre, difficulty, content, solus});
    
     const [newEnigme] = await db.query(`SELECT * FROM enigme WHERE id_enigme = ${insertEnigme.insertId}`)
-    console.log('memotechnik', insertEnigme, newEnigme)
+    console.log('insert :', insertEnigme)
+    console.log("new insert",  insertEnigme.insertId);
+    console.log("new enigme",  newEnigme);
     // console.log("mode", MODE);
     if (MODE === "test")
       res.json({
