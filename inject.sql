@@ -1,2 +1,31 @@
-INSERT INTO `membres` (`id`,`name`,`password`,`email`,`isVerified`,`isAdmin`,`isBan`,`avatar`) VALUES (1,'Admin',('ludo90Eni-'),'ludolpr@gmail.com',0,1,0,'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.ms_ni44c-_TBsdHzF0W5awHaHa%26pid%3DApi&f=1');
- 
+   SET GLOBAL log_bin_trust_function_creators=1;
+DROP FUNCTION IF EXISTS fnStripTags;
+
+
+CREATE FUNCTION fnStripTags($str text, $tag text,$keep_phrase bool) RETURNS text
+    BEGIN
+        DECLARE $start, $end INT DEFAULT 1;
+        SET $str = COALESCE($str, '');
+        LOOP
+            SET $start = LOCATE(CONCAT('<', $tag), $str, $start);
+            IF (!$start) THEN RETURN $str; END IF;
+            IF ($keep_phrase) THEN
+                SET $end = LOCATE('>', $str, $start);
+                IF (!$end) THEN SET $end = $start; END IF;
+                SET $str = INSERT($str, $start, $end - $start + 1, '');
+                SET $str = REPLACE($str, CONCAT('</', $tag, '>'), '');
+            ELSE
+                SET $end = LOCATE(CONCAT('</', $tag, '>'),$str,$start);
+                IF (!$end) THEN 
+                    SET $end = LOCATE('/>',$str,$start); 
+                    SET $str = INSERT($str, $start, $end - $start + 2, '');
+                ELSE 
+                    SET $str = INSERT($str, $start, $end - $start 
+                       + LENGTH(CONCAT('</', $tag, '>')), '');
+                END IF;
+            END IF;
+        END LOOP;
+    END //
+    |
+DELIMITER ;
+SELECT fnStripTags('this <html>is <b>a test</b>, nothing more</html>');

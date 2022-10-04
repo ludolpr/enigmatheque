@@ -27,13 +27,16 @@ let getData = async (keys) => {
       if (response.ok) {
         response.json().then(function (pixdata) {
           console.log(pixdata.hits[0].webformatURL);
+          
 
           if (pixdata.hits[0]) img.src = pixdata.hits[0].webformatURL
           else {
+            
             const lastKey = motclef.split(' ')[motclef.split(' ').length - 1]
             console.log("lastKey", lastKey,pixdata.hits[0].hits.tag)
             getData(lastKey)
           }
+          
           // console.log("pixdata", pixdata.hits[0].webformatURL);
         })
       } else {

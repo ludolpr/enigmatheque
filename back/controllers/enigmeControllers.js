@@ -67,7 +67,7 @@ const
     //   `INSERT INTO enigme (titre , difficulty, content, solus, id_user) VALUES ("${titre}", "${difficulty}", "${content}", "${solus}", "${req.session.user.id}");`,
     // );
     //
-    const insertEnigme = await db.query(`INSERT INTO enigme SET titre=:titre, difficulty=:difficulty, content=:content, solus=:solus,
+    const insertEnigme = await db.query(`INSERT INTO enigme SET titre=:tit  re, difficulty=:difficulty, content=:content, solus=:solus,
      id_user="${req.session.user.id}"`, {titre, difficulty, content, solus});
    
     const [newEnigme] = await db.query(`SELECT * FROM enigme WHERE id_enigme = ${insertEnigme.insertId}`)
@@ -121,11 +121,12 @@ const
       `UPDATE enigme SET titre="${titre}", difficulty="${difficulty}", content="${content}", solus="${solus}", is_Verified="${is_Verified === "on" ? 1 : 0
       }" WHERE id_enigme="${id}";`
     );
+    const fnStripTags = await db.query(`UPDATE enigme set solus = fnStripTags(solus) where id_enigme=${putEnigme.insertId}`);
 
     // Redirection vers la page admin
     if (MODE === "test")
       res.json({
-        putEnigme,
+        putEnigme,fnStripTags,
         flash: "Votre enigme à été modifié",
         dbEnigmes: await db.query('SELECT * FROM enigme')
       });
