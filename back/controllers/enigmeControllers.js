@@ -46,7 +46,7 @@ const
     //   console.log(dbEnigmes);
 
     if (process.env.MODE === "test") {
-      console.log("salut !!!", dbEnigmes);
+      // console.log("salut !!!", dbEnigmes);
       res.json({ enigmes: dbEnigmes, titre: req.query.q });
     } else {
       res.render("enigme", {
@@ -67,8 +67,8 @@ const
     //   `INSERT INTO enigme (titre , difficulty, content, solus, id_user) VALUES ("${titre}", "${difficulty}", "${content}", "${solus}", "${req.session.user.id}");`,
     // );
     //
-    const insertEnigme = await db.query(`INSERT INTO enigme SET titre=:tit  re, difficulty=:difficulty, content=:content, solus=:solus,
-     id_user="${req.session.user.id}"`, {titre, difficulty, content, solus});
+    const insertEnigme = await db.query(`INSERT INTO enigme SET titre=:titre, difficulty=:difficulty, content=:content, solus=:solus, id_user=:id_user`,
+     {titre, difficulty, content, solus, id_user: req.session.user.id});
    
     const [newEnigme] = await db.query(`SELECT * FROM enigme WHERE id_enigme = ${insertEnigme.insertId}`)
     console.log('insert :', insertEnigme)
@@ -121,12 +121,13 @@ const
       `UPDATE enigme SET titre="${titre}", difficulty="${difficulty}", content="${content}", solus="${solus}", is_Verified="${is_Verified === "on" ? 1 : 0
       }" WHERE id_enigme="${id}";`
     );
-    const fnStripTags = await db.query(`UPDATE enigme set solus = fnStripTags(solus) where id_enigme=${putEnigme.insertId}`);
+    // const fnStripTags = await db.query(`UPDATE enigme set solus = fnStripTags(solus) where id_enigme=${putEnigme.insertId}`); 
+    // mettre  fnStripTags dans mon mode test au besoins
 
     // Redirection vers la page admin
     if (MODE === "test")
       res.json({
-        putEnigme,fnStripTags,
+        putEnigme,
         flash: "Votre enigme à été modifié",
         dbEnigmes: await db.query('SELECT * FROM enigme')
       });
