@@ -15,7 +15,7 @@ const
         db.query(
             `SELECT * FROM membres WHERE email="${email}"`,
             function (err, data) {
-                console.log("1", data);
+                // console.log("1", data);
                 if (err) throw err;
 
                 let user = data[0];
@@ -92,6 +92,7 @@ const
                 )}", isAdmin=0,isVerified=0, isBan=0, avatar="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.ms_ni44c-_TBsdHzF0W5awHaHa%26pid%3DApi&f=1"`
             );
             const [membres] = await db.query(`SELECT * FROM membres WHERE id = ${newUser.insertId}`)
+            console.log([membres]);
             const token = jwt.sign({ membres }, "SecretKey");
        
             // req.session.membres = membres

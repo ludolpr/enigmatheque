@@ -9,7 +9,8 @@
     "testChai": "MODE=test nodemon --exec 'mocha  ./test/enigmesChai.js'",
     "swagger": "MODE=test nodemon server.js",
     "start": "MODE=prod node server.js",
-    "dev": "MODE=dev nodemon server.js"
+    "dev": "MODE=dev nodemon server.js",
+    "sass": "sass --watch public/css/sass/index.scss ./public/css/style.css"
   },
   "repository": {
     "type": "git",
@@ -44,7 +45,6 @@
     "mysql": "^2.18.1",
     "node": "^18.5.0",
     "nodemailer": "^6.7.8",
-    "sharp": "^0.30.7",
     "swagger-ui-express": "^4.5.0"
   },
   "devDependencies": {

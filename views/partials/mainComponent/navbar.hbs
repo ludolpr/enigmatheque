@@ -1,141 +1,218 @@
 <!-- Fixed navbar -->
-<nav class="border-bottom navbar navbar-expand-md navbar-dark navbar fixed-top bg-dark">
+<nav
+  class="border-bottom navbar navbar-expand-md navbar-dark navbar fixed-top bg-dark"
+>
   <div class="container-fluid">
+
     <a class="navbar-brand" href="/">EnigmaTheque</a>
 
-    {{#if flash }}
-    <div class="position-fixed m-5 top-0 end-0 p-3" style="z-index: 9999">
-      <div id="po" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="width: auto;">
-        <div class="toast-header bg-dark">
-          <strong class="me-auto">Message automatique</strong>
-          <small class="mx-2">A l'instant</small>
-          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-        <div class="toast-body bg-dark">
-          {{ flash }}
+    {{#if flash}}
+      <div class="position-fixed m-5 top-0 end-0 p-3" style="z-index: 9999">
+        <div
+          id="po"
+          class="toast"
+          role="alert"
+          aria-live="assertive"
+          aria-atomic="true"
+          style="width: auto;"
+        >
+          <div class="toast-header bg-dark">
+            <strong class="me-auto">Message automatique</strong>
+            <small class="mx-2">A l'instant</small>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="toast"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="toast-body bg-dark">
+            {{flash}}
+          </div>
         </div>
       </div>
-    </div>
-    <script>
-      var toastDiv = document.getElementById('po')
-      setTimeout(() => {
-        var toast = new bootstrap.Toast(toastDiv)
-        toast.show()
-      }, 0)
-    </script>
-    {{/if }}
-
+      <script>
+        var toastDiv = document.getElementById('po') setTimeout(() => { var
+        toast = new bootstrap.Toast(toastDiv) toast.show() }, 0)
+      </script>
+    {{/if}}
 
     <script>
-      const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
-      const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new
-        bootstrap.Popover(popoverTriggerEl))
+      const popoverTriggerList =
+      document.querySelectorAll('[data-bs-toggle="popover"]') const popoverList
+      = [...popoverTriggerList].map(popoverTriggerEl => new
+      bootstrap.Popover(popoverTriggerEl))
     </script>
 
-
-    <button class="navbar-toggler collapsed m-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-      aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <button
+      class="navbar-toggler collapsed m-3"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarCollapse"
+      aria-controls="navbarCollapse"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
     {{#if user}}
-    <div class="collapse navbar-collapse d-flex" id="navbarNavDropdown">
-      <ul class="navbar-nav me-auto mb-2 mb-md-0">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#" role="button"
-            aria-expanded="false">Enigmes & solutions
-          </a>
-          {{! liste enigmes }}
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/enigme?q=facile">Facile</a></li>
-            <li>
-              <hr class="dropdown-divider" />
-            </li>
-            <li><a class="dropdown-item" href="/enigme?q=normal">Normal</a></li>
-            <li>
-              <hr class="dropdown-divider" />
-            </li>
-            <li><a class="dropdown-item" href="/enigme?q=difficile">Difficile</a></li>
-          </ul>
-          {{! deux pages suivantes }}
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-light" href="/proposer">Proposer</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-light" href="/enigme?q=devinettes">Devinettes</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-light" href="/enigme?q=homme-sage">Homme-sage</a>
-          {{!-- "le querry au dessus c'est possible ?" --}}
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-light" href="/profil/{{this.user.id}}">Profil</a>
-        </li>
-        
+
+      <div
+        class="collapse navbar-collapse d-flex col-md-6 justify-content-around"
+        id="navbarNavDropdown"
+      >
+        <ul class="navbar-nav me-auto mb-2 mb-md-0 d-flex">
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle text-light"
+              data-bs-toggle="dropdown"
+              href="#"
+              role="button"
+              aria-expanded="false"
+            >Enigmes & solutions
+            </a>
+            {{! liste enigmes }}
+            <ul class="dropdown-menu">
+              <li><a
+                  class="dropdown-item"
+                  href="/enigme?q=facile"
+                >Facile</a></li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li><a
+                  class="dropdown-item"
+                  href="/enigme?q=normal"
+                >Normal</a></li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li><a
+                  class="dropdown-item"
+                  href="/enigme?q=difficile"
+                >Difficile</a></li>
+            </ul>
+            {{! deux pages suivantes }}
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="/proposer">Proposer</a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link text-light"
+              href="/enigme?q=devinettes"
+            >Devinettes</a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link text-light"
+              href="/enigme?q=homme-sage"
+            >Homme-sage</a>
+            {{! "le querry au dessus c'est possible ?" }}
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link text-light"
+              href="/profil/{{this.user.id}}"
+            >Profil</a>
+          </li>
+
           {{#if user.isAdmin}}
-        <li class="nav-item">
-          <a class="nav-link text-light" href="/admin">Admin</a>
-        </li>
-        {{/if}}
-      </ul>
-      {{! Deconnexion }}
-      <form action="/logout" method="post" class="d-flex ">
+            <li class="nav-item">
+              <a class="nav-link text-light" href="/admin">Admin</a>
+            </li>
+          {{/if}}
 
-        <button type="submit" class="d-flex justify-content-lg-end text-light  btn btn-danger me-2 ms-auto"
-          data-bs-target="#staticBackdrop">Deconnexion
-        </button>
-        </li>
+        </ul>
 
+      </div>
+      <div class="col-md-2">
+        <form action="/logout" method="post" class="d-flex">
+          {{! Deconnexion }}
+          <button
+            type="submit"
+            class="d-flex justify-content-lg-end align-items-center text-light btn btn-danger me-2 ms-auto"
+            data-bs-target="#staticBackdrop"
+          >Deconnexion
+          </button>
 
-        </li>
-      </form>
-
-
-
-    </div>
+        </form>
+      </div>
     {{else}}
 
-    <div class="d-flex justify-content-end justify-content-center ">
-      <button type="button" class="text-dark btn btn-secondary me-2" data-bs-toggle="modal"
-        data-bs-target="#staticBackdrop">Connexion</button>
+      <div class="d-flex justify-content-end justify-content-center">
+        <button
+          type="button"
+          class="text-dark btn btn-secondary me-2"
+          data-bs-toggle="modal"
+          data-bs-target="#staticBackdrop"
+        >Connexion</button>
 
-      <a href="/inscription">
-        <button type="button" class="text-dark btn btn-secondary">Inscription</button>
-      </a>
+        <a href="/inscription">
+          <button
+            type="button"
+            class="text-dark btn btn-secondary"
+          >Inscription</button>
+        </a>
 
-    </div>
+      </div>
     {{/if}}
   </div>
 </nav>
-{{! modal }}
 
-
-
-<div class="modal fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-  aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog  modal-dialog-centered">
+<div
+  class="modal fade"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content bg-success">
       <div class="modal-header">
         <h1 class="modal-title" id="staticBackdropLabel">Connexion</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <form action="/login" method="post">
         <div class="modal-body">
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">E-mail</label>
-            <input type="email" name="email" class="form-control" id="exampleInputEmail1"
-              aria-describedby="emailHelp" />
+            <input
+              type="email"
+              name="email"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+            />
             <div id="emailHelp" class="form-text text-light">Nous ne partagerons
               jamais votre adresse électronique avec qui que ce soit.</div>
           </div>
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
-            <input name="password" type="password" class="form-control" id="exampleInputPassword1" />
+            <input
+              name="password"
+              type="password"
+              class="form-control"
+              id="exampleInputPassword1"
+            />
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary " action="/resetpassword" method="post" data-bs-toggle="modal"
-            data-bs-target="#staticPasswordBackdrop">Mot de passe oublié
+          <button
+            type="button"
+            class="btn btn-secondary"
+            action="/resetpassword"
+            method="post"
+            data-bs-toggle="modal"
+            data-bs-target="#staticPasswordBackdrop"
+          >Mot de passe oublié
           </button>
           <button type="button" class="btn btn-secondary">Fermer
           </button>
@@ -147,27 +224,85 @@
   </div>
 
 </div>
-{{!-- modal mot de passe oublié --}}
+{{! modal mot de passe oublié }}
 <form action="/resetpassword" method="post">
-  <div class="modal fade" id="staticPasswordBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog  modal-dialog-centered">
-      <div class="modal-content  bg-success">
+  <div
+    class="modal fade"
+    id="staticPasswordBackdrop"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-success">
         <div class="modal-header">
           <h5 class="modal-title" id="staticBackdropLabel">Mot de passe oublié</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
         </div>
         <div class="modal-body">
-          <label for="exampleFormControlInput1" class="form-label text-white">Votre adresse
-            mail</label>
-          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="" name="email">
+          <label
+            for="exampleFormControlInput1"
+            class="form-label text-white"
+          >Votre adresse mail</label>
+          <input
+            type="email"
+            class="form-control"
+            id="exampleFormControlInput1"
+            placeholder=""
+            name="email"
+          />
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >Fermer</button>
           <button type="submit" class="btn btn-primary">Envoyer</button>
         </div>
       </div>
     </div>
   </div>
 </form>
+
+{{! <nav class="navbar navbar-expand-md navbar-dark bg-dark" aria-label="Fourth navbar example">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Expand at md</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExample04">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled">Disabled</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+        </ul>
+        <form role="search">
+          <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+        </form>
+      </div>
+    </div>
+  </nav> }}

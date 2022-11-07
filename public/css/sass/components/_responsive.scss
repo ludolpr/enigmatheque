@@ -1,11 +1,42 @@
+
+@media screen and (max-width:1200px) {
+        .btn {
+            width: auto;
+            font-size: 12px;
+            padding: 0;
+        }
+        body{
+            font-size:12px ;
+        }
+        nav{
+            font-size: 15px;
+        }
+        .carousel-item img{
+            min-height: 650px;
+           }
+       h1,h2,h3,h4,h5{
+        font-size:12px
+       } 
+    button{
+        width: auto;
+        padding: 0;
+        margin-top: 5px;
+    }
+       
+}
 @media screen and (max-width:1024px) {
+    body{
+        font-size: 12px ;
+    }
     nav{
-        font-size: 15px;
+        font-size: 12px;
     }
-    .btn{
-        font-size: 15px;    
-        height: 35px;
-    }
+   .carousel-item {
+    max-height: 500px;
+   }
+   a {
+    font-size: 10px;
+   }
     
 }
 
@@ -15,16 +46,29 @@
     }
     .btn{
         font-size: 10px;
-        width: 75px;
-        height: 25px;
+        padding: 5px;
+        
     }
+    .carousel-item {
+        max-height: 500px;
+       }
 }
 @media screen and (max-width:768px) {
     .bgDoor{
         background-image: url('/assets/images/door-1590024_640.jpg'); 
         height: 100vh;
+        max-width: 100%;
         
     }
+    .btn{
+        margin:0 ;
+        margin-top: 5px;
+    }
+   
+    h1,h2,h3,h4,h5{
+        margin-top: 5px;
+       }
+    
 }
 @media screen and (max-width:400px) {
     

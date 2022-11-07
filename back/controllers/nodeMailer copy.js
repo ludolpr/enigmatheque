@@ -23,7 +23,6 @@ const transporter = require("../utils/nodeMailer");
       if (err) {
         callback(err, info);
       } else {
-        zz;
         callback(null, info);
       }
       transporter.close();

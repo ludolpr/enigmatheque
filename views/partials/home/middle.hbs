@@ -1,26 +1,30 @@
-<div class="containe bg-secondary w-100 pb-5 borderCarrousel ">
+<div class="container-fluid bg-secondary w-100 pb-5 borderCarrousel ">
   <div class="col-md-12 container">
     <div class="col-md-12 align-items-center  ">
 
       <h1
         class="p-3 text-center text-uppercase text-dark border-bottom border-dark border-3 mb-5 fw-bold align-items-center mt-5">
-        Voici une selection d'enigmes</h1>
+        Voici une selection d'enigmes
+      </h1>
       <div id="carouselExampleCaptions" class="carousel slide  " data-bs-ride="carousel">
-        <div class="carousel-inner col-md-6 ">
+        <div class="carousel-inner col-md-6  ">
           
           {{#each enigmes}}
-          <div id="it-" class="carousel-item" style="min-height: 650px; max-height: 650px;" data-bs-interval="5000">
-            <img src=""  class="img-fluid d-block w-100 " style="min-height: 650px; max-height: 650px;" alt="..." id="img">
+          <div id="it-" class="carousel-item"  data-bs-interval="5000">
+            <img src=""  class="img-fluid d-block w-100 "  alt="..." id="imgFetch">
             <div class="carousel-caption d-none d-md-block  bg-dark">
               <a href="/enigme/{{id_enigme }}" class=" text-decoration-none ">
 
-                <h3 id="tag" class="text-light text-decoration-none">{{this.titre}} </h3>
+                <h3  class="text-light text-decoration-none " id="tag">{{this.titre}} </h3>
               </a>
-                {{{cutStr this.content}}}
+              <div class="textEnigme">
+
+                {{{ this.content}}}
+              </div>
             </div>
           </div>
           
-          {{/each}}
+          {{/each}} 
 
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
             data-bs-slide="prev">
