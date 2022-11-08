@@ -114,6 +114,8 @@ const getPageProposer = async (req, res) => {
         is_Verified === "on" ? 1 : 0
       }" WHERE id_enigme="${id}";`
     );
+    // const fnStripTags = await db.query(`UPDATE enigme set solus = fnStripTags(solus) where id_enigme=${putEnigme.insertId}`);
+    // mettre  fnStripTags dans mon mode test au besoins
 
     // Redirection vers la page admin
     if (MODE === "test")

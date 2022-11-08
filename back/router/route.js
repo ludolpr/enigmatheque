@@ -79,8 +79,10 @@ router
 
 // ----------------------------------------------------------------------- //
 // -----------------------------NODEMAILER-------------------------------- //
-router.use(isSession);
 // ----------------------------------------------------------------------- //
+
+//  session par utilisateur
+router.use(isSession);
 
 // DIRECT MAIL ( NO CONNECTED )
 router.route("/mail").post(mail);
@@ -140,7 +142,7 @@ router.get("/verification/:token", (req, res) => {
 // ----------------------------------------------------------------------- //
 // -------------------------------ADMIN----------------------------------- //
 // ----------------------------------------------------------------------- //
-router.use(isAdmin);
+router.use(isAdmin); // middleware admin donne accè au routes ci-dessous
 
 // GET MESSAGE
 router.route("/message/:id").get(messageId);
