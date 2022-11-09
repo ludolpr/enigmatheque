@@ -10,7 +10,8 @@
         <div class="carousel-inner col-md-6  ">
           
           {{#each enigmes}}
-          <div id="it-" class="carousel-item"  data-bs-interval="5000">
+          <div>
+<div id="it-" class="carousel-item"  data-bs-interval="5000">
             <img src=""  class="img-fluid d-block w-100 "  alt="..." id="img">
             <div class="carousel-caption d-none d-md-block  bg-dark">
               <a href="/enigme/{{id_enigme }}" class=" text-decoration-none ">
@@ -18,11 +19,12 @@
                 <h3  class="text-light text-decoration-none " id="tag">{{this.titre}} </h3>
               </a>
               <div class="textEnigme">
-
                 {{{ this.content}}}
               </div>
             </div>
           </div>
+          </div>
+          
           
           {{/each}} 
 
