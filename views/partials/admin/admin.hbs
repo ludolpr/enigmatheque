@@ -97,7 +97,7 @@
                 <div class="modal-body text-dark">
                   <form action="/updateEnigme/{{ this.id_enigme }}?_method=PUT" method="post">
                     <div class="container bg-secondary text-dark p-3 mb-6 mt-2">
-                      <div class="row">
+                      <div class="row d-flex justify-content-center">
 
                         <label for="titre" class="form-label  p-2 ps-0">Votre titre</label>
                         <input type="text" class="form-control border-success align-items-center mb-3"
@@ -129,7 +129,7 @@
                         </textarea>
                           </div>
                         <div class="col-md-12 m-0 ">
-                          <label class=" text-dark" for="">Enigme verifiée</label>
+                          <label class="mt-2 text-dark" for="">Enigme verifiée</label>
                           <input type="checkbox" id="isVerified{{ this.id_enigme }}" name="is_Verified"
                             class="bg-successform-check-input" />
                         </div>
@@ -168,9 +168,9 @@
                   {{!--------------------------------------------------------------------------}}
                   {{!--------------------------------------------------------------------------}}
                   {{!-- Supprimer l'énigme --}}
-                  <form action="/deleteEnigme/{{ this.id_enigme }}?_method=DELETE" method="post" class="p-0 m-0">
-                    <button type="submit" class="m-0 btn btn-labeled btn-danger mt-3 col-md-12">
-                      <span class="btn-label"><i class="fa fa-remove m-1"></i></span>Retirer
+                  <form action="/deleteEnigme/{{ this.id_enigme }}?_method=DELETE" method="post" class="p-0 m-2 d-flex justify-content-center">
+                    <button type="submit" class=" btn btn-labeled btn-danger col-md-12 ">
+                      <span class="btn-label"><i class="fa fa-remove m-1 pe-1"></i></span>Retirer
                     </button>
                   </form>
                 </div>
@@ -181,23 +181,12 @@
       </div>
     </div>
 {{!-- import de ck editor --}}
-    <script src="../../../assets/js/ckeditor.js"></script>
-    {{!-- essai n°1 = fn --}}
+    <script src="/assets/js/ckeditor.js"></script>
     <script type="text/javascript">
     ClassicEditor.create(document.getElementById('editorEnigme{{ this.id_enigme }}'))
     ClassicEditor.create(document.getElementById('editorSolus{{ this.id_enigme }}'))
     </script>
    
-    <script>
-
-      const isVerified1{{this.id_enigme}} = document.getElementById('isVerified1{{this.id_enigme}}')
-      const vrf{{this.id_enigme}} = {{this.is_Verified}}
-      if (vrf{{this.id_enigme}}.toString() === "1" ) isVerified1{{ this.id_enigme }}.checked = true;
-
-      console.log('test', isVerified1{{this.id_enigme}}, typeof vrf{{this.id_enigme}}, (vrf{{this.id_enigme}}.toString() === "1"))
-
-    </script>
-
     {{/each}}
     {{!-- ckeditor boucle --}}
 
@@ -229,12 +218,12 @@
         </div>
 
       </div>
-      <div class="col-md-8">
+      <div class="col-md-7">
         <h3 class="text-left"><a href="#" class="text-decoration-none text-light">Sujet: {{this.sujet}}</a></h3>
         <p class="text-left">Message: {{this.message}}</p>
 
       </div>
-      <div class="col-md-1 d-flex justify-content-center align-items-center">
+      <div class="col-md-1 d-flex justify-content-center align-items-center me-3">
         <form action="/deleteMessage/{{this.id}}?_method=DELETE" method="post">
           <button type="submit" class="btn btn-labeled btn-danger">
             <span class="btn-label"><i class="fa fa-check m-1"></i></span>Suprimer
@@ -242,7 +231,7 @@
         </form>
 
       </div>
-      <form action="/mail" method="post" class="col-md-1 d-flex justify-content-center align-items-center">
+      <form action="/mailReply" method="post" class="col-md-1 d-flex justify-content-center align-items-center">
         <div class="col-md-1 d-flex justify-content-center align-items-center">
           <button type="button" class="btn btn-labeled btn-light" data-bs-toggle="modal"
             data-bs-target="#messageModal{{@index}}">
@@ -269,7 +258,7 @@
     tabindex="0">
     {{#each dbMembres}}
 
-    <div class="col-md-12 bg-dark border-top border-success border-5 text-light m-0 row mb-1 xl:col">
+    <div class="col-md-12 bg-dark border-top border-success border-5 text-light m-0 row mb-1 ">
       {{!--------------------------------------------------------------------------}}
       {{!--------------------------------------------------------------------------}}
       {{!-- Membres du site --}}
@@ -277,7 +266,7 @@
       {{!--------------------------------------------------------------------------}}
 
       <div
-        class="col-md-2 bg-success d-flex justify-content-center align-items-center border-light border-bottom border-2 xl:col ">
+        class="col-md-2 bg-success d-flex justify-content-center align-items-center border-light border-bottom border-2 lg:col-md-12 ">
 
         <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -286,16 +275,16 @@
         </div>
 
       </div>
-      <div class="col-md-3  d-flex justify-content-center align-items-center border-light border-bottom border-2">
+      <div class="col-md-3 d-flex justify-content-center align-items-center border-light border-bottom border-2 ">
         <h3 class="text-center"><a href="#" class="text-decoration-none text-light center fs-5 ">{{this.email}}</a>
         </h3>
 
       </div>
 
-      <div class="col-md-7 d-flex justify-content-center align-items-center border-light border-bottom border-2 xl:col col-md-12">
+      <div class="col-md-7 d-flex justify-content-center align-items-center border-light border-bottom border-2 xl:col-sm-12">
 
         <form action="/checkRoles?_method=PUT" method="post" class="d-flex justify-content-center align-items-center">
-          <button type="button" class="h-50 d-flex align-items-center btn btn-labeled btn-light m-3" name="isAdmin">
+          <button type="button" class="h-50 d-flex align-items-center btn btn-labeled btn-light m-3 p-2" name="isAdmin">
             <div class="form-check form-switch">
               <span class="btn-label"><i data-bs-toggle="popover" data-bs-placement="top"
                   data-bs-content="Administrateur" class="fs-4 fa-solid fa-image-portrait text-dark"></i></span>
@@ -303,21 +292,21 @@
             </div>
           </button>
 
-          <button type="button" class="h-50 d-flex align-items-center btn btn-labeled btn-light m-3" name="isBan">
-            <div class="form-check form-switch">
+          <button type="button" class="h-50 d-flex align-items-center btn btn-labeled btn-light m-3 p-2" name="isBan">
+            <div class="form-check form-switch ">
               <span class="btn-label"><i data-bs-toggle="popover" data-bs-placement="top"
-                  data-bs-content="Utilisateur banni" class="fs-4 fa-solid fa-user-slash text-danger"></i></span>
+                  data-bs-content="Utilisateur banni" class="fs-4 fa-solid fa-user-slash  text-danger"></i></span>
               <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
             </div>
           </button>
           
 
           <button type="submit"
-            class="h-50 w-50 btn btn-labeled btn-light mt-3 mb-3 d-flex  justify-content-center align-items-center m-3">
+            class=" btn btn-labeled btn-light mt-3 mb-3 d-flex  justify-content-center align-items-center">
             <a class="text-decoration-none">
               <div class="row">
 
-                <p class="d-flex align-items-center m-1 p-0 h-100">Modifier</p>
+                <p class="d-flex align-items-center m-2 h-100">Modifier</p>
               </div>
             </a>
           </button>
@@ -330,27 +319,18 @@
             </div>
           </button>
         <button type="button"
-          class="h-50 w-25 btn btn-labeled btn-light mt-3 mb-3 d-flex justify-content-center align-items-center m-0 p-0">
+          class="h-50  btn btn-labeled btn-light mt-3 mb-3 d-flex justify-content-center align-items-center m-0 p-0">
           <a class="text-decoration-none" href="/profil/{{this.id}}">
             <div class="row">
 
-              <p class="d-flex align-items-center m-0">Profil<span class="btn-label"><i
-                    class="fs-4 fa-solid fa-eye text-success m-3"></i></span></p>
+              <p class="d-flex align-items-center m-2">Profil<span class="btn-label"><i
+                    class="fs-4 fa-solid fa-eye text-success m-2 p-2"></i></span>
+              </p>
             </div>
           </a>
         </button>
       </div>
-      <div class="col-md-5 d-flex justify-content-center align-items-center border-light border-bottom border-2">
-
-
-
-
-
-
-
-
-
-      </div>
+     
       <script src="/assets/js/popoverEverywhere.js"></script>
       {{!--------------------------------------------------------------------------}}
       {{!-- Fin des membres du site --}}

@@ -10796,7 +10796,7 @@ body {
   .btn {
     width: auto;
     font-size: 12px;
-    padding: 0;
+    padding: 5px;
   }
   body {
     font-size: 12px;
@@ -10812,7 +10812,7 @@ body {
   }
   button {
     width: auto;
-    padding: 0;
+    padding: 5px;
     margin-top: 5px;
   }
 }

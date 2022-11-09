@@ -1,11 +1,6 @@
-<!-- Fixed navbar -->
-<nav
-  class="border-bottom navbar navbar-expand-md navbar-dark navbar fixed-top bg-dark"
->
+<nav class="navbar navbar-expand-lg bg-light text-light navbar-dark bg-dark">
   <div class="container-fluid">
-
     <a class="navbar-brand" href="/">EnigmaTheque</a>
-
     {{#if flash}}
       <div class="position-fixed m-5 top-0 end-0 p-3" style="z-index: 9999">
         <div
@@ -36,42 +31,38 @@
         toast = new bootstrap.Toast(toastDiv) toast.show() }, 0)
       </script>
     {{/if}}
-
     <script>
       const popoverTriggerList =
       document.querySelectorAll('[data-bs-toggle="popover"]') const popoverList
       = [...popoverTriggerList].map(popoverTriggerEl => new
       bootstrap.Popover(popoverTriggerEl))
     </script>
-
-    <button
-      class="navbar-toggler collapsed m-3"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarCollapse"
-      aria-controls="navbarCollapse"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
     {{#if user}}
-
-      <div
-        class="collapse navbar-collapse d-flex col-md-6 justify-content-around"
-        id="navbarNavDropdown"
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
       >
-        <ul class="navbar-nav me-auto mb-2 mb-md-0 d-flex">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
           <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle text-light"
-              data-bs-toggle="dropdown"
               href="#"
               role="button"
+              data-bs-toggle="dropdown"
               aria-expanded="false"
-            >Enigmes & solutions
+            >
+              Enigmes & solutions
             </a>
-            {{! liste enigmes }}
             <ul class="dropdown-menu">
               <li><a
                   class="dropdown-item"
@@ -91,53 +82,52 @@
                   class="dropdown-item"
                   href="/enigme?q=difficile"
                 >Difficile</a></li>
+
             </ul>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="/proposer">Proposer</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link text-light"
+                href="/enigme?q=devinettes"
+              >Devinettes</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link text-light"
+                href="/enigme?q=homme-sage"
+              >Homme-sage</a>
+              {{! "le querry au dessus c'est possible ?" }}
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link text-light"
+                href="/profil/{{this.user.id}}"
+              >Profil</a>
+            </li>
             {{! deux pages suivantes }}
           </li>
-          <li class="nav-item">
-            <a class="nav-link text-light" href="/proposer">Proposer</a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link text-light"
-              href="/enigme?q=devinettes"
-            >Devinettes</a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link text-light"
-              href="/enigme?q=homme-sage"
-            >Homme-sage</a>
-            {{! "le querry au dessus c'est possible ?" }}
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link text-light"
-              href="/profil/{{this.user.id}}"
-            >Profil</a>
-          </li>
-
           {{#if user.isAdmin}}
             <li class="nav-item">
               <a class="nav-link text-light" href="/admin">Admin</a>
             </li>
           {{/if}}
-
         </ul>
+        <div class="col-md-2">
+          <form action="/logout" method="post" class="d-flex">
+            {{! Deconnexion }}
+            <button
+              type="submit"
+              class="d-flex justify-content-lg-end align-items-center text-light btn btn-danger me-2 ms-auto"
+              data-bs-target="#staticBackdrop"
+            >Deconnexion
+            </button>
 
+          </form>
+        </div>
       </div>
-      <div class="col-md-2">
-        <form action="/logout" method="post" class="d-flex">
-          {{! Deconnexion }}
-          <button
-            type="submit"
-            class="d-flex justify-content-lg-end align-items-center text-light btn btn-danger me-2 ms-auto"
-            data-bs-target="#staticBackdrop"
-          >Deconnexion
-          </button>
 
-        </form>
-      </div>
     {{else}}
 
       <div class="d-flex justify-content-end justify-content-center">
@@ -146,7 +136,8 @@
           class="text-dark btn btn-secondary me-2"
           data-bs-toggle="modal"
           data-bs-target="#staticBackdrop"
-        >Connexion</button>
+        >Connexion
+        </button>
 
         <a href="/inscription">
           <button
@@ -204,7 +195,7 @@
             />
           </div>
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer m-3">
           <button
             type="button"
             class="btn btn-secondary"
@@ -272,37 +263,3 @@
     </div>
   </div>
 </form>
-
-{{! <nav class="navbar navbar-expand-md navbar-dark bg-dark" aria-label="Fourth navbar example">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Expand at md</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarsExample04">
-        <ul class="navbar-nav me-auto mb-2 mb-md-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled">Disabled</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-        </ul>
-        <form role="search">
-          <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-        </form>
-      </div>
-    </div>
-  </nav> }}

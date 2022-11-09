@@ -1,6 +1,6 @@
 var keyGive = "28067265-e1b2e13d58c37680a1a031824";
 // key & import de pixabay
-let img = document.querySelectorAll("#imgFetch");
+let img = document.querySelectorAll("#img");
 // ici le querry selector
 const tag = document.querySelectorAll("#tag");
 // const motclef = tag.innerText;

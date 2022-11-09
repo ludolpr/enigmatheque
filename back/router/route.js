@@ -28,13 +28,12 @@ const { setSession } = require("../utils/setSession"),
     postEnigme,
     getPageProposer,
   } = require("../controllers/enigmeControllers"),
-  { mail, mailReply, mailVisiteur } = require("../controllers/nodeMailer"),
+  { mailReply, mailVisiteur } = require("../controllers/nodeMailer"),
   {
     message,
     messageId,
     deleteMessage,
   } = require("../controllers/messageAdmin"),
-  { page404 } = require("../controllers/page404"),
   { profilId, profilEdit } = require("../controllers/profil"),
   {
     login,
@@ -83,9 +82,6 @@ router
 
 //  session par utilisateur
 router.use(isSession);
-
-// DIRECT MAIL ( NO CONNECTED )
-router.route("/mail").post(mail);
 
 // // CONNECT REQUIRED
 // LOGOUT
