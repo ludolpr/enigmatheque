@@ -26,17 +26,9 @@
           </div>
         </div>
       </div>
-      <script>
-        var toastDiv = document.getElementById('po') setTimeout(() => { var
-        toast = new bootstrap.Toast(toastDiv) toast.show() }, 0)
-      </script>
+      <script src="/assets/js/toast.js"></script>
     {{/if}}
-    <script>
-      const popoverTriggerList =
-      document.querySelectorAll('[data-bs-toggle="popover"]') const popoverList
-      = [...popoverTriggerList].map(popoverTriggerEl => new
-      bootstrap.Popover(popoverTriggerEl))
-    </script>
+     <script src="/assets/js/popoverEverywhere.js"></script>
     {{#if user}}
       <button
         class="navbar-toggler"

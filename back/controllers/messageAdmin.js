@@ -10,10 +10,6 @@ const
     await db.query(
       `INSERT INTO message (name, email, sujet, message ) VALUES ("${name}","${email}", "${sujet}", "${message}");`
     );
-
-    // await db.query(
-    //   `INSERT INTO message (name, email, sujet, message ) VALUES ("${name}","${email}", "${sujet}", "${message}" WHERE id=${id};`)
-
     res.redirect("/");
   },
 

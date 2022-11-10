@@ -4,8 +4,8 @@ const { MAIL_USER } = process.env;
 // ----------------------------------------------------------------------- //
 // ---------------------------NODEMAILER VISITEUR------------------------- //
 // ----------------------------------------------------------------------- //
-
-(mailVisiteur = async (req, res) => {
+const
+mailVisiteur = async (req, res) => {
   const { content, sujet, email } = req.body;
   console.log("mail envoyé", req.body);
 
@@ -31,12 +31,12 @@ const { MAIL_USER } = process.env;
   );
 
   res.render("home", { flash: "E-mail envoyé" });
-}),
+},
   // ----------------------------------------------------------------------- //
   // ------------------------NODEMAILER REPLY------------------------------- //
   // ----------------------------------------------------------------------- //
 
-  (mailReply = async (req, res) => {
+  mailReply = async (req, res) => {
     const { content, sujet, email } = req.body;
     console.log("mail envoyé", req.body);
     // le transporte serf a se connec er a notre boite mail
@@ -61,7 +61,7 @@ const { MAIL_USER } = process.env;
     );
     // res.render("back", { flash: "E-mail envoyé" }); // mon res.render me renvoie dans une page admin bizarre
     res.redirect("/admin");
-  });
+  };
 
 // ----------------------------------------------------------------------- //
 // -----------------------------EXPORTS MODULE---------------------------- //

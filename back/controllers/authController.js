@@ -89,7 +89,7 @@ const
                 `INSERT INTO membres SET name="${name}", email="${email}", password="${await bcrypt.hash(
                     password,
                     bcrypt_salt
-                )}", isAdmin=0,isVerified=0, isBan=0, avatar="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.ms_ni44c-_TBsdHzF0W5awHaHa%26pid%3DApi&f=1"`
+                )}", isAdmin=0,isVerified=0, isBan=0, avatar="default.png"`
             );
             const [membres] = await db.query(`SELECT * FROM membres WHERE id = ${newUser.insertId}`)
             console.log([membres]);

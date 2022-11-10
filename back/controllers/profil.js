@@ -1,7 +1,8 @@
 // IMPORT DES MODULES 
 const bcrypt = require('bcrypt');
 const bcrypt_salt = 10;
-
+const path = require("path");
+const fs = require("fs");
 const
   // ----------------------------------------------------------------------- //
   // -----------------------------PROFIL------------------------------------ //
@@ -18,11 +19,19 @@ const
   },
   profilEdit = async (req, res) => {
     const image = req.file ? req.file.filename : false;
-    console.log("edit::profil", req.body);
+    // console.log("edit::profil", req.body);
     const { id } = req.params;
     const { name, email, password, confPassword, bio } = req.body;
+    const [ava] = await db.query(`SELECT avatar FROM membres WHERE id=${id}`)
+    
     if (image) {
-      await db.query(`UPDATE membres SET avatar="/assets/images/${image}" WHERE id=${id}`);
+      if (ava.avatar !== "default.png") {
+        pathImg = path.resolve("public/images/" + ava.avatar)
+        fs.unlink(pathImg, (err) => {
+          if (err) throw err;
+        })
+      }
+      await db.query(`UPDATE membres SET avatar="${image}" WHERE id=${id}`);
     }
     if (name) {
       await db.query(`UPDATE membres SET name="${name}" WHERE id=${id}`);

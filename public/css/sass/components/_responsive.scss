@@ -1,5 +1,5 @@
 
-@media screen and (max-width:1200px) {
+@media screen and (min-width:1200px) {
         .btn {
             width: auto;
             font-size: 12px;
@@ -11,9 +11,7 @@
         nav{
             font-size: 15px;
         }
-        .carousel-item img{
-            min-height: 650px;
-           }
+        
        h1,h2,h3,h4,h5{
         font-size:12px
        } 
@@ -24,23 +22,25 @@
     }
        
 }
-@media screen and (max-width:1024px) {
+@media screen and (min-width:1024px) {
     body{
         font-size: 12px ;
     }
     nav{
         font-size: 12px;
     }
-   .carousel-item {
-    max-height: 500px;
-   }
+//    .carousel-item {
+//     max-height: 500px;
+//    }
    a {
     font-size: 10px;
    }
-    
+   .imgc{
+    min-height: 500px;
+}
 }
 
-@media screen and (max-width:885px) {
+@media screen and (min-width:885px) {
     nav{
         font-size: 10px;
     }
@@ -49,9 +49,12 @@
         padding: 5px;
         
     }
-    .carousel-item {
-        max-height: 500px;
-       }
+    // .carousel-item {
+    //     max-height: 500px;
+    //    }
+    .imgc{
+        max-height: 400px;
+    }
 }
 @media screen and (max-width:768px) {
     .bgDoor{
@@ -68,6 +71,9 @@
     h1,h2,h3,h4,h5{
         margin-top: 5px;
        }
+    .imgc{
+        max-height: 300px;
+    }
     
 }
 @media screen and (max-width:400px) {

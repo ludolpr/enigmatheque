@@ -10,7 +10,7 @@
     "swagger": "MODE=test nodemon server.js",
     "start": "MODE=prod node server.js",
     "dev": "MODE=dev nodemon server.js",
-    "sass": "sass --watch public/css/sass/index.scss ./public/css/style.css"
+    "sass": "sass --watch public/css/sass/index.scss:./public/css/style.css"
   },
   "repository": {
     "type": "git",
@@ -36,6 +36,7 @@
     "express-oas-generator": "^1.0.45",
     "express-session": "^1.17.3",
     "flash": "^1.1.0",
+    "fs": "0.0.1-security",
     "handlebars": "^4.7.7",
     "jsonwebtoken": "^8.5.1",
     "method-override": "^3.0.0",
@@ -45,6 +46,7 @@
     "mysql": "^2.18.1",
     "node": "^18.5.0",
     "nodemailer": "^6.7.8",
+    "path": "^0.12.7",
     "swagger-ui-express": "^4.5.0"
   },
   "devDependencies": {
