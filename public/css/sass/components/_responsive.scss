@@ -1,81 +1,144 @@
+@media screen and (max-width:1920px) {
+    .imgCarousel {
+        height: 750px;
+    }
 
-@media screen and (min-width:1200px) {
-        .btn {
-            width: auto;
-            font-size: 12px;
-            padding: 5px;
-        }
-        body{
-            font-size:12px ;
-        }
-        nav{
-            font-size: 15px;
-        }
-        
-       h1,h2,h3,h4,h5{
-        font-size:12px
-       } 
-    button{
-        width: auto;
-        padding: 5px;
-        margin-top: 5px;
+    .carousel-item {
+        height: 750px;
     }
-       
 }
-@media screen and (min-width:1024px) {
-    body{
-        font-size: 12px ;
+
+
+@media screen and (max-width:1200px) {
+    .btn {
+        width: auto;
+        font-size: 12px;
+        padding: 5px;
     }
-    nav{
+
+    body {
         font-size: 12px;
     }
-//    .carousel-item {
-//     max-height: 500px;
-//    }
-   a {
-    font-size: 10px;
-   }
-   .imgc{
-    min-height: 500px;
-}
+
+    nav {
+        font-size: 15px;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+        font-size: 12px
+    }
+
+    .imgCarousel {
+        height: 750px;
+    }
+
+    .carousel-item {
+        height: 750px;
+    }
+
 }
 
-@media screen and (min-width:885px) {
-    nav{
+@media screen and (max-width:1024px) {
+    body {
+        font-size: 12px;
+    }
+
+    nav {
+        font-size: 12px;
+    }
+
+    a {
         font-size: 10px;
     }
-    .btn{
-        font-size: 10px;
-        padding: 5px;
-        
+
+    .imgCarousel {
+        height: 750px;
     }
-    // .carousel-item {
-    //     max-height: 500px;
-    //    }
-    .imgc{
-        max-height: 400px;
+
+    .carousel-item {
+        height: 750px;
+    }
+
+}
+
+@media screen and (max-width:992px) {
+    .imgCarousel {
+        height: 600px;
+    }
+
+    .carousel-item {
+        height: 600px;
     }
 }
+
+@media screen and (max-width:885px) {
+    nav {
+        font-size: 10px;
+    }
+
+    .imgCarousel {
+        height: 550px;
+    }
+
+    .carousel-item {
+        height: 550px;
+    }
+}
+
 @media screen and (max-width:768px) {
-    .bgDoor{
-        background-image: url('/assets/images/door-1590024_640.jpg'); 
+    .bgDoor {
+        background-image: url('/assets/images/door-1590024_640.jpg');
         height: 100vh;
         max-width: 100%;
-        
+
     }
-    .btn{
-        margin:0 ;
+
+    .btn {
+        margin: 0;
         margin-top: 5px;
     }
-   
-    h1,h2,h3,h4,h5{
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
         margin-top: 5px;
-       }
-    .imgc{
-        max-height: 300px;
     }
-    
+
+    .imgCarousel {
+        height: 450px;
+    }
+
+    .carousel-item {
+        height: 450px;
+    }
+
 }
+
+@media screen and (max-width:480px) {
+    .imgCarousel {
+        height: 300px;
+    }
+
+    .carousel-item {
+        height: 300px;
+    }
+
+}
+
 @media screen and (max-width:400px) {
-    
+    .imgCarousel {
+        height: 300px;
+    }
+
+    .carousel-item {
+        height: 300px;
+    }
+
+
 }

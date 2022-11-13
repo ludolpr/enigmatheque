@@ -8,7 +8,7 @@ const tag = document.querySelectorAll("#tag");
 let nbImg = 0;
 let getData = async (keys) => {
   fetch(
-    `https://pixabay.com/api/?key=${keyGive}&per_page=72&lang=fr&q=${encodeURIComponent(
+    `https://pixabay.com/api/?key=${keyGive}&per_page=72&_960&lang=fr&q=${encodeURIComponent(
       keys
     )}`
   ) // mon parametre est integrée a l'url

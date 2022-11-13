@@ -35,10 +35,3 @@ exports.inc = (value, option) => {
 // exports.idPlusUn = () => {
 
 // }
-
-// exports.cutStr = (str) => {
-//     var tab = str.split(" ");
-//     for (var i = 0; tab.length < 10; i++) {
-//       return str;
-//     }
-//   };

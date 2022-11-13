@@ -30,20 +30,20 @@
       {{!-- debut du conteneur admin --}}
       <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"
         tabindex="0">
-       
-  {{!-- <ul class="pagination">
-    <li class="page-item ">
-      <a class="page-link" href="#" tabindex="-1">Précedent</a>
-    </li>
-    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-    <li class="page-item ">
-      <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-    </li>
-    <li class="page-item"><a class="page-link" href="{{id_enigme}}+1">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#">Suivant</a>
-    </li>
-  </ul> --}}
+
+        {{!-- <ul class="pagination">
+          <li class="page-item ">
+            <a class="page-link" href="#" tabindex="-1">Précedent</a>
+          </li>
+          <li class="page-item active"><a class="page-link" href="#">1</a></li>
+          <li class="page-item ">
+            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="page-item"><a class="page-link" href="{{id_enigme}}+1">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Suivant</a>
+          </li>
+        </ul> --}}
 
         {{#each dbEnigmes}}
 
@@ -61,10 +61,10 @@
               <div class="text-center ">
                 <h2> {{ upper this.name }} : {{this.id_enigme}} </h2>
                 <div class="col-md-12 m-3  ">
-                          <label class=" text-light" for="">Enigme verifiée</label>
-                          <input type="checkbox" id="isVerified{{ this.id_enigme }}" name="is_Verified"
-                            class="bg-successform-check-input" />
-                        </div>
+                  <label class=" text-light" for="">Enigme verifiée</label>
+                  <input type="checkbox" id="isVerified{{ this.id_enigme }}" name="is_Verified"
+                    class="bg-successform-check-input" />
+                </div>
                 {{!-- <p> {{ this.is_Verified }} </p> --}}
               </div>
 
@@ -116,18 +116,19 @@
                         </div>
                         <div class="row d-flex justify-content-around">
                           <label for="content" class="form-label p-2 ps-0">Enigme que vous proposer</label>
-                        <textarea name="content d-flex justify-content-around" id="editorEnigme{{ this.id_enigme }}" placeholder="Votre Enigme"
-                          class="border-success justify-content-center" cols="70" rows="15" name="content">{{ this.content }}
+                          <textarea name="content d-flex justify-content-around" id="editorEnigme{{ this.id_enigme }}"
+                            placeholder="Votre Enigme" class="border-success justify-content-center" cols="70" rows="15"
+                            name="content">{{ this.content }}
                         </textarea>
                         </div>
-                        
 
-                          <div class="row d-flex justify-content-around">
-                        <label for="solus" class="form-label p-2 ps-0">Réponse à votre énigme</label>
-                        <textarea name="solus" id="editorSolus{{ this.id_enigme }}" placeholder="Votre Solution"
-                          class="border-success" id="solus" cols="70" rows="15" name="solus">{{ this.solus }}
+
+                        <div class="row d-flex justify-content-around">
+                          <label for="solus" class="form-label p-2 ps-0">Réponse à votre énigme</label>
+                          <textarea name="solus" id="editorSolus{{ this.id_enigme }}" placeholder="Votre Solution"
+                            class="border-success" id="solus" cols="70" rows="15" name="solus">{{ this.solus }}
                         </textarea>
-                          </div>
+                        </div>
                         <div class="col-md-12 m-0 ">
                           <label class="mt-2 text-dark" for="">Enigme verifiée</label>
                           <input type="checkbox" id="isVerified{{ this.id_enigme }}" name="is_Verified"
@@ -142,15 +143,13 @@
                           <span class="btn-label"><i class="fa fa-check m-1"></i></span>Valider
                         </button>
                   </form>
-                    <script>
+                  <script>
+                    const isVerified{{ this.id_enigme }} = document.getElementById('isVerified{{this.id_enigme}}')
+                    const vrf{{ this.id_enigme }} = {{ this.is_Verified }}
+                    if (vrf{{ this.id_enigme }}.toString() === "1" ) isVerified{{ this.id_enigme }}.checked = true;
 
-                        const isVerified{{this.id_enigme}} = document.getElementById('isVerified{{this.id_enigme}}')
-                        const vrf{{this.id_enigme}} = {{this.is_Verified}}
-                        if (vrf{{this.id_enigme}}.toString() === "1" ) isVerified{{ this.id_enigme }}.checked = true;
-
-                        console.log('test', isVerified{{this.id_enigme}}, typeof vrf{{this.id_enigme}}, (vrf{{this.id_enigme}}.toString() === "1"))
-
-                    </script>
+                  </script>
+                  
                   {{!--------------------------------------------------------------------------}}
                   {{!--------------------------------------------------------------------------}}
                   {{!-- data-bs-dismiss="modal" --}}
@@ -168,7 +167,8 @@
                   {{!--------------------------------------------------------------------------}}
                   {{!--------------------------------------------------------------------------}}
                   {{!-- Supprimer l'énigme --}}
-                  <form action="/deleteEnigme/{{ this.id_enigme }}?_method=DELETE" method="post" class="p-0 m-2 d-flex justify-content-center">
+                  <form action="/deleteEnigme/{{ this.id_enigme }}?_method=DELETE" method="post"
+                    class="p-0 m-2 d-flex justify-content-center">
                     <button type="submit" class=" btn btn-labeled btn-danger col-md-12 ">
                       <span class="btn-label"><i class="fa fa-remove m-1 pe-1"></i></span>Retirer
                     </button>
@@ -180,13 +180,13 @@
         </div>
       </div>
     </div>
-{{!-- import de ck editor --}}
+    {{!-- import de ck editor --}}
     <script src="/assets/js/ckeditor.js"></script>
     <script type="text/javascript">
-    ClassicEditor.create(document.getElementById('editorEnigme{{ this.id_enigme }}'))
-    ClassicEditor.create(document.getElementById('editorSolus{{ this.id_enigme }}'))
+      ClassicEditor.create(document.getElementById('editorEnigme{{ this.id_enigme }}'))
+      ClassicEditor.create(document.getElementById('editorSolus{{ this.id_enigme }}'))
     </script>
-   
+
     {{/each}}
     {{!-- ckeditor boucle --}}
 
@@ -266,25 +266,26 @@
       {{!--------------------------------------------------------------------------}}
 
       <div
-        class="col-md-2 bg-success d-flex justify-content-center align-items-center border-light border-bottom border-2 lg:col-md-12 ">
+        class=" bg-success d-flex justify-content-center align-items-center border-light border-bottom border-2 col-lg-12 ">
 
         <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
         <div class="center">
-          <h2> {{ this.name }} </h2>
+          <h2> {{ this.name }}</h2>
         </div>
 
       </div>
-      <div class="col-md-3 d-flex justify-content-center align-items-center border-light border-bottom border-2 ">
+      <div class="col-lg-12 d-flex justify-content-center align-items-center border-light border-bottom border-2 ">
         <h3 class="text-center"><a href="#" class="text-decoration-none text-light center fs-5 ">{{this.email}}</a>
         </h3>
 
       </div>
 
-      <div class="col-md-7 d-flex justify-content-center align-items-center border-light border-bottom border-2 xl:col-sm-12">
+      <div class="d-flex justify-content-center p-0 align-items-center border-light border-bottom border-2 col-lg-12">
 
-        <form action="/checkRoles?_method=PUT" method="post" class="d-flex justify-content-center align-items-center">
-          <button type="button" class="h-50 d-flex align-items-center btn btn-labeled btn-light m-3 p-2" name="isAdmin">
+        <form action="/checkRoles?_method=PUT" method="post"
+          class="d-flex justify-content-end align-items-center col-lg-6">
+          <button type="button" class="h-50 d-flex align-items-center btn btn-labeled btn-light m-1 p-1" name="isAdmin">
             <div class="form-check form-switch">
               <span class="btn-label"><i data-bs-toggle="popover" data-bs-placement="top"
                   data-bs-content="Administrateur" class="fs-4 fa-solid fa-image-portrait text-dark"></i></span>
@@ -292,14 +293,14 @@
             </div>
           </button>
 
-          <button type="button" class="h-50 d-flex align-items-center btn btn-labeled btn-light m-3 p-2" name="isBan">
+          <button type="button" class="h-50 d-flex align-items-center btn btn-labeled btn-light m-1 p-1" name="isBan">
             <div class="form-check form-switch ">
               <span class="btn-label"><i data-bs-toggle="popover" data-bs-placement="top"
                   data-bs-content="Utilisateur banni" class="fs-4 fa-solid fa-user-slash  text-danger"></i></span>
               <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
             </div>
           </button>
-          
+
 
           <button type="submit"
             class=" btn btn-labeled btn-light mt-3 mb-3 d-flex  justify-content-center align-items-center">
@@ -311,33 +312,44 @@
             </a>
           </button>
         </form>
-        <button type="button" class="h-50 d-flex align-items-center btn btn-labeled btn-light m-3" name="isVerifiedUser">
+        <div class="d-flex justify-content-start align-items-center col-lg-6">
+          <button type="button" class="h-50 d-flex align-items-center btn btn-labeled btn-light m-2 p-1 "
+            name="isVerifiedUser">
             <div class="form-check form-switch">
               <span class="btn-label"><i data-bs-toggle="popover" data-bs-placement="top"
                   data-bs-content="Utilisateur verifier" class="fs-4 fa-solid fa-user-check text-warning"></i></span>
-              <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+              <input class="form-check-input" type="checkbox" role="switch" id="is_Verified{{ this.id }}">
             </div>
           </button>
-        <button type="button"
-          class="h-50  btn btn-labeled btn-light mt-3 mb-3 d-flex justify-content-center align-items-center m-0 p-0">
-          <a class="text-decoration-none" href="/profil/{{this.id}}">
-            <div class="row">
+          <button type="button"
+            class="h-50  btn btn-labeled btn-light mt-3 mb-3 d-flex justify-content-center align-items-center m-0 p-0">
+            <a class="text-decoration-none" href="/profil/{{this.id}}">
+              <div class="row">
 
-              <p class="d-flex align-items-center m-2">Profil<span class="btn-label"><i
-                    class="fs-4 fa-solid fa-eye text-success m-2 p-2"></i></span>
-              </p>
-            </div>
-          </a>
-        </button>
+                <p class="d-flex align-items-center m-0">Profil<span class="btn-label"><i
+                      class="fs-4 fa-solid fa-eye text-success m-2"></i></span>
+                </p>
+              </div>
+            </a>
+          </button>
+          <script>
+                    const is_Verified{{ this.id }} = document.getElementById('is_Verified{{this.id}}')
+                    const vrf2{{ this.id }} = {{ this.isVerified }}
+                    if (vrf2{{ this.id }}.toString() === "1" ) is_Verified{{ this.id }}.checked = true;
+               console.log('test', is_Verified{{this.id}}, typeof vrf{{this.id}}, (vrf2{{this.id}}.toString() === "1"))
+         </script>
+        </div>
+
       </div>
-     
+
       <script src="/assets/js/popoverEverywhere.js"></script>
       {{!--------------------------------------------------------------------------}}
       {{!-- Fin des membres du site --}}
       {{!--------------------------------------------------------------------------}}
 
     </div>
-      {{!-- <script src="../../../public/js/adminCheck.js"></script> --}}
+    {{!--
+    <script src="../../../public/js/adminCheck.js"></script> --}}
 
 
     {{/each}}

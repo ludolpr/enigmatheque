@@ -8,25 +8,25 @@
       </h1>
       <div id="carouselExampleCaptions" class="carousel slide  " data-bs-ride="carousel">
         <div class="carousel-inner col-md-6  ">
-        <div class="">
-          {{#each enigmes}}
-          
-            <div id="it-" class="hhh carousel-item" data-bs-interval="5000">
-              <img src="" class="imgc img-fluid d-block w-100 " alt="..." id="img">
-              <div class="carousel-caption d-none d-md-block  bg-dark">
+          <div class="">
+            {{#each enigmes}}
+
+            <div id="it-" class="carousel-item" data-bs-interval="5000">
+              <img src="" class="imgCarousel img-fluid d-block w-100 " alt="..." id="img">
+              <div class="carousel-caption d-md-block  bg-dark">
                 <a href="/enigme/{{id_enigme }}" class=" text-decoration-none ">
 
                   <h3 class="text-light text-decoration-none " id="tag">{{this.titre}} </h3>
                 </a>
                 <div class="textEnigme">
-                  {{{ this.content}}}
+                  {{{cutStr this.content}}}
                 </div>
               </div>
             </div>
-          
 
-          {{/each}}
-        </div>
+
+            {{/each}}
+          </div>
 
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
             data-bs-slide="prev">
