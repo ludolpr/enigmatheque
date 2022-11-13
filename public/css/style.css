@@ -10829,6 +10829,9 @@ h5,
   .carousel-item {
     height: 750px;
   }
+  .bgDoor {
+    background-image: url("/assets/images/door-1590024_1280.jpg");
+  }
 }
 @media screen and (max-width: 1024px) {
   body {
@@ -10854,6 +10857,9 @@ h5,
   .carousel-item {
     height: 600px;
   }
+  .bgDoor {
+    background-image: url("/assets/images/door-1590024_640.jpg");
+  }
 }
 @media screen and (max-width: 885px) {
   nav {
@@ -10869,8 +10875,6 @@ h5,
 @media screen and (max-width: 768px) {
   .bgDoor {
     background-image: url("/assets/images/door-1590024_640.jpg");
-    height: 100vh;
-    max-width: 100%;
   }
   .btn {
     margin: 0;

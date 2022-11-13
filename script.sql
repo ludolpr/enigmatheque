@@ -136,7 +136,7 @@ VALUES
     1,
     1,
     0,
-    'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.ms_ni44c-_TBsdHzF0W5awHaHa%26pid%3DApi&f=1'
+    'default.png'
   );
 
 INSERT INTO
@@ -160,45 +160,91 @@ INSERT INTO
   )
 VALUES
   (
-    "le verre d'eau",
-    1,
-    "Combien peut t'on mettre de gouttes d'eau dans un verre vide ?",
-    '1',
-    1,
-    1
-  ),
-  (
-    "Le nénuphar géant",
-    2,
-    "Un nénuphar se trouvant dans un lac double de taille chaque jour. Au bout de 10 jours, il couvre la moitié du lac.
-
-Combien de jours lui aura-t-il fallu en tout pour le recouvrir entièrement ?",
-    'rien',
-    1,
-    1
-  ),
-  (
-    "L'énigme de Stanford",
-    3,
-    "Cette énigme fut posée aux étudiants de l'université de Stanford lors d'une épreuve de réflexion.
-
-C'est mieux que Dieu.
-C'est pire que le Diable.
-Les pauvres en ont.
-Les riches en ont besoin.
-Et si on en mange, on meurt.
-Qu'est ce que c'est ?",
-    '11',
-    1,
-    1
-  ),
-  (
-    "La prescription",
+    "Inversé",
     4,
-    "Votre médecin vous a donné un traitement de trois gélules. Il faut en prendre une toutes les demi-heures.
-
-Quelle est la durée du traitement (en minutes) ?",
-    '60 minutes',
+    "Pour moi, l'accouchement vient avant la grossesse, l'enfance avant la naissance, l'adolescence avant l'enfance, la mort avant la vie.",
+    'le dictionnaire',
     1,
     1
-  );
+  ),
+  (
+    "Le mot",
+    4,
+    "Quel mot commence par la lettre 'e' et contient une lettre ?",
+    'Une enveloppe',
+    1,
+    1
+  ),
+  (
+    "L'école",
+    4,
+    "Quel mot est représenté par ce nombre : 713705 ?",
+    'Soleil',
+    1,
+    1
+  ),
+  (
+    "L'inconnu",
+    4,
+    "Sans voix, je hurle
+Sans ailes, je voltige
+Sans dents, je mords
+Sans bouche, je murmure
+
+Qui suis-je ?",
+    'Le vent',
+    1,
+    1
+  ),
+  (
+    "La longue marche",
+    4,
+    "A ciel dégagé, on peut marcher vers lui mais jamais on ne l'atteint.
+
+Qui est-ce ?",
+    'Le soleil',
+    1,
+    1
+  ),
+  (
+    "Le message",
+    5,
+    "Message colporté dans un but malveillant, Je suis aussi un sanglier de 2 à 3 ans. Je suis...",
+    'Un ragot',
+    1,
+    1
+  ),
+  (
+    " Autrefois",
+    5,
+    "Autrefois bien utile pour faire chauffer un lit, ce n'est pas toujours lui que l'on voit dans son habit. Je suis...",
+    'Un moine',
+    1,
+    1
+  ),
+  (
+    " Mûr",
+    5,
+    "Mûr à point, il est fauché; fauché on l'est de n'en avoir point. Je suis...",
+    'Du blé',
+    1,
+    1
+  ),
+  (
+    "Le pont",
+    5,
+    "C'est la partie intégrante d'un pont. Le rendre, c'est en avoir ras-le-bol. Et bien qu'il déserte nos écoles, contre les taches, c'est une protection. Je suis...
+
+",
+    'Un tablier',
+    1,
+    1
+  ),
+  (
+    " La machine",
+    5,
+    "Redoutable machine de guerre, des portes lui cédèrent naguère. Généralement il blatère, et c'est aussi un signe de feu. Je suis...",
+    'Un bélier',
+    1,
+    1
+  )

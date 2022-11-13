@@ -63,7 +63,7 @@
                 <div class="col-md-12 m-3  ">
                   <label class=" text-light" for="">Enigme verifiée</label>
                   <input type="checkbox" id="isVerified{{ this.id_enigme }}" name="is_Verified"
-                    class="bg-successform-check-input" />
+                    class="bg-successform-check-input" disabled="disabled" />
                 </div>
                 {{!-- <p> {{ this.is_Verified }} </p> --}}
               </div>
@@ -289,18 +289,27 @@
             <div class="form-check form-switch">
               <span class="btn-label"><i data-bs-toggle="popover" data-bs-placement="top"
                   data-bs-content="Administrateur" class="fs-4 fa-solid fa-image-portrait text-dark"></i></span>
-              <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault1">
+              <input class="form-check-input" type="checkbox" role="switch" id="is_Admin{{ this.id }}" >
             </div>
           </button>
+          <script>
+                    const is_Admin{{ this.id }} = document.getElementById('is_Admin{{this.id}}')
+                    const vrf3{{ this.id }} = {{ this.isAdmin }}
+                    if (vrf3{{ this.id }}.toString() === "1" ) is_Admin{{ this.id }}.checked = true;
+         </script>
 
           <button type="button" class="h-50 d-flex align-items-center btn btn-labeled btn-light m-1 p-1" name="isBan">
             <div class="form-check form-switch ">
               <span class="btn-label"><i data-bs-toggle="popover" data-bs-placement="top"
                   data-bs-content="Utilisateur banni" class="fs-4 fa-solid fa-user-slash  text-danger"></i></span>
-              <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+              <input class="form-check-input" type="checkbox" role="switch" id="is_Ban{{this.id}}">
             </div>
           </button>
-
+            <script>
+                    const is_Ban{{ this.id }} = document.getElementById('is_Ban{{this.id}}')
+                    const vrf3{{ this.id }} = {{ this.isBan }}
+                    if (vrf3{{ this.id }}.toString() === "1" ) is_Ban{{ this.id }}.checked = true;
+         </script>
 
           <button type="submit"
             class=" btn btn-labeled btn-light mt-3 mb-3 d-flex  justify-content-center align-items-center">
@@ -313,12 +322,11 @@
           </button>
         </form>
         <div class="d-flex justify-content-start align-items-center col-lg-6">
-          <button type="button" class="h-50 d-flex align-items-center btn btn-labeled btn-light m-2 p-1 "
-            name="isVerifiedUser">
+          <button type="button" class="h-50 d-flex align-items-center btn btn-labeled btn-light m-2 p-1 ">
             <div class="form-check form-switch">
               <span class="btn-label"><i data-bs-toggle="popover" data-bs-placement="top"
                   data-bs-content="Utilisateur verifier" class="fs-4 fa-solid fa-user-check text-warning"></i></span>
-              <input class="form-check-input" type="checkbox" role="switch" id="is_Verified{{ this.id }}">
+              <input class="form-check-input" type="checkbox" role="switch" id="is_Verified{{ this.id }}" name="isVerified" disabled="disabled" >
             </div>
           </button>
           <button type="button"
@@ -364,7 +372,7 @@
   {{! bas de page }}
 
 </div>
-</div>
+
 
 {{!--------------------------------------------------------------------------}}
 {{!--------------------------------------------------------------------------}}

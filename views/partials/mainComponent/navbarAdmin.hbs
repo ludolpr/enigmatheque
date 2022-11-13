@@ -7,12 +7,6 @@
       </a>
     </div>
 
-    <button
-      type="submit"
-      class="d-flex justify-content-lg-end align-items-center text-light btn btn-danger me-2 ms-auto"
-      data-bs-target="#staticBackdrop"
-    >Deconnexion
-    </button>
     <div
       class="d-flex collapse navbar-collapse justify-content-end"
       id="navbarSupportedContent"
@@ -20,7 +14,12 @@
       <div class="col-md-2 d-flex justify-content-end">
         <form action="/logout" method="post" class="d-flex">
           {{! Deconnexion }}
-
+          <button
+            type="submit"
+            class="d-flex justify-content-lg-end align-items-center text-light btn btn-danger me-2 ms-auto"
+            data-bs-target="#staticBackdrop"
+          >Deconnexion
+          </button>
         </form>
       </div>
     </div>
