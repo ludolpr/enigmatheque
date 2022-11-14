@@ -131,7 +131,7 @@ VALUES
   (
     1,
     'Admin',
-    '$2b$10$3xZYGlHNX0XSn/D28.9e.Od608tlJ3ip2W2SqWKQEzrZJfwJ5i56e',
+    '$2b$10$yspJw/V7Iex2zJv9AvyI/.WKPABQZ6S7b8AFNJyYnk1vAQsZQ8vSC',
     'ludolpr@gmail.com',
     1,
     1,

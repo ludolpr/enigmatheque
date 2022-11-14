@@ -42,7 +42,6 @@ const { setSession } = require("../utils/setSession"),
     getPageInscription,
     getPageVerification,
   } = require("../controllers/authController"),
-  { checkMembre } = require("../../public/js/adminCheck"),
   {
     GetResetPassword,
     PostResetPassword,

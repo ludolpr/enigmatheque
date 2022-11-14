@@ -31,20 +31,6 @@
       <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"
         tabindex="0">
 
-        {{!-- <ul class="pagination">
-          <li class="page-item ">
-            <a class="page-link" href="#" tabindex="-1">Précedent</a>
-          </li>
-          <li class="page-item active"><a class="page-link" href="#">1</a></li>
-          <li class="page-item ">
-            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="page-item"><a class="page-link" href="{{id_enigme}}+1">3</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#">Suivant</a>
-          </li>
-        </ul> --}}
-
         {{#each dbEnigmes}}
 
         <div class="col-md-12 text-dark m-0 row">
@@ -289,7 +275,7 @@
             <div class="form-check form-switch">
               <span class="btn-label"><i data-bs-toggle="popover" data-bs-placement="top"
                   data-bs-content="Administrateur" class="fs-4 fa-solid fa-image-portrait text-dark"></i></span>
-              <input class="form-check-input" type="checkbox" role="switch" id="is_Admin{{ this.id }}" >
+              <input class="form-check-input" type="checkbox" role="switch" id="is_Admin{{ this.id }}" disabled="disabled" >
             </div>
           </button>
           <script>
@@ -298,11 +284,11 @@
                     if (vrf3{{ this.id }}.toString() === "1" ) is_Admin{{ this.id }}.checked = true;
          </script>
 
-          <button type="button" class="h-50 d-flex align-items-center btn btn-labeled btn-light m-1 p-1" name="isBan">
+          <button type="button" class="h-50 d-flex align-items-center btn btn-labeled btn-light m-1 p-1" name="isBan" >
             <div class="form-check form-switch ">
               <span class="btn-label"><i data-bs-toggle="popover" data-bs-placement="top"
                   data-bs-content="Utilisateur banni" class="fs-4 fa-solid fa-user-slash  text-danger"></i></span>
-              <input class="form-check-input" type="checkbox" role="switch" id="is_Ban{{this.id}}">
+              <input class="form-check-input" type="checkbox" role="switch" id="is_Ban{{this.id}}" disabled="disabled">
             </div>
           </button>
             <script>
@@ -311,9 +297,9 @@
                     if (vrf3{{ this.id }}.toString() === "1" ) is_Ban{{ this.id }}.checked = true;
          </script>
 
-          <button type="submit"
+          <button type="submit" disabled="disabled" 
             class=" btn btn-labeled btn-light mt-3 mb-3 d-flex  justify-content-center align-items-center">
-            <a class="text-decoration-none">
+            <a class="text-decoration-none" >
               <div class="row">
 
                 <p class="d-flex align-items-center m-2 h-100">Modifier</p>
