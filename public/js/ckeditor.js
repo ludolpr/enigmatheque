@@ -37483,7 +37483,7 @@
               table: {
                 contentToolbar: ["tableColumn", "tableRow", "mergeTableCells"],
               },
-              language: "fr",
+              language: "en",
             });
         })(),
         (o = o.default)

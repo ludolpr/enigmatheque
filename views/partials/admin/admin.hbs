@@ -167,10 +167,19 @@
       </div>
     </div>
     {{!-- import de ck editor --}}
-    <script src="/assets/js/ckeditor.js"></script>
+    <script src="/assets/js/build/ckeditor.js"></script>
     <script type="text/javascript">
-      ClassicEditor.create(document.getElementById('editorEnigme{{ this.id_enigme }}'))
-      ClassicEditor.create(document.getElementById('editorSolus{{ this.id_enigme }}'))
+
+                ClassicEditor.create( document.querySelector( '#editorEnigme{{ this.id_enigme }}' ) )
+                .then( editor => { window.editor = editor; } ) .catch( error =>
+                { console.error( 'Problème rencontré.',
+                error ); } );
+
+                ClassicEditor.create( document.querySelector( '#editorSolus{{ this.id_enigme }}' ) )
+                .then( editor => { window.editor = editor; } ) .catch( error =>
+                { console.error( 'Problème rencontré.',
+                error ); } );
+
     </script>
 
     {{/each}}
