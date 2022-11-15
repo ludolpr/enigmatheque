@@ -75,10 +75,6 @@ router
   .post(PostResetPassword) // c'est le formulaire de mot de passe oublier ( /connexion )
   .put(PutResetPassword); // c'est le formulaire d'edition du mot de passe ( /resetPassword )
 
-// ----------------------------------------------------------------------- //
-// -----------------------------NODEMAILER-------------------------------- //
-// ----------------------------------------------------------------------- //
-
 //  session par utilisateur
 router.use(isSession);
 
@@ -126,7 +122,7 @@ router.get("/verification/:token", (req, res) => {
 
   jwt.verification(token, "MaCleSecrete", function (err, decoded) {
     if (err) {
-      console.log(err);
+      // console.log(err);
       res.send("Email de verification echoué, le lien est invalide");
     } else {
       res.send("Email de verification success");

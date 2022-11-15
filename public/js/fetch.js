@@ -24,14 +24,14 @@ let getData = async (keys) => {
             else {
               // appelle de ma fonctionn ( keys === motclef)
               const lastKey = motclef.split(" ")[motclef.split(" ").length - 1];
-              console.log("lastKey", lastKey, pixdata.hits[0].hits.tag);
+              // console.log("lastKey", lastKey, pixdata.hits[0].hits.tag);
               // lastkey me permet de garder seulement le dernier mot clef et de relancer une requête avec fetch
               getData(lastKey);
             }
           })
           // deuxieme .then reprend pixdata.hits[0].webformatURL ( url )
           .then(function (url) {
-            console.log("Image:", img, "nbImg:", (img[nbImg].src = url));
+            // console.log("Image:", img, "nbImg:", (img[nbImg].src = url));
             // definie la source de l'id image par rapport a nbImg
             img[nbImg].src = url;
             // ajoute +1

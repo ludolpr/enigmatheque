@@ -20,11 +20,11 @@ const // -----------------------------------------------------------------------
         if (!user)
           if (process.env.MODE === "test") {
             return res.json({
-              flashConnexion: "Votre compte n'est pas correct",
+              flash: "Votre compte n'est pas correct",
             });
           } else {
             return res.render("home", {
-              flashConnexion: "Ce compte n'existe pas",
+              flash: "Ce compte n'existe pas",
             });
           }
 
@@ -55,7 +55,7 @@ const // -----------------------------------------------------------------------
               // console.log("3");
               return res.json({ flash: "Connexion reussi" });
             } else {
-              console.log("4");
+              // console.log("4");
               return res.redirect("/");
             }
           }
@@ -70,7 +70,7 @@ const // -----------------------------------------------------------------------
     res.render("inscription");
   },
   inscription = async (req, res) => {
-    console.log("inscription OK !", req.body);
+    // console.log("inscription OK !", req.body);
     const { name, email, password, confPassword } = req.body;
     const checkEmail = await db.query(`SELECT email FROM membres`);
     const checkName = await db.query(`SELECT name FROM membres`);
@@ -80,8 +80,10 @@ const // -----------------------------------------------------------------------
         flash: "Veuillez définir un nom ainsi qu'un email",
       });
     } else if (email === checkEmail || name === checkName) {
-      console.log("mail ou name déjà utilisé");
-      res.render("back");
+      // console.log("mail ou name déjà utilisé");
+      res.render("back", {
+        flash: "E-mail ou nom déjà utilisé",
+      });
     } else if (password === confPassword) {
       const newUser = await db.query(
         `INSERT INTO membres SET name="${name}", email="${email}", password="${await bcrypt.hash(
@@ -92,7 +94,7 @@ const // -----------------------------------------------------------------------
       const [membres] = await db.query(
         `SELECT * FROM membres WHERE id = ${newUser.insertId}`
       );
-      console.log([membres]);
+      // console.log([membres]);
       const token = jwt.sign({ membres }, "SecretKey");
 
       // req.session.membres = membres
@@ -113,32 +115,31 @@ const // -----------------------------------------------------------------------
                   `,
         });
 
-        console.log("Email de confirmation de compte est bien envoyé !!", data);
-        console.log("1er token", token);
-        // res.redirect('/');
+        // console.log("Email de confirmation de compte est bien envoyé !!", data);
+        // console.log("1er token", token);
+        yy;
       } catch (error) {
-        console.log("error", error);
+        // console.log("error", error);
         res.redirect("/");
       }
       res.render("home", { flash: "Vous êtes maintenant inscrit" });
       //return res.redirect("/");
     } else {
-      console.log("PB inscription");
+      // console.log("PB inscription");
       res.render("inscription", {
         flash: "Probleme de confirmation entre vos deux mots de passe",
       });
     }
   },
   getPageVerification = (req, res) => {
-    console.log("info req.session", req.session);
+    // console.log("info req.session", req.session);
     const { token } = req.session;
-    console.log("voici le token", token);
+    // console.log("voici le token", token);
 
     jwt.verify(token, "SecretKey", async (err, decoded) => {
-      console.log("decoded", decoded);
+      // console.log("decoded", decoded);
       if (err) {
-        console.log(err);
-        // ne passe pa splus loin ???
+        // console.log(err);
         res.send("Email de verification echoué, le lien est invalide");
       } else {
         const [membres] = await db.query(
@@ -146,10 +147,10 @@ const // -----------------------------------------------------------------------
         );
 
         if (!membres) {
-          console.log("pb membres");
+          // console.log("pb membres");
           res.redirect("/");
         } else {
-          console.log("Email de verification success");
+          // console.log("Email de verification success");
           db.query(
             `UPDATE membres SET isVerified="1" WHERE id="${decoded.membres.id}"`
           );
@@ -166,7 +167,7 @@ const // -----------------------------------------------------------------------
   logout = async (req, res) => {
     req.session.destroy(() => {
       res.clearCookie("poti-gato");
-      console.log("Clear Cookie session :", req.sessionID);
+      // console.log("Clear Cookie session :", req.sessionID);
       res.redirect("/");
     });
   };

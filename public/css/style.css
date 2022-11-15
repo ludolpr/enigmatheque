@@ -10877,7 +10877,6 @@ h5,
     background-image: url("/assets/images/door-1590024_640.jpg");
   }
   .btn {
-    margin: 0;
     margin-top: 5px;
   }
   h1, .h1,
@@ -10890,6 +10889,12 @@ h4,
 h5,
 .h5 {
     margin-top: 5px;
+  }
+  .label__check {
+    margin-top: 5px;
+  }
+  .m-resp {
+    margin: 10px;
   }
   .imgCarousel {
     height: 450px;

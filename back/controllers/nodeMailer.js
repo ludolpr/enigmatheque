@@ -4,41 +4,40 @@ const { MAIL_USER } = process.env;
 // ----------------------------------------------------------------------- //
 // ---------------------------NODEMAILER VISITEUR------------------------- //
 // ----------------------------------------------------------------------- //
-const
-mailVisiteur = async (req, res) => {
-  const { content, sujet, email } = req.body;
-  console.log("mail envoyé", req.body);
+const mailVisiteur = async (req, res) => {
+    const { content, sujet, email } = req.body;
+    // console.log("mail envoyé", req.body);
 
-  transporter.sendMail(
-    {
-      from: MAIL_USER,
-      to: MAIL_USER,
-      subject: sujet,
-      html: `
+    transporter.sendMail(
+      {
+        from: MAIL_USER,
+        to: MAIL_USER,
+        subject: sujet,
+        html: `
             <h1> Le mail du destinataire: ${email}</h1>
             <h3> son message : ${content}</h3>
         `,
-    },
-    (err, info) => {
-      if (err) {
-        callback(err, info);
-      } else {
-        zz;
-        callback(null, info);
+      },
+      (err, info) => {
+        if (err) {
+          callback(err, info);
+        } else {
+          zz;
+          callback(null, info);
+        }
+        transporter.close();
       }
-      transporter.close();
-    }
-  );
+    );
 
-  res.render("home", { flash: "E-mail envoyé" });
-},
+    res.render("home", { flash: "E-mail envoyé" });
+  },
   // ----------------------------------------------------------------------- //
   // ------------------------NODEMAILER REPLY------------------------------- //
   // ----------------------------------------------------------------------- //
 
   mailReply = async (req, res) => {
     const { content, sujet, email } = req.body;
-    console.log("mail envoyé", req.body);
+    // console.log("mail envoyé", req.body);
     // le transporte serf a se connec er a notre boite mail
     transporter.sendMail(
       {

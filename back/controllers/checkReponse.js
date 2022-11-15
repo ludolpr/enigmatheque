@@ -6,16 +6,17 @@ exports.checkReponse = async (req, res) => {
   const { id } = req.params;
   const { solus } = req.body;
 
-  console.log("id:", id);
+  // console.log("id:", id);
   // console.log("solus:",solus);
 
   let [enigme] = await db.query(`select * from enigme where id_enigme=${id}`);
   //   console.log(enigme.solus.toString().toLowerCase().replaceAll("<p>", " "));
   if (solus) {
-    console.log("ici:", enigme);
+    // console.log("ici:", enigme);
     if (
       enigme.solus.toString().toLowerCase() ===
-      "<p>" + solus.toString().toLowerCase() + "</p>"
+        "<p>" + solus.toString().toLowerCase() + "</p>" ||
+      enigme.solus.toString().toLowerCase() === solus.toString().toLowerCase()
     )
       res.render("enigme_details", { enigme, flash: "Réponse exacte" });
     else res.render("enigme_details", { enigme, flash: "Mauvaise réponse" });

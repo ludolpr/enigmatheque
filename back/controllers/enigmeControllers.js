@@ -57,7 +57,7 @@ const getPageProposer = async (req, res) => {
     const { titre, difficulty, content, solus } = req.body;
     // Ajout d'une énigme
     // console.log("le body", req.body);
-    console.log("Session", req.session);
+    // console.log("Session", req.session);
 
     const insertEnigme = await db.query(
       `INSERT INTO enigme SET titre=:titre, difficulty=:difficulty, content=:content, solus=:solus, id_user="${req.session.user.id}"`,
@@ -75,7 +75,7 @@ const getPageProposer = async (req, res) => {
         flash: "Votre enigme à été envoyé",
         dbEnigmes: await db.query("SELECT * FROM enigme"),
       });
-    else res.render("proposer", { flash: "Votre enigme à été envoyé" });
+    else res.render("proposer", { flash: "Votre énigme à été envoyé" });
   },
   // AFFICHER ENIGME
   getEnigmeId = async (req, res) => {
@@ -121,7 +121,7 @@ const getPageProposer = async (req, res) => {
     if (MODE === "test")
       res.json({
         putEnigme,
-        flash: "Votre enigme à été modifié",
+        flash: "Votre énigme à été modifié",
         dbEnigmes: await db.query("SELECT * FROM enigme"),
       });
     else res.redirect("/admin");
@@ -132,11 +132,11 @@ const getPageProposer = async (req, res) => {
     // console.log("delete::enigme", id);
 
     if (id) {
-      await db.query(`DELETE FROM enigme WHERE id_enigme = "${id}";`);
+      await db.query(`DELETE FROM énigme WHERE id_enigme = "${id}";`);
     }
     if (MODE === "test")
       res.json({
-        flash: "Votre enigme à été supprimer",
+        flash: "Votre énigme à été supprimer",
       });
     else res.redirect("/admin");
   };

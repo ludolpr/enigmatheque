@@ -62,20 +62,22 @@ describe("Début des tests", function () {
     // put
     it("Test Async putEnigmes", async () => {
       // console.log("put", enigmes);
-      let data = await db.query(`UPDATE enigme SET titre="bijour" WHERE id_enigme = "${enigmes.id_enigme}";`)
+      let data = await db.query(
+        `UPDATE enigme SET titre="bijour" WHERE id_enigme = "${enigmes.id_enigme}";`
+      );
       // console.log("update de mes datas", typeof data);
       assert.equal(typeof data, typeof {});
     });
 
     // delete
     it("delEnigmes", async () => {
-      let data = await db.query(`DELETE FROM enigme WHERE id_enigme = "${enigmes.id_enigme}";`)
+      let data = await db.query(
+        `DELETE FROM enigme WHERE id_enigme = "${enigmes.id_enigme}";`
+      );
 
-      console.log("voici mes datas", data);
+      // console.log("voici mes datas", data);
       assert.equal(typeof data, typeof {});
     });
-
-
 
     // ------------------------------------------------------------------------------------ //
     // --------------------------------SEPARATE-------------------------------------------- //
