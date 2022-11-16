@@ -100,20 +100,21 @@
                             </select>
                             </span>
                         </div>
-                        <div class="row d-flex justify-content-around">
+
+                        <div class="row d-flex justify-content-around w-100">
                           <label for="content" class="form-label p-2 ps-0">Enigme que vous proposer</label>
                           <textarea id="editorEnigme{{ this.id_enigme }}"
-                            placeholder="Votre Enigme" class="border-success justify-content-center" cols="70" rows="15"
+                            placeholder="Votre Enigme" class="border-success justify-content-center" cols="70" rows="10"
                             name="content">{{ this.content }}
-                        </textarea>
+                          </textarea>
                         </div>
 
 
-                        <div class="row d-flex justify-content-around">
+                        <div class="row d-flex justify-content-around w-auto">
                           <label for="solus" class="form-label p-2 ps-0">Réponse à votre énigme</label>
                           <textarea name="solus" id="editorSolus{{ this.id_enigme }}" placeholder="Votre Solution"
                             class="border-success" id="solus" cols="70" rows="15" name="solus">{{ this.solus }}
-                        </textarea>
+                          </textarea>
                         </div>
                         <div class="col-md-12 m-0 ">
                           <label class="mt-2 text-dark" for="">Enigme verifiée</label>
@@ -135,21 +136,6 @@
                     if (vrf{{ this.id_enigme }}.toString() === "1" ) isVerified{{ this.id_enigme }}.checked = true;
 
                   </script>
-                  
-                  {{!--------------------------------------------------------------------------}}
-                  {{!--------------------------------------------------------------------------}}
-                  {{!-- data-bs-dismiss="modal" --}}
-                  {{!-- envoyer l'énigme // Valider l'enigme pour faire la modif sur is_verified--}}
-
-
-                  {{!-- <form action="/insertEnigme/{{ this.id_enigme }}?_method=PUT" method="post">
-                    <button type="submit" class="m-2 btn btn-labeled btn-success col-md-12">
-                      <span class="btn-label"><i class="fa fa-check m-1"></i></span>Valider
-                    </button>
-                  </form> --}}
-
-
-
                   {{!--------------------------------------------------------------------------}}
                   {{!--------------------------------------------------------------------------}}
                   {{!-- Supprimer l'énigme --}}
