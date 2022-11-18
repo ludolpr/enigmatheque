@@ -157,3 +157,16 @@
 
 
 }
+
+@media screen and (max-width:300px) {
+
+    .navbar-brand {
+        font-size: 13px;
+    }
+
+    .form-control {
+        font-size: 10px;
+    }
+
+
+}
