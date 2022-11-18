@@ -10781,7 +10781,7 @@ body {
 
 .bgDoor {
   background-image: url("/assets/images/door-1590024_1920.jpg");
-  height: 100vh;
+  height: 100%;
   background-size: cover;
 }
 
@@ -10798,6 +10798,9 @@ body {
   }
   .carousel-item {
     height: 750px;
+  }
+  .bgDoor {
+    height: 100%;
   }
 }
 @media screen and (max-width: 1200px) {
