@@ -25,7 +25,7 @@ exports.limitObjectReverse = (objEnigme, limit) => {
 exports.upper = (str) => str.toUpperCase();
 
 // fonction nombres de caractere max 40
-exports.cutStr = (str) => str.substr(0, 30, "....");
+exports.cutStr = (str) => str.substr(0, 30) + ".....";
 
 // function incrémenter de + 1
 
