@@ -16,7 +16,13 @@ exports.checkReponse = async (req, res) => {
     if (
       enigme.solus.toString().toLowerCase() ===
         "<p>" + solus.toString().toLowerCase() + "</p>" ||
-      enigme.solus.toString().toLowerCase() === solus.toString().toLowerCase()
+      enigme.solus.toString().toLowerCase() ===
+        solus.toString().toLowerCase() ||
+      enigme.solus.toString().toLowerCase().split("").length - 1 ||
+      "<p>" +
+        enigme.solus.toString().toLowerCase().split("").length -
+        1 +
+        "</p>"
     )
       res.render("enigme_details", { enigme, flash: "Réponse exacte" });
     else res.render("enigme_details", { enigme, flash: "Mauvaise réponse" });
