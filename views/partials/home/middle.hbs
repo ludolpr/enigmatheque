@@ -14,9 +14,9 @@
             <div id="it-" class="carousel-item" data-bs-interval="5000">
               <img src="" class="imgCarousel img-fluid d-block w-100 " alt="image d'une énigme" id="img">
               <div class="carousel-caption d-md-block  bg-dark">
+                  <h4 class="text-light">Cliquer sur le titre:</h4>
                 <a href="/enigme/{{id_enigme }}" class=" text-decoration-none ">
-
-                  <h3 class="text-light text-decoration-none " id="tag">{{this.titre}} </h3>
+                  <h3 class="text-light text-decoration-none link-secondary" id="tag">{{upper this.titre}} </h3>
                 </a>
                 <div class="textEnigme">
                   {{{cutStr this.content}}}
